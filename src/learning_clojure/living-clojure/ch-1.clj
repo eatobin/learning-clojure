@@ -16,3 +16,17 @@ nil
 ;; My last comment!
 '(1 2 "jam" :marmalade-jar)
 (list 1 2 :me "you")
+'(1, 2, "jam", :bee)
+(first (list :rabbit :pocket-watch :marmalade :door))
+(rest '(:rabbit :pocket-watch :marmalade :door))
+(first (rest '(:rabbit :pocket-watch :marmalade :door)))
+(first (rest (rest '(:rabbit :pocket-watch :marmalade :door))))
+(first (rest (rest (rest '(:rabbit :pocket-watch :marmalade :door)))))
+(first (rest (rest (rest (rest '(:rabbit :pocket-watch :marmalade :door))))))
+
+
+
+
+
+
+
