@@ -1,3 +1,48 @@
+(class true)
+(true? true)
+(true? false)
+(true? nil)
+(false? false)
+(false? true)
+(false? nil)
+(nil? nil)
+(nil? 1)
+(not true)
+(not 1)
+(not "hi")
+(not false)
+(not nil)
+
+(= :drinkme :drinkme)
+(= :drinkme 4)
+
+(= '(:drinkme :bottle) [:drinkme :bottle])
+
+;; There also is a not= expression that is a shortcut for doing (not (= x y)) :
+(not= :drinkme :4)
+
+;; to page 29
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (let [[color size] ["blue" "small"]]
   (str "The " color " door is " size))
 
