@@ -50,3 +50,115 @@ nil
 (keys {:jam1 "strawberry", :jam2 "blackberry", :jam3 "marmalade"})
 (vals {:jam1 "strawberry", :jam2 "blackberry", :jam3 "marmalade"})
 (assoc {:jam1 "red" :jam2 "black"} :jam1 "orange")
+(dissoc {:jam1 "strawberry", :jam2 "blackberry"} :jam1)
+(merge  {:jam1 "red" :jam2 "black"}
+        {:jam1 "orange" :jam3 "red"}
+        {:jam4 "blue"})
+#{:red :blue :white :pink}
+(clojure.set/union #{:r :b :w} #{:w :p :y})
+(clojure.set/difference #{:r :b :w} #{:w :p :y})
+(clojure.set/intersection #{:r :b :w} #{:w :p :y})
+(set [:rabbit :rabbit :watch :door])
+(set {:a 1, :b 2, :c 3})
+(get (set {:a 1, :b 2, :c 3}) :c)
+(get #{:rabbit :door :watch} :rabbit)
+(get #{:rabbit :door :watch} :jar)
+(:rabbit #{:rabbit :door :watch})
+(#{ :rabbit :door :watch} :rabbit)
+(contains? #{:rabbit :door :watch} :rabbit)
+(contains? #{:rabbit :door :watch} :jam)
+
+(contains? [:rabbit :door :watch] :door)
+
+;; `contains?` is straightforward for maps:
+(contains? {:a 1} :a)    ;=> true
+(contains? {:a nil} :a)  ;=> true
+(contains? {:a 1} :b)    ;=> false
+
+;; It's likely to surprise you for other sequences because it's
+;; about *indices* or *keys*, not *contents*:
+
+(contains? [:a :b :c] :b)  ;=> false
+(contains? [:a :b :c] 2)   ;=> true
+(contains? "f" 0)          ;=> true
+(contains? "f" 1)          ;=> false
+;; Can be used to test set membership
+(def s #{"a" "b" "c"})
+
+;; The members of a set are the keys of those elements.
+(contains? s "a")   ;=> true
+(contains? s "z")   ;=> false
+
+(conj #{:rabbit :door} :jam)
+(disj #{:rabbit :door} :door)
+
+'(+ 1 1)
+(first '(+ 1 1))
+
+(def developer "Alice")
+developer
+*ns*
+user/developer
+
+(let [developer "Alice in Wonderland"]
+developer)
+developer
+
+(let [developer "Alice in Wonderland"
+rabbit "White Rabbit"]
+[developer rabbit])
+developer
+
+(defn follow-the-rabbit [] "Off we go!")
+(follow-the-rabbit)
+
+(defn shop-for-jams [jam1 jam2]
+{:name "jam-basket"
+:jam1 jam1
+:jam2 jam2})
+(shop-for-jams "straw" "blue")
+
+;;returns back a function
+(fn [] (str "Off we go" "!"))
+;;invoke with parens
+((fn [] (str "Off we go" "!")))
+
+(def follow-again (fn [] (str "Off we go" "!")))
+(follow-again)
+
+(#(str "Off we go" "!"))
+(#(str "Off we go" "!" " - " %) "again")
+(#(str "Off we go" "!" " - " %1 %2) "again" "?")
+
+(ns alice.favfoods)
+*ns*
+(def fav-food "strawberry jam")
+fav-food
+alice.favfoods/fav-food
+(ns rabbit.favfoods)
+(def fav-food "lettuce soup")
+fav-food
+*ns*
+alice.favfoods/fav-food
+
+(ns wonderland)
+(require '[alice.favfoods :as af])
+af/fav-food
+*ns*
+
+(ns wonderland2
+(:require [alice.favfoods :as af]))
+*ns*
+af/fav-food
+
+(ns wonderland
+  (:require [clojure.set :as s]))
+
+(defn common-fav-foods [foods1 foods2]
+  (let [food-set1 (set foods1)
+        food-set2 (set foods2)
+        common-foods (s/intersection food-set1 food-set2)]
+    (str "Common Foods: " common-foods)))
+
+(common-fav-foods [:jam :brownies :toast]
+                  [:lettuce :carrots :jam])
