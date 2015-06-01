@@ -51,9 +51,9 @@ nil
 (vals {:jam1 "strawberry", :jam2 "blackberry", :jam3 "marmalade"})
 (assoc {:jam1 "red" :jam2 "black"} :jam1 "orange")
 (dissoc {:jam1 "strawberry", :jam2 "blackberry"} :jam1)
-(merge  {:jam1 "red" :jam2 "black"}
-        {:jam1 "orange" :jam3 "red"}
-        {:jam4 "blue"})
+(merge {:jam1 "red" :jam2 "black"}
+       {:jam1 "orange" :jam3 "red"}
+       {:jam4 "blue"})
 #{:red :blue :white :pink}
 (clojure.set/union #{:r :b :w} #{:w :p :y})
 (clojure.set/difference #{:r :b :w} #{:w :p :y})
@@ -64,30 +64,30 @@ nil
 (get #{:rabbit :door :watch} :rabbit)
 (get #{:rabbit :door :watch} :jar)
 (:rabbit #{:rabbit :door :watch})
-(#{ :rabbit :door :watch} :rabbit)
+(#{:rabbit :door :watch} :rabbit)
 (contains? #{:rabbit :door :watch} :rabbit)
 (contains? #{:rabbit :door :watch} :jam)
 
 (contains? [:rabbit :door :watch] :door)
 
 ;; `contains?` is straightforward for maps:
-(contains? {:a 1} :a)    ;=> true
-(contains? {:a nil} :a)  ;=> true
-(contains? {:a 1} :b)    ;=> false
+(contains? {:a 1} :a)                                       ;=> true
+(contains? {:a nil} :a)                                     ;=> true
+(contains? {:a 1} :b)                                       ;=> false
 
 ;; It's likely to surprise you for other sequences because it's
 ;; about *indices* or *keys*, not *contents*:
 
-(contains? [:a :b :c] :b)  ;=> false
-(contains? [:a :b :c] 2)   ;=> true
-(contains? "f" 0)          ;=> true
-(contains? "f" 1)          ;=> false
+(contains? [:a :b :c] :b)                                   ;=> false
+(contains? [:a :b :c] 2)                                    ;=> true
+(contains? "f" 0)                                           ;=> true
+(contains? "f" 1)                                           ;=> false
 ;; Can be used to test set membership
 (def s #{"a" "b" "c"})
 
 ;; The members of a set are the keys of those elements.
-(contains? s "a")   ;=> true
-(contains? s "z")   ;=> false
+(contains? s "a")                                           ;=> true
+(contains? s "z")                                           ;=> false
 
 (conj #{:rabbit :door} :jam)
 (disj #{:rabbit :door} :door)
@@ -98,24 +98,24 @@ nil
 (def developer "Alice")
 developer
 *ns*
-user/developer
+;; user/developer
 
 (let [developer "Alice in Wonderland"]
-developer)
+  developer)
 developer
 
 (let [developer "Alice in Wonderland"
-rabbit "White Rabbit"]
-[developer rabbit])
+      rabbit "White Rabbit"]
+  [developer rabbit])
 developer
 
 (defn follow-the-rabbit [] "Off we go!")
 (follow-the-rabbit)
 
 (defn shop-for-jams [jam1 jam2]
-{:name "jam-basket"
-:jam1 jam1
-:jam2 jam2})
+  {:name "jam-basket"
+   :jam1 jam1
+   :jam2 jam2})
 (shop-for-jams "straw" "blue")
 
 ;;returns back a function
@@ -147,7 +147,7 @@ af/fav-food
 *ns*
 
 (ns wonderland2
-(:require [alice.favfoods :as af]))
+  (:require [alice.favfoods :as af]))
 *ns*
 af/fav-food
 

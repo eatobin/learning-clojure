@@ -26,7 +26,9 @@
 
 (if (= 1 1) 100 nil)
 ;; 100
-(if-let [result (if (= 1 1) 100 nil)]
+(if-let [result (if (= 1 1)
+                  100
+                  nil)]
   result
   "I'll go to a cafe.")
 ;; 100
