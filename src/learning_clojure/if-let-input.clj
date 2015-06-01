@@ -19,6 +19,25 @@
     result
     "I'll go to a cafe.")
 
+(if-let [result nil]
+  result
+  "I'll go to a cafe.")
+;; "I'll go to a cafe."
+
+(if (= 1 1) 100 nil)
+;; 100
+(if-let [result (if (= 1 1) 100 nil)]
+  result
+  "I'll go to a cafe.")
+;; 100
+(if-let [result (if (not= 1 1) 100 nil)]
+  result
+  "I'll go to a cafe.")
+;; "I'll go to a cafe."
+
+
+
+
 (if-let [result "works!"]
     result)
 

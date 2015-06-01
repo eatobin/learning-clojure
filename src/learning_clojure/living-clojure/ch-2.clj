@@ -57,8 +57,39 @@ fn [x] (= x :drinkme)
 (some #{nil} [nil nil nil])
 (some #{false} [false false false])
 
+(if true "it is true" "it is false")
+;; -> "it is true"
+(if false "it is true" "it is false")
+;; -> "it is false"
+(if nil "it is true" "it is false")
+;; -> "it is false"
 
+(if (= :drinkme :drinkme)
+  "Try it"
+  "Don't try it")
+;; -> "Try it"
 
+(if-let [result "I'll go to a park."]
+  result
+  "I'll go to a cafe.")                                     ;; "I'll go to a park."
+
+(if-let [result nil]
+  result
+  "I'll go to a cafe.")
+;; "I'll go to a cafe."
+
+(if (= 1 1)
+  100
+  nil)
+;; 100
+(if-let [result (if (= 1 1) 100 nil)]
+  result
+  "I'll go to a cafe.")
+;; 100
+(if-let [result (if (not= 1 1) 100 nil)]
+  result
+  "I'll go to a cafe.")
+;; "I'll go to a cafe."
 
 
 
