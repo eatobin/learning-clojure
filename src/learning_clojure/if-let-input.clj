@@ -37,11 +37,17 @@
   "I'll go to a cafe.")
 ;; "I'll go to a cafe."
 
-
-
-
 (if-let [result "works!"]
     result)
+
+(when-let [result (if (= 1 1)
+                    100)]
+  result)
+;; 100
+(when-let [result (if (not= 1 1)
+                    100)]
+  result)
+;; nil
 
 ;; in real repl only (read-line):
 ;;

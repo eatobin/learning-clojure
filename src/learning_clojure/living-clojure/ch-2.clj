@@ -93,6 +93,104 @@ fn [x] (= x :drinkme)
   "I'll go to a cafe.")
 ;; "I'll go to a cafe."
 
+(defn drink [need-to-grow-small]
+  (when need-to-grow-small "drink bottle"))
+
+(drink true)
+;; -> "drink bottle"
+(drink false)
+;; -> nil
+
+(when-let [x true] "It's true!")
+;; "It's true!"
+(when-let [x false] "It's true!")
+;; nil
+
+(when-let [x "It's true!!!"] x)
+;; "It's true!!!"
+
+(when-let [x false] x)
+;; nil
+
+(when-let [result (if (= 1 1)
+                    100)]
+  result)
+;; 100
+(when-let [result (if (not= 1 1)
+                    100)]
+  result)
+;; nil
+(when-let [result (if (not= 1 1)
+                    100
+                    500)]
+  result)
+;; 500
+(when-let [result (if (= 1 1)
+                    100
+                    500)]
+  result)
+;; 100
+
+(let [bottle "drinkme"]
+  (cond
+    (= bottle "poison") "don't touch"
+    (= bottle "drinkme") "grow smaller"
+    (= bottle "empty") "all gone"))
+;; -> "grow smaller"
+
+(let [x 5]
+  (cond
+    (> x 10) "bigger than 10"
+    (> x 4) "bigger than 4"
+    (> x 3) "bigger than 3"))
+;; -> "bigger than 4"
+
+(let [x 5]
+  (cond
+    (> x 3) "bigger than 3"
+    (> x 10) "bigger than 10"
+    (> x 4) "bigger than 4"))
+;; -> "bigger than 3"
+
+(let [x 1]
+  (cond
+    (> x 10) "bigger than 10"
+    (> x 4) "bigger than 4"
+    (> x 3) "bigger than 3"))
+;; nil
+
+(let [bottle "mystery"]
+  (cond
+    (= bottle "poison") "don't touch"
+    (= bottle "drinkme") "grow smaller"
+    (= bottle "empty") "all gone"
+    :else "unknown"))
+;; -> "unknown"
+
+(let [bottle "drinkme"]
+  (case bottle
+    "poison" "don't touch"
+    "drinkme" "grow smaller"
+    "empty" "all gone"))
+;; "grow smaller"
+
+(let [bottle "mystery"]
+  (case bottle
+    "poison" "don't touch"
+    "drinkme" "grow smaller"
+    "empty" "all gone"))
+;; -> IllegalArgumentException No matching clause: mystery
+
+(let [bottle "mystery"]
+  (case bottle
+    "poison" "don't touch"
+    "drinkme" "grow smaller"
+    "empty" "all gone"
+    "unknown"))
+;; -> "unknown"
+
+;; page 36
+
 
 
 
