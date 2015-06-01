@@ -21,11 +21,21 @@
 ;; There also is a not= expression that is a shortcut for doing (not (= x y)) :
 (not= :drinkme :4)
 
-;; to page 29
+(empty? [:table :door :key])
+(empty? [])
+(empty? {})
+(empty? '())
 
+(seq [1 2 3])
+(class [1 2 3])
+(class (seq [1 2 3]))
 
+;; use this to check for not empty
+(seq [])
 
-
+(every? odd? [1 3 5])
+(every? odd? [1 2 3 4 5])
+;; page 31
 
 
 
