@@ -232,7 +232,7 @@ fn [x] (= x :drinkme)
 ;; -> 15
 
 (let [[color size] ["blue" "small"]]
-(str "The " color " door is " size))
+  (str "The " color " door is " size))
 ;; -> "The blue door is small"
 
 
