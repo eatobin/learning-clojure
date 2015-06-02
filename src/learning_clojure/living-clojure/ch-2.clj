@@ -236,9 +236,9 @@ fn [x] (= x :drinkme)
 ;; -> "The blue door is small"
 
 
+;; page 38
 
-(let [[color size] ["blue" "small"]]
-  (str "The " color " door is " size))
+
 
 (let [[color size :as original] ["blue" "small"]]
   {:color color :size size :original original})
