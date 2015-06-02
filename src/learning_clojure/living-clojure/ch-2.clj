@@ -231,7 +231,7 @@ fn [x] (= x :drinkme)
 (adder-5 10)
 ;; -> 15
 
-
+;; page 38
 
 
 
