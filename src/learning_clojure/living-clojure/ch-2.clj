@@ -231,7 +231,9 @@ fn [x] (= x :drinkme)
 (adder-5 10)
 ;; -> 15
 
-;; page 38
+(let [[color size] ["blue" "small"]]
+(str "The " color " door is " size))
+;; -> "The blue door is small"
 
 
 
