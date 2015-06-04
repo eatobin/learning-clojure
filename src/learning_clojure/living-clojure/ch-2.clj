@@ -235,17 +235,40 @@ fn [x] (= x :drinkme)
   (str "The " color " door is " size))
 ;; -> "The blue door is small"
 
+(let [[color [size]] ["blue" ["very small"]]]
+  (str "The " color " door is " size))
+;; -> "The blue door is very small"
 
-;; page 38
-
-
+(let [[color size] ["blue" "very small"]]
+  (str "The " color " door is " size))
+;; -> "The blue door is very small"
 
 (let [[color size :as original] ["blue" "small"]]
   {:color color :size size :original original})
+;; {:color "blue", :size "small", :original ["blue" "small"]}
 
 (let [[color [size] :as original] ["blue" ["small"]]]
   {:color color :size size :original original})
+;; -> {:color "blue", :size "small", :original ["blue" ["small"]]}
 
 (let [{myFlower :flower1 yourFlower :flower2}
       {:flower1 "red" :flower2 "blue"}]
   (str "The flowers are " myFlower " and " yourFlower))
+;; "The flowers are red and blue"
+
+(let [{flower1 :flower1 flower2 :flower2 :or {flower2 "missing"}}
+      {:flower1 "red"}]
+  (str "The flowers are " flower1 " and " flower2))
+;; -> "The flowers are red and missing"
+;; To keep the whole initial data structure as a binding, :as works in maps too:
+(let [{flower1 :flower1 :as all-flowers}
+      {:flower1 "red"}]
+  [flower1 all-flowers])
+;; -> ["red" {:flower1 "red"}]
+
+(defn flower-colors [{:keys [flower1 flower2]}]
+  (str "The flowers are " flower1 " and " flower2))
+(flower-colors {:flower1 "red" :flower2 "blue"})
+;; -> "The flowers are red and blue"
+
+;; page 41
