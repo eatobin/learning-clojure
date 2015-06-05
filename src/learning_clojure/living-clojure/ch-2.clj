@@ -101,9 +101,9 @@ fn [x] (= x :drinkme)
 (drink false)
 ;; -> nil
 
-(when-let [x true] "It's true!")
+(when-let [_ true] "It's true!")
 ;; "It's true!"
-(when-let [x false] "It's true!")
+(when-let [_ false] "It's true!")
 ;; nil
 
 (when-let [x "It's true!!!"] x)
