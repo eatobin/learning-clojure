@@ -78,3 +78,36 @@ t0
 ;; #'user/seq-of-maps
 (filter (comp #{"hi"} :bar) seq-of-maps)
 ;; ({:bar "hi", :foo 1})
+
+
+(def test-it (comp #{"hi"} :bar))
+;; #'user/test-it
+(test-it {:foo 1 :bar "baz"})
+;; nil
+(test-it {:foo 1 :bar "hi"})
+;; "hi"
+(test-it {:foo 1 :bark "hi"})
+;; nil
+(:bar {:foo 1})
+;; nil
+(:bar {:bar 1})
+;; 1
+(#{2} (:bar {:bar 1}))
+;; nil
+(#{1} (:bar {:bar 1}))
+;; 1
+(#{"hi"} (:bar {:foo 1 :bar "hi"} {:foo 0 :bar "baz"}))
+;; "hi"
+(#{"baz"} (:bar {:foo 1 :bar "hi"} {:foo 0 :bar "baz"}))
+;; nil
+(#{"baz"} (:bar {:foo 1 :bar "baz"} {:foo 0 :bar "me"}))
+;; "baz"
+
+(def seq-of-maps [{:foo 1 :bar "baz"} {:foo 0 :bar "hi"}])
+;; #'user/seq-of-maps
+(filter (comp #{"hi"} :bar) seq-of-maps)
+;; ({:bar "hi", :foo 0})
+
+(def seq-of-maps [{:foo 1 :bar "baz"} {:foo 0 :bar "hi"} {:foo 22 :bar "hi"}])
+(filter (comp #{"hi"} :bar) seq-of-maps)
+;; ({:bar "hi", :foo 0} {:bar "hi", :foo 22})
