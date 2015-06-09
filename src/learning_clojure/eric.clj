@@ -79,7 +79,6 @@ t0
 (filter (comp #{"hi"} :bar) seq-of-maps)
 ;; ({:bar "hi", :foo 1})
 
-
 (def test-it (comp #{"hi"} :bar))
 ;; #'user/test-it
 (test-it {:foo 1 :bar "baz"})
