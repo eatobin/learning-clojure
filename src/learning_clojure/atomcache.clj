@@ -5,7 +5,7 @@
 ; END:create
 
 ; START:get
-(defn get
+(defn getski
   [cache key]
   (@cache key))
 ; END:get
@@ -20,12 +20,12 @@
 (def ac (create))
 (put ac :first "Eric")
 ; {:first "Eric"}
-(println (str "Item: " (get ac :first)))
+(println (str "Item: " (getski ac :first)))
 ; Item: Eric
 ; nil
 (put ac :first "Scott")
 ; {:first "Scott"}
-(println (str "Item: " (get ac :first)))
+(println (str "Item: " (getski ac :first)))
 ; Item: Scott
 ;nil
 (put ac :last "Scott")
@@ -48,8 +48,8 @@ solutions.atom-cache=> (put ac :last "Tobin")
 (get-in @k [:1 :first])
 ; "Scott"
 
-(defn get-in
-  ([m ks]
-     (reduce get @m ks)))
-(get-in k [:1 :first])
+(defn get-inski ([m ks]
+  (reduce get @m ks)))
+
+(get-inski k [:1 :first])
 ; "Scott"
