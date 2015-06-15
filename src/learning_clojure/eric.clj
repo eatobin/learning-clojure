@@ -74,6 +74,17 @@ t0
 (get-in m [:tobbre :first])
 ;; "Brenda"
 
+;I’ll give you one last convenient oddity before I move on. Sets are also functions.
+;The set #{:jar-jar, :chewbacca} is an element but also a function. Sets test
+;membership, like this:
+;user=> (#{:jar-jar :chewbacca} :chewbacca)
+;:chewbacca
+;user=> (#{:jar-jar :chewbacca} :luke)
+;nil
+;When you use a set as a function, the function will return the first argument
+;if that argument is a member of the set. That covers the basics for sets. Let’s
+;move on to maps.
+
 (def seq-of-maps [{:foo 1 :bar "hi"} {:foo 0 :bar "baz"}])
 ;; #'user/seq-of-maps
 (filter (comp #{"hi"} :bar) seq-of-maps)
@@ -110,3 +121,14 @@ t0
 (def seq-of-maps [{:foo 1 :bar "baz"} {:foo 0 :bar "hi"} {:foo 22 :bar "hi"}])
 (filter (comp #{"hi"} :bar) seq-of-maps)
 ;; ({:bar "hi", :foo 0} {:bar "hi", :foo 22})
+
+(def books [{:title "Book One" :author "Joe Blow" :person "Person One"}
+            {:title "Book Two" :author "Joe Two" :person nil}
+            {:title "The Bible" :author "G-d" :person "Person One"}])
+(def people [{:name "Person One" :max-books 3}
+             {:name "Person Two" :max-books 6}])
+(filter (comp #{"Book One"} :title) books)
+(filter (comp #{"Person One"} :name) people)
+(filter (comp #{"Person One"} :person) books)
+(defn get-books-for-person [person library]
+  (filter (comp #{person} :person) library))
