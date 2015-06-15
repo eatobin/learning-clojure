@@ -12,9 +12,9 @@
 ; START:put
 (defn put
   ([cache value-map]
-     (swap! cache merge value-map))
+   (swap! cache merge value-map))
   ([cache key value]
-     (swap! cache assoc key value)))
+   (swap! cache assoc key value)))
 ; END:put
 ; START:usage
 (def ac (create))
@@ -30,7 +30,7 @@
 ;nil
 (put ac :last "Scott")
 ; {:last "Scott", :first "Scott"}
-solutions.atom-cache=> (put ac :last "Tobin")
+(put ac :last "Tobin")
 ; {:last "Tobin", :first "Scott"}
 (put ac {:middle "None" :age 66})
 ; {:middle "None", :age 66, :last "Tobin", :first "Scott"}
@@ -49,7 +49,7 @@ solutions.atom-cache=> (put ac :last "Tobin")
 ; "Scott"
 
 (defn get-inski ([m ks]
-  (reduce get @m ks)))
+                 (reduce get @m ks)))
 
 (get-inski k [:1 :first])
 ; "Scott"
