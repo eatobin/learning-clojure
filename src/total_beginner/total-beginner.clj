@@ -1,5 +1,5 @@
 (def books (atom [{:title "Book One" :author "Joe Blow" :person "Person One"}
-            {:title "Book Two" :author "Joe Two" :person nil}
+                  {:title "Book Two" :author "Joe Two" :person nil}
                   {:title "The Bible" :author "G-d" :person "Person One"}]))
 
 (def people [{:name "Person One" :max-books 3}
