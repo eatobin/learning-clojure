@@ -21,5 +21,7 @@
   (def books (atom []))
   (def people (atom [])))
 
+(def library-name "my-library")
+
 (defn get-available-books []
   (filter (comp nil? :person) (deref books)))
