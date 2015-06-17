@@ -16,7 +16,7 @@
       panel (JPanel.)
       frame (proxy [JFrame ActionListener]
         [] ; superclass constructor arguments
-        (actionPerformed [e] ; nil below is the parent component
+              (actionPerformed [_] ; nil below is the parent component
           (JOptionPane/showMessageDialog nil (message name-field))))]
   (doto panel
     (.add (JLabel. "Name:"))

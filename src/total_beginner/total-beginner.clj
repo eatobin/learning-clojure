@@ -17,8 +17,7 @@
 (defn add-book [title author person]
   (swap! books conj {:title title :author author :person person}))
 
-(defn create-library [name]
-  (def library-name name)
+(defn create-library []
   (def books (atom []))
   (def people (atom [])))
 
