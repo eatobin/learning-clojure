@@ -25,3 +25,9 @@
 
 (defn get-available-books []
   (filter (comp nil? :person) (deref books)))
+
+(defn get-book [title]
+  (filter (comp #{title} :title) (deref books)))
+
+(defn check-in [title]
+  (nil? (:person (get-book title))))
