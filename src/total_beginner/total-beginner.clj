@@ -27,7 +27,19 @@
   (filter (comp nil? :person) (deref books)))
 
 (defn get-book [title]
-  (filter (comp #{title} :title) (deref books)))
+  (first (filter (comp #{title} :title) (deref books))))
 
 (defn check-in [title]
-  (nil? (:person (get-book title))))
+  (:person (get-book title)))
+
+(if ((complement nil?) (check-in "Book Two")) "yes")
+
+(swap! books assoc-in [2 :author] "Ericky")
+
+(swap! books (assoc (get-book "Book One") :author "Ericky"))
+
+(def books2 [{:title "Book One" :author "Joe Blow" :person "Person One"}
+             {:title "Book Two" :author "Joe Two" :person nil}
+             {:title "The Bible" :author "G-d" :person "Person One"}])
+
+(first (filter (comp #{"Book One"} :title) books2))
