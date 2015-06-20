@@ -42,7 +42,6 @@
 (.indexOf v {:type 199})
 (.indexOf @books (get-book "Book Two"))
 
-(and (nil? (:person (get-book title))) true)
 (and (nil? (:person (get-book "Book One"))) true)
 (count (get-books-for-person "Person One"))
 
@@ -51,6 +50,6 @@
 
 (defn check-out [title name]
   (when (and (nil? (:person (get-book title)))
-     (< (count (get-books-for-person name))
-        (:max-books (get-person name))))
-  (swap! books assoc-in [(.indexOf @books (get-book title)) :person] name)))
+             (< (count (get-books-for-person name))
+                (:max-books (get-person name))))
+    (swap! books assoc-in [(.indexOf @books (get-book title)) :person] name)))
