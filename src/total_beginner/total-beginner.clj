@@ -2,8 +2,8 @@
                   {:title "Book Two" :author "Joe Two" :person nil}
                   {:title "The Bible" :author "G-d" :person "Person One"}]))
 
-(def people [{:name "Person One" :max-books 3}
-             {:name "Person Two" :max-books 6}])
+(def people (atom [{:name "Person One" :max-books 3}
+                   {:name "Person Two" :max-books 6}]))
 
 (filter (comp #{"Book One"} :title) books)
 (filter (comp #{"Person One"} :name) people)
@@ -40,3 +40,10 @@
 (def v [[1] "two" "three" {:type 199}])
 (.indexOf v {:type 199})
 (.indexOf @books (get-book "Book Two"))
+
+(and (nil? (:person (get-book title))) true)
+(and (nil? (:person (get-book "Book One"))) true)
+(count (get-books-for-person "Person One"))
+
+(defn get-person [name]
+  (first (filter (comp #{name} :name) (deref people))))
