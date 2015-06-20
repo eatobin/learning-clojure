@@ -8,6 +8,7 @@
 (filter (comp #{"Book One"} :title) books)
 (filter (comp #{"Person One"} :name) people)
 (filter (comp #{"Person One"} :person) books)
+
 (defn get-books-for-person [person]
   (filter (comp #{person} :person) (deref books)))
 
@@ -49,11 +50,7 @@
   (first (filter (comp #{name} :name) (deref people))))
 
 (defn check-out [title name]
-  (and (nil? (:person (get-book title)))
-     (< (count (get-books-for-person name))
-        (:max-books (get-person name)))))
-
-
-(and (nil? (:person (get-book title)))
+  (when (and (nil? (:person (get-book title)))
      (< (count (get-books-for-person name))
         (:max-books (get-person name))))
+  (swap! books assoc-in [(.indexOf @books (get-book title)) :person] name)))
