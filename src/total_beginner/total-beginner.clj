@@ -2,7 +2,7 @@
                   {:title "Book Two" :author "Joe Two" :person nil}
                   {:title "The Bible" :author "G-d" :person "Person One"}]))
 
-(def people (atom [{:name "Person One" :max-books 3}
+(def people (atom [{:name "Person One" :max-books 2}
                    {:name "Person Two" :max-books 6}]))
 
 (filter (comp #{"Book One"} :title) books)
@@ -47,3 +47,13 @@
 
 (defn get-person [name]
   (first (filter (comp #{name} :name) (deref people))))
+
+(defn check-out [title name]
+  (and (nil? (:person (get-book title)))
+     (< (count (get-books-for-person name))
+        (:max-books (get-person name)))))
+
+
+(and (nil? (:person (get-book title)))
+     (< (count (get-books-for-person name))
+        (:max-books (get-person name))))
