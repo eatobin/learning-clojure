@@ -18,11 +18,10 @@
 (defn add-book [title author person]
   (swap! books conj {:title title :author author :person person}))
 
-(defn create-library []
+(defn create-library [name]
+  (def library-name name)
   (def books (atom []))
   (def people (atom [])))
-
-(def library-name "my-library")
 
 (defn get-available-books []
   (filter (comp nil? :person) (deref books)))
@@ -53,3 +52,12 @@
              (< (count (get-books-for-person name))
                 (:max-books (get-person name))))
     (swap! books assoc-in [(.indexOf @books (get-book title)) :person] name)))
+
+(defn person-to-string [name]
+  (str name " (" (:max-books (get-person name)) " books)"))
+
+(defn library-to-string []
+  (str library-name ": "
+       (count (deref books)) " books; "
+       (count (deref people)) " people."))
+
