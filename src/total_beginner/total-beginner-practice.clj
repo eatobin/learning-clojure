@@ -61,3 +61,13 @@
        (count (deref books)) " books; "
        (count (deref people)) " people."))
 
+  (defn book-to-string [title]
+    (if (nil? (:person (get-book title))) "Available"
+        (str "Checked out to " (:person (get-book title)))))
+
+  (nil? (:person (get-book "Book Two")))
+  (str "Checked out to " (:person (get-book "Book One")))
+
+(defn book-to-string [title]
+  (if (nil? (:person (get-book title))) "Available"
+      (str "Checked out to " (:person (get-book title)))))
