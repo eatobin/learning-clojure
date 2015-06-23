@@ -18,6 +18,9 @@
 (defn get-available-books []
   (filter (comp nil? :person) (deref books)))
 
+(defn get-books-for-person [person]
+  (filter (comp #{person} :person) (deref books)))
+
 (defn check-out [title name]
   (when (and (nil? (:person (get-book title)))
              (< (count (get-books-for-person name))

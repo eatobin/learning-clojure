@@ -54,7 +54,8 @@
     (swap! books assoc-in [(.indexOf @books (get-book title)) :person] name)))
 
 (defn person-to-string [name]
-  (str name " (" (:max-books (get-person name)) " books)"))
+  (let [books-out (count (get-books-for-person name))]
+  (str name " (" (:max-books (get-person name)) " books) (has " books-out " of my books)" \newline)))
 
 (defn library-to-string []
   (str library-name ": "
@@ -71,3 +72,25 @@
 (defn book-to-string [title]
   (if (nil? (:person (get-book title))) "Available"
       (str "Checked out to " (:person (get-book title)))))
+
+(defn book-to-string [title]
+  (let [available
+        (if (nil? (:person (get-book title)))
+          "Available"
+          (str "Checked out to " (:person (get-book title))))]
+  (str title " by " (:author (get-book title)) "; " available \newline)))
+
+(defn get-title [book]
+  (:title book))
+
+(print (apply str (map book-to-string (map get-title (deref books)))))
+
+(defn get-name [person]
+  (:name person))
+
+(print (str (apply str (map person-to-string (map get-name (deref people)))) \newline))
+
+(print (str (apply str (map person-to-string (let [name (map get-name (deref people))])) "has " (count (get-books-for-person name))) \newline))
+
+
+
