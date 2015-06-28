@@ -271,4 +271,78 @@ fn [x] (= x :drinkme)
 (flower-colors {:flower1 "red" :flower2 "blue"})
 ;; -> "The flowers are red and blue"
 
-;; page 41
+(take 5 (range))
+;; -> (0 1 2 3 4)
+
+(take 10 (range))
+;; -> (0 1 2 3 4 5 6 7 8 9)
+
+(count (take 1000 (range)))
+;; -> 1000
+
+(repeat 3 "rabbit")
+;; -> ("rabbit" "rabbit" "rabbit")
+
+(take 5 (repeat "rabbit"))
+;; -> ("rabbit" "rabbit" "rabbit" "rabbit" "rabbit")
+
+(rand-int 10)
+;; -> 3
+
+(repeat 5 (rand-int 10))
+;; -> (7 7 7 7 7)
+
+#(rand-int 10)
+;; -> #<user$eval721$fn__722 user$eval721$fn__722@308092db>
+(#(rand-int 10))
+;; -> 3
+
+(repeatedly 5 #(rand-int 10))
+;; -> (1 5 8 4 3)
+
+;; Dice:
+(+ 1 (rand-int 6))
+(repeatedly 50 #(+ 1 (rand-int 6)))
+(sort (repeatedly 50 #(+ 1 (rand-int 6))))
+
+(def adjs ["normal"
+           "too small"
+           "too big"
+           "swimming"])
+(defn alice-is [in out]
+  (if (empty? in)
+    out
+    (alice-is
+      (rest in)
+      (conj out
+            (str "Alice is " (first in))))))
+(alice-is adjs [])
+;; -> ["Alice is normal" "Alice is too small" "Alice is too big" "Alice is swimming"]
+
+(defn alice-is2 [input]
+  (loop [in input
+         out []]
+    (if (empty? in)
+      out
+      (recur (rest in)
+             (conj out
+                   (str "Alice is " (first in)))))))
+(alice-is2 adjs)
+;; -> ["Alice is normal" "Alice is too small" "Alice is too big" "Alice is swimming"]
+
+(defn countdown [n]
+  (if (= n 0)
+    n
+    (countdown (- n 1))))
+(countdown 3)
+;; -> 0
+(countdown 100000)
+;; -> StackOverflowError
+
+(defn countdown [n]
+  (if (= n 0)
+    n
+    (recur (- n 1))))
+(countdown 100000)
+;; -> 0
+;; In this case, the recursion point is the function itself, because there is no loop.
