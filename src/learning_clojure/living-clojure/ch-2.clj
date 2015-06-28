@@ -346,3 +346,49 @@ fn [x] (= x :drinkme)
 (countdown 100000)
 ;; -> 0
 ;; In this case, the recursion point is the function itself, because there is no loop.
+
+(def animals [:mouse :duck :dodo :lory :eaglet])
+;Because each of these are keywords, let’s have a function that will transform a key‐
+;word to a string. str will do just fine for this:
+(#(str %) :mouse)
+;; -> ":mouse"
+;Finally, let’s put it all together with map and map this function over all the elements of
+;the collection:
+(map #(str %) animals)
+;; -> (":mouse" ":duck" ":dodo" ":lory" ":eaglet")
+;Did you notice that it wasn’t a vector that got returned?
+(class (map #(str %) animals))
+;; -> clojure.lang.LazySeq
+;map returns a lazy sequence. Lazy sequences mean that we can deal with infinite
+;sequences if we like. Let’s see what happens when we try to map across an infinite
+;sequence like all integers:
+(take 3 (map #(str %) (range)))
+;; -> ("0" "1" "2")
+(take 10 (map #(str %) (range)))
+;; -> ("0" "1" "2" "3" "4" "5" "6" "7" "8" "9")
+(def animal-print (map #(println %) animals))
+;; -> #'user/animal-print
+animal-print
+;; :mouse
+;; :duck
+;; :dodo
+;; :lory
+;; :eaglet
+;; -> (nil nil nil nil nil)
+
+(def animals
+  ["mouse" "duck" "dodo" "lory" "eaglet"])
+(def colors
+  ["brown" "black" "blue" "pink" "gold"])
+(defn gen-animal-string [animal color]
+  (str color "-" animal))
+(map gen-animal-string animals colors)
+;; -> ("brown-mouse" "black-duck" "blue-dodo" "pink-lory" "gold-eaglet"
+(def animals
+  ["mouse" "duck" "dodo" "lory" "eaglet"])
+(def colors
+  ["brown" "black"])
+(map gen-animal-string animals colors)
+;; -> ("brown-mouse" "black-duck")
+
+;; to page 50
