@@ -390,5 +390,32 @@ animal-print
   ["brown" "black"])
 (map gen-animal-string animals colors)
 ;; -> ("brown-mouse" "black-duck")
+(map gen-animal-string animals (cycle ["brown" "black"]))
+;; -> ("brown-mouse" "black-duck" "brown-dodo" "black-lory" "brown-eaglet")
 
-;; to page 50
+(reduce + [1 2 3 4 5])
+;; -> 15
+
+(reduce (fn [r x] (+ r (* x x))) [1 2 3])
+;; -> 14
+
+(reduce (fn [r x] (if (nil? x) r (conj r x)))
+        []
+        [:mouse nil :duck nil nil :lory])
+;; -> [:mouse :duck :lory]
+
+((complement nil?) nil)
+;; -> false
+((complement nil?) 1)
+;; -> true
+
+(filter (complement nil?) [:mouse nil :duck nil])
+;; -> (:mouse :duck)
+
+(filter keyword? [:mouse nil :duck nil])
+;; -> (:mouse :duck)
+
+(remove nil? [:mouse nil :duck nil])
+;; -> (:mouse :duck)
+
+;; page 51
