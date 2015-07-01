@@ -28,3 +28,19 @@
     (if (empty? l)
       c
       (recur (rest l) (inc c)))))
+
+; Broken unless
+(defn unless [test body] (if (not test) body))
+(unless true (println "Danger, danger Will Robinson"))
+
+(macroexpand ''something-we-do-not-want-interpreted)
+
+(defmacro unless [test body]
+  (list 'if (list 'not test) body))
+(macroexpand '(unless condition body))
+
+(unless true (println "No more danger, Will."))
+;; nil
+(unless false (println "Now, THIS is The FORCE."))
+;; Now, THIS is The FORCE.
+;; nil
