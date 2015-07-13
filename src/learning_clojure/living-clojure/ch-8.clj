@@ -66,3 +66,16 @@
 ;=> #'user/add3
 (add3 9)
 ;=> 12
+
+(defmacro def-make-adder2 [name plus]
+  `(def ~(symbol name)
+     (make-adder ~plus)))
+
+(macroexpand-1 '(def-make-adder2 add33 33))
+;=> (def add33 (user/make-adder 33))
+
+(def-make-adder2 add33 33)
+;#'user/add33
+
+(add33 6)
+;=> 39
