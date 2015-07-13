@@ -43,3 +43,26 @@
 ;; -> #'user/dormouse-hi-queen
 (dormouse-hi-queen)
 ;; -> "I am the Dormouse, so please your Majesty."
+
+(macroexpand-1 '(def-hi-queen alice-hi-queen "My name is Alice"))
+;; -> (defn alice-hi-queen [] (hi-queen "My name is Alice"))
+
+(defn make-adder [x]
+  (let [y x]
+    (fn [z] (+ y z))))
+
+(def add2 (make-adder 2))
+(add2 24)
+
+(defmacro def-make-adder [name plus]
+  (list 'def
+        (symbol name)
+        (list 'make-adder plus)))
+
+(macroexpand-1 '(def-make-adder add3 3))
+;=> (def add3 (make-adder 3))
+
+(def-make-adder add3 3)
+;=> #'user/add3
+(add3 9)
+;=> 12
