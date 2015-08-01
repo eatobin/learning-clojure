@@ -1,3 +1,5 @@
+(ns learning-clojure.eric)
+
 (def t0 (System/currentTimeMillis))
 (defn t1 [] (System/currentTimeMillis))
 (t1)
@@ -6,13 +8,13 @@ t0
 (t1)
 
 (def xx 1)
-(println xx)
+xx
 
 (list 1 2 3)
 
 (def aa 70)
 (def vv 88)
-(println (+ vv aa))
+(+ vv aa)
 
 (let [j 58] (/ j 2))
 
@@ -28,7 +30,7 @@ t0
 
 (defn big [st n]
   (if (> (count st) n)
-    (println "True it is.")))
+    "True it is."))
 (big "gggg" 4)                                              ;; prints nothing
 (big "gggg" 3)
 
@@ -132,3 +134,16 @@ t0
 (filter (comp #{"Person One"} :person) books)
 (defn get-books-for-person [person library]
   (filter (comp #{person} :person) library))
+
+(require '[clj-yaml.core :as yaml])
+
+(yaml/generate-string
+  [{:name "John Smith", :weight 100, :age 33}
+   {:weight 150, :name "Mary Smith", :age 27}])
+
+(yaml/parse-string "
+- {weight: 120, name: Brenda Smith, age: 27}
+- name: Scott Smith
+  weight: 175
+  age: 28
+")
