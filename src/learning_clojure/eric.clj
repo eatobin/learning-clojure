@@ -143,9 +143,31 @@ xx
 ;; => "- {age: 33, name: John Smith, weight: 100}\n- {age: 27, name: Mary Smith, weight: 150}\n"
 
 (into [] (yaml/parse-string "
-- {weight: 120, name: Brenda Smith, age: 27}
-- name: Scott Smith
-  weight: 175
-  age: 28
-"))
+                            - {weight: 120, name: Brenda Smith, age: 27}
+                            - name: Scott Smith
+                            weight: 175
+                            age: 28
+                            "))
 ;; => [{:weight 120, :name "Brenda Smith", :age 27} {:name "Scott Smith", :weight 175, :age 28}]
+
+(spit "flubber.yaml" (yaml/generate-string
+                       [{:name "Scott Smith", :age 33}
+                        {:name "Brenda Smith", :age 27}]))
+
+(into [] (yaml/parse-string
+           (slurp "flubber.yaml")))
+;; => [{:age 33 :name "Scott Smith"} {:age 27 :name "Brenda Smith"}]
+
+(spit "flubber.yaml" (yaml/generate-string
+                       [{:title "Book One" :author "Joe Blow" :person "Person One"}
+                        {:title "Book Two" :author "Joe Two" :person nil}
+                        {:title "The Bible" :author "G-d" :person "Person One"}]))
+
+(def booksX
+  (atom (into []
+              (yaml/parse-string
+                (slurp "flubber.yaml")))))
+
+(spit "flubber.yaml"
+      (yaml/generate-string
+        (deref booksX)))
