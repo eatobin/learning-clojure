@@ -1,0 +1,4 @@
+- {person: Person One, title: Book One, author: Joe Blow}
+- {person: nil, title: Book Two, author: Joe Two}
+- {person: Person One, title: The Bible, author: G-d}
+- {person: Person Two, title: Me Quack, author: Donald Duck}
