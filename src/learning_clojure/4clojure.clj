@@ -10,8 +10,8 @@
   c)
 ;; -> ("bird" "fish")
 
-;The other type of destructuring technique is to use the :as keyword. This takes the
-;whole destructuring argument and binds it to a name:
+;The other type of destructuring technique is to use the :as keyword.
+; This takes the whole destructuring argument and binds it to a name:
 
 (let [[a b :as x] ["cat" "dog" "bird" "fish"]]
   x)
