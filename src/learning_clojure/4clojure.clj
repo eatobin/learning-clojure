@@ -33,6 +33,12 @@
 (= 7 (let [x 3, y 10] (- y x)))
 (= 7 (let [x 21] (let [y 3] (/ x y))))
 
+;; 36
+(= 10 (let [x 7 y 3] (+ x y)))
+(= 4 (let [y 3 z 1] (+ y z)))
+(= 1 (let [z 1] z))
+
+;; End day 2
 
 ;; 51
 (let [[a b & c] ["cat" "dog" "bird" "fish"]]
