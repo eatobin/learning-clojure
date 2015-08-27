@@ -40,6 +40,21 @@
 
 ;; End day 2
 
+;; 37
+(re-seq #"jam" "I like jam in my jam ")
+(= "ABC" (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
+
+;; 57
+(= '(1 2 3 4 5) ((fn foo [x] (when (> x 0) (conj (foo (dec x)) x))) 5))
+
+;; 68
+(= __
+   (loop [x 5
+          result []]
+     (if (> x 0)
+       (recur (dec x) (conj result (+ 2 x)))
+       result)))
+
 ;; 51
 (let [[a b & c] ["cat" "dog" "bird" "fish"]]
   [a b])
