@@ -45,10 +45,13 @@
 (= "ABC" (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
 
 ;; 57
+(conj '(1 2 3) 4)
+;; => (4 1 2 3)
 (= '(1 2 3 4 5) ((fn foo [x] (when (> x 0) (conj (foo (dec x)) x))) 5))
 
 ;; 68
-(= __
+;; This results in a VECTOR - not a list! conj is at END for vector! (#57)
+(= [7 6 5 4 3]
    (loop [x 5
           result []]
      (if (> x 0)
