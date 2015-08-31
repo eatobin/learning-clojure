@@ -16,9 +16,10 @@ xx
 (def vv 88)
 (+ vv aa)
 
-(let [j 58] (/ j 2))
+(let [j 58] (/ j 2) j)
 
 (def x (/ 12 3))
+x
 
 (let [x 1
       y x]
@@ -41,22 +42,31 @@ xx
 (factorial 12)
 
 ;; We can use get-in for reaching into nested maps:
-(def m {:username "sally"
-        :profile  {:name    "Sally Clojurian"
-                   :address {:city "Austin" :state "TX"}}})
+(def my {:username "sally"
+         :profile  {:name    "Sally Clojurian"
+                    :address {:city "Austin" :state "TX"}}})
 
-(get-in m [:profile :name])
+(get-in my [:profile :name])
 ;; "Sally Clojurian"
-(get-in m [:profile :address :city])
+(get-in my [:profile :address :city])
 ;; "Austin"
-(get-in m [:profile :address :zip-code])
+(get-in my [:profile :address :zip-code])
 ;; nil
-(get-in m [:profile :address :zip-code] "no zip code!")
+(get-in my [:profile :address :zip-code] "no zip code!")
 ;; "no zip code!"
 
 (def us {:username "toberi"
          :profile  {:first "Eric", :last "Tobin"}, :tobbre {:first "Brenda", :last "Tobin"}})
 (get-in us [0 :first])
+;; nil
+(get-in us [1 :first])
+;; nil
+(get-in us [:profile :first])
+;; "Eric"
+(get-in us [:username])
+;;=> "toberi"
+(get-in us [:tobbre :last])
+;;=> "Tobin"
 
 ;; We can mix associative types:
 (def mv {:username "jimmy"
@@ -68,12 +78,12 @@ xx
 (get-in mv [:pets 1 :type])
 ;; :hamster
 
-(def m {:toberi {:first "Eric", :last "Tobin"}
-        :tobbre {:first "Brenda" :last "Tobin"}})
+(def mo {:toberi {:first "Eric", :last "Tobin"}
+         :tobbre {:first "Brenda" :last "Tobin"}})
 
-(get-in m [:toberi :first])
+(get-in mo [:toberi :first])
 ;; "Eric"
-(get-in m [:tobbre :first])
+(get-in mo [:tobbre :first])
 ;; "Brenda"
 
 ;I’ll give you one last convenient oddity before I move on. Sets are also functions.
@@ -87,9 +97,9 @@ xx
 ;if that argument is a member of the set. That covers the basics for sets. Let’s
 ;move on to maps.
 
-(def seq-of-maps [{:foo 1 :bar "hi"} {:foo 0 :bar "baz"}])
+(def seq-of-maps1 [{:foo 1 :bar "hi"} {:foo 0 :bar "baz"}])
 ;; #'user/seq-of-maps
-(filter (comp #{"hi"} :bar) seq-of-maps)
+(filter (comp #{"hi"} :bar) seq-of-maps1)
 ;; ({:bar "hi", :foo 1})
 
 (def test-it (comp #{"hi"} :bar))
@@ -115,13 +125,13 @@ xx
 (#{"baz"} (:bar {:foo 1 :bar "baz"} {:foo 0 :bar "me"}))
 ;; "baz"
 
-(def seq-of-maps [{:foo 1 :bar "baz"} {:foo 0 :bar "hi"}])
+(def seq-of-maps2 [{:foo 1 :bar "baz"} {:foo 0 :bar "hi"}])
 ;; #'user/seq-of-maps
-(filter (comp #{"hi"} :bar) seq-of-maps)
+(filter (comp #{"hi"} :bar) seq-of-maps2)
 ;; ({:bar "hi", :foo 0})
 
-(def seq-of-maps [{:foo 1 :bar "baz"} {:foo 0 :bar "hi"} {:foo 22 :bar "hi"}])
-(filter (comp #{"hi"} :bar) seq-of-maps)
+(def seq-of-maps9 [{:foo 1 :bar "baz"} {:foo 0 :bar "hi"} {:foo 22 :bar "hi"}])
+(filter (comp #{"hi"} :bar) seq-of-maps9)
 ;; ({:bar "hi", :foo 0} {:bar "hi", :foo 22})
 
 (def books [{:title "Book One" :author "Joe Blow" :person "Person One"}
@@ -132,8 +142,6 @@ xx
 (filter (comp #{"Book One"} :title) books)
 (filter (comp #{"Person One"} :name) people)
 (filter (comp #{"Person One"} :person) books)
-(defn get-books-for-person [person library]
-  (filter (comp #{person} :person) library))
 
 (require '[clj-yaml.core :as yaml])
 
