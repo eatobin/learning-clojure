@@ -142,13 +142,8 @@ xx
    {:weight 150, :name "Mary Smith", :age 27}])
 ;; => "- {age: 33, name: John Smith, weight: 100}\n- {age: 27, name: Mary Smith, weight: 150}\n"
 
-(into [] (yaml/parse-string "
-                            - {weight: 120, name: Brenda Smith, age: 27}
-                            - name: Scott Smith
-                            weight: 175
-                            age: 28
-                            "))
-;; => [{:weight 120, :name "Brenda Smith", :age 27} {:name "Scott Smith", :weight 175, :age 28}]
+(into [] (yaml/parse-string "- {age: 33, name: John Smith, weight: 100}\n- {age: 27, name: Mary Smith, weight: 150}" \n))
+;; => [{:age 33, :name "John Smith", :weight 100} {:age 27, :name "Mary Smith", :weight 150}]
 
 (spit "flubber.yaml" (yaml/generate-string
                        [{:name "Scott Smith", :age 33}
