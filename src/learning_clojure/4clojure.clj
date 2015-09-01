@@ -58,7 +58,14 @@
        (recur (dec x) (conj result (+ 2 x)))
        result)))
 
-;; Next - 71
+;; 71
+(-> [:cat :dog :fish] first str .toUpperCase)
+;; -> ":CAT"
+(= (last (sort (rest (reverse [2 5 4 1 3 6]))))
+   (-> [2 5 4 1 3 6] (reverse) (rest) (sort) (last))
+   5)
+
+;; to 72 pg 175
 
 ;; 51
 (let [[a b & c] ["cat" "dog" "bird" "fish"]]
