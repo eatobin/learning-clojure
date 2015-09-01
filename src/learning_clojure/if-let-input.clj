@@ -1,3 +1,5 @@
+(ns learning-clojure.if-let-input)
+
 (defn my-plan [weather]
   (if (= :good weather)
     "I'll go to a park."
@@ -51,6 +53,7 @@
 
 ;; in real repl only (read-line):
 ;;
+;; (println (read-line))
 ;; (if-let [result (read-line)]
 ;;     result
 ;;     "I'll go to a cafe.")

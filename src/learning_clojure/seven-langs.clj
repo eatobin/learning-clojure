@@ -1,3 +1,5 @@
+(ns learning-clojure.seven-langs)
+
 (def people ["Lea", "Han Solo"])
 (count "Lea")
 (map count people)
@@ -23,11 +25,12 @@
     (inc (size (rest v)))))
 (size [1 2 3])
 
-(defn size [v]
+(defn sizeX [v]
   (loop [l v, c 0]
     (if (empty? l)
       c
       (recur (rest l) (inc c)))))
+(sizeX [1 2 3])
 
 ; Broken unless
 (defn unless [test body] (if (not test) body))
@@ -35,9 +38,9 @@
 
 (macroexpand ''something-we-do-not-want-interpreted)
 
-(defmacro unless [test body]
+(defmacro unlessX [test body]
   (list 'if (list 'not test) body))
-(macroexpand '(unless condition body))
+(macroexpand '(unlessX condition body))
 
 (unless true (println "No more danger, Will."))
 ;; nil
