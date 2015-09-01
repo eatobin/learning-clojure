@@ -31,22 +31,22 @@
 (let [x 5]
   `(first [~x 2 3]))
 ;; -> (clojure.core/first [5 2 3])
-(defmacro def-hi-queen [name phrase]
+(defmacro def-hi-queen2 [name phrase]
   `(defn ~(symbol name) []
      (hi-queen ~phrase)))
 ;We use the ` (Syntax-quote) to quote the defn form. To get the name of the function,
 ;we use the ~ (Unquote) to evaluate the symbol of the name parameter.
 ;Checking this with our macroexpand-1, we can see that it is doing the right thing:
-(macroexpand-1 '(def-hi-queen alice-hi-queen "My name is Alice"))
+(macroexpand-1 '(def-hi-queen2 alice-hi-queen2 "My name is Alice"))
 ;; -> (clojure.core/defn alice-hi-queen []
 ;; (user/hi-queen "My name is Alice"))
 ;We can then use it as our def-hi-queen macro:
-(def-hi-queen dormouse-hi-queen "I am the Dormouse")
+(def-hi-queen2 dormouse-hi-queen "I am the Dormouse")
 ;; -> #'user/dormouse-hi-queen
 (dormouse-hi-queen)
 ;; -> "I am the Dormouse, so please your Majesty."
 
-(macroexpand-1 '(def-hi-queen alice-hi-queen "My name is Alice"))
+(macroexpand-1 '(def-hi-queen2 alice-hi-queen "My name is Alice"))
 ;; -> (defn alice-hi-queen [] (hi-queen "My name is Alice"))
 
 (defn make-adder [x]
