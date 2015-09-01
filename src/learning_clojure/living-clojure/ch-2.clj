@@ -1,3 +1,5 @@
+(ns learning-clojure.ch-2)
+
 (class true)
 (true? true)
 (true? false)
@@ -42,7 +44,7 @@
 (drinkable? :poison)
 (every? drinkable? [:drinkme :drinkme])
 (every? drinkable? [:drinkme :poison])
-fn [x] (= x :drinkme)
+(fn [x] (= x :drinkme))
 (every? (fn [x] (= x :drinkme) :toast) [:drinkme :drinkme])
 (every? #(= % :drinkme) [:drinkme :drinkme])
 (not-any? #(= % :drinkme) [:drinkme :poison])
@@ -174,11 +176,11 @@ fn [x] (= x :drinkme)
     "empty" "all gone"))
 ;; "grow smaller"
 
-(let [bottle "mystery"]
-  (case bottle
-    "poison" "don't touch"
-    "drinkme" "grow smaller"
-    "empty" "all gone"))
+;(let [bottle "mystery"]
+;  (case bottle
+;    "poison" "don't touch"
+;    "drinkme" "grow smaller"
+;    "empty" "all gone"))
 ;; -> IllegalArgumentException No matching clause: mystery
 
 (let [bottle "mystery"]
@@ -330,34 +332,34 @@ fn [x] (= x :drinkme)
 (alice-is2 adjs)
 ;; -> ["Alice is normal" "Alice is too small" "Alice is too big" "Alice is swimming"]
 
-(defn countdown [n]
+(defn countdown22 [n]
   (if (= n 0)
     n
-    (countdown (- n 1))))
-(countdown 3)
+    (countdown22 (- n 1))))
+(countdown22 3)
 ;; -> 0
-(countdown 100000)
+;;(countdown 100000)
 ;; -> StackOverflowError
 
-(defn countdown [n]
+(defn countdown5 [n]
   (if (= n 0)
     n
     (recur (- n 1))))
-(countdown 100000)
+(countdown5 100000)
 ;; -> 0
 ;; In this case, the recursion point is the function itself, because there is no loop.
 
-(def animals [:mouse :duck :dodo :lory :eaglet])
+(def animals19 [:mouse :duck :dodo :lory :eaglet])
 ;Because each of these are keywords, let’s have a function that will transform a key‐
 ;word to a string. str will do just fine for this:
 (#(str %) :mouse)
 ;; -> ":mouse"
 ;Finally, let’s put it all together with map and map this function over all the elements of
 ;the collection:
-(map #(str %) animals)
+(map #(str %) animals19)
 ;; -> (":mouse" ":duck" ":dodo" ":lory" ":eaglet")
 ;Did you notice that it wasn’t a vector that got returned?
-(class (map #(str %) animals))
+(class (map #(str %) animals19))
 ;; -> clojure.lang.LazySeq
 ;map returns a lazy sequence. Lazy sequences mean that we can deal with infinite
 ;sequences if we like. Let’s see what happens when we try to map across an infinite
@@ -366,7 +368,7 @@ fn [x] (= x :drinkme)
 ;; -> ("0" "1" "2")
 (take 10 (map #(str %) (range)))
 ;; -> ("0" "1" "2" "3" "4" "5" "6" "7" "8" "9")
-(def animal-print (map #(println %) animals))
+(def animal-print (map #(println %) animals19))
 ;; -> #'user/animal-print
 animal-print
 ;; :mouse
@@ -376,19 +378,19 @@ animal-print
 ;; :eaglet
 ;; -> (nil nil nil nil nil)
 
-(def animals
+(def animals98
   ["mouse" "duck" "dodo" "lory" "eaglet"])
-(def colors
+(def colors33
   ["brown" "black" "blue" "pink" "gold"])
 (defn gen-animal-string [animal color]
   (str color "-" animal))
-(map gen-animal-string animals colors)
+(map gen-animal-string animals98 colors33)
 ;; -> ("brown-mouse" "black-duck" "blue-dodo" "pink-lory" "gold-eaglet"
 (def animals
   ["mouse" "duck" "dodo" "lory" "eaglet"])
-(def colors
+(def colors41
   ["brown" "black"])
-(map gen-animal-string animals colors)
+(map gen-animal-string animals colors41)
 ;; -> ("brown-mouse" "black-duck")
 (map gen-animal-string animals (cycle ["brown" "black"]))
 ;; -> ("brown-mouse" "black-duck" "brown-dodo" "black-lory" "brown-eaglet")
