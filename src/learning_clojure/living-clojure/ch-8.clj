@@ -1,4 +1,6 @@
-(defn hi-queen [phrase]
+(ns learning-clojure.ch-8)
+
+defn hi-queen [phrase]
   (str phrase ", so please your Majesty."))
 
 (defmacro def-hi-queen [name phrase]
