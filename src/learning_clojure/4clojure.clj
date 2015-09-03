@@ -65,7 +65,26 @@
    (-> [2 5 4 1 3 6] (reverse) (rest) (sort) (last))
    5)
 
-;; to 72 pg 175
+;; 72
+(->> [1 2 3 4 5 6 7 8] (filter even?) (take 3))
+;; -> (2 4 6)
+
+(= (reduce + (map inc (take 3 (drop 2 [2 5 4 1 3 6]))))
+   (->> [2 5 4 1 3 6] (drop 2) (take 3) (map inc) (reduce +))
+   11)
+
+;; 145
+(= '(1 5 9 13 17 21 25 29 33 37) (for [x (range 40)
+                                       :when (= 1 (rem x 4))]
+                                   x))
+(= '(1 5 9 13 17 21 25 29 33 37) (for [x (iterate #(+ 4 %) 0)
+                                       :let [z (inc x)]
+                                       :while (< z 40)]
+                                   z))
+(= '(1 5 9 13 17 21 25 29 33 37) (for [[x y] (partition 2 (range 20))]
+                                   (+ x y)))
+
+;; to 20 pg 176
 
 ;; 51
 (let [[a b] ["cat" "dog" "bird" "fish"]]
