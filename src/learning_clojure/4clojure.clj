@@ -94,6 +94,22 @@
 (fn [coll]
   (last (take 2 (reverse coll))))
 
+;; 24
+(fn [coll]
+  (reduce + coll))
+(= ((fn [coll]
+      (reduce + coll)) [1 2 3]) 6)
+(= ((fn [coll]
+      (reduce + coll)) (list 0 -2 5 5)) 8)
+(= ((fn [coll]
+      (reduce + coll)) #{4 2 1}) 7)
+(= ((fn [coll]
+      (reduce + coll)) '(0 0 -1)) -1)
+(= ((fn [coll]
+      (reduce + coll)) '(1 10 3)) 14)
+
+;; 25 pg 176 next
+
 ;; 51
 (let [[a b] ["cat" "dog" "bird" "fish"]]
   [a b])
