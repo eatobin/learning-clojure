@@ -84,7 +84,15 @@
 (= '(1 5 9 13 17 21 25 29 33 37) (for [[x y] (partition 2 (range 20))]
                                    (+ x y)))
 
-;; to 20 pg 176
+;; 20
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) (list 1 2 3 4 5)) 4)
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) ["a" "b" "c"]) "b")
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) [[1 2] [3 4]]) [1 2])
+(fn [coll]
+  (last (take 2 (reverse coll))))
 
 ;; 51
 (let [[a b] ["cat" "dog" "bird" "fish"]]
