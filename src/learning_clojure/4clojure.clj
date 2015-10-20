@@ -108,7 +108,24 @@
 (= ((fn [coll]
       (reduce + coll)) '(1 10 3)) 14)
 
-;; 25 pg 176 next
+;; 25
+
+(fn [coll]
+  (filter odd? coll))
+(= ((fn [coll]
+      (filter odd? coll)) #{1 2 3 4 5})
+   '(1 3 5))
+(= ((fn [coll]
+      (filter odd? coll)) [4 2 1 6])
+   '(1))
+(= ((fn [coll]
+      (filter odd? coll)) [2 2 4 6])
+   '())
+(= ((fn [coll]
+      (filter odd? coll)) [1 1 1 3])
+   '(1 1 1 3))
+
+;; 27 pg 177 next
 
 ;; 51
 (let [[a b] ["cat" "dog" "bird" "fish"]]
