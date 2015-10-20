@@ -125,7 +125,39 @@
       (filter odd? coll)) [1 1 1 3])
    '(1 1 1 3))
 
-;; 27 pg 177 next
+;; 27
+
+(fn [coll]
+  (= (seq coll)
+     (reverse (seq coll))))
+(false? ((fn [coll]
+           (= (seq coll)
+              (reverse (seq coll))))
+          '(1 2 3 4 5)))
+(true? ((fn [coll]
+          (= (seq coll)
+             (reverse (seq coll))))
+         "racecar"))
+(true? ((fn [coll]
+          (= (seq coll)
+             (reverse (seq coll))))
+         [:foo :bar :foo]))
+(true? ((fn [coll]
+          (= (seq coll)
+             (reverse (seq coll))))
+         '(1 1 3 3 1 1)))
+(false? ((fn [coll]
+           (= (seq coll)
+              (reverse (seq coll))))
+          '(:a :b :c)))
+
+;; 32 pg 177
+
+;Write a function which duplicates each element of a sequence.
+(= (__ [1 2 3]) '(1 1 2 2 3 3))
+(= (__ [:a :a :b :b]) '(:a :a :a :a :b :b :b :b))
+(= (__ [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
+(= (__ [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
 
 ;; 51
 (let [[a b] ["cat" "dog" "bird" "fish"]]
