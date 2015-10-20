@@ -109,7 +109,6 @@
       (reduce + coll)) '(1 10 3)) 14)
 
 ;; 25
-
 (fn [coll]
   (filter odd? coll))
 (= ((fn [coll]
@@ -126,7 +125,6 @@
    '(1 1 1 3))
 
 ;; 27
-
 (fn [coll]
   (= (seq coll)
      (reverse (seq coll))))
