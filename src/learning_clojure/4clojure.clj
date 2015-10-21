@@ -150,13 +150,25 @@
               (reverse (seq coll))))
           '(:a :b :c)))
 
-;; 32 pg 177
+;; 32
+(fn [coll]
+  (mapcat #(repeat 2 %)
+          coll))
+(= ((fn [coll]
+      (mapcat #(repeat 2 %)
+              coll)) [1 2 3])
+   '(1 1 2 2 3 3))
+(= ((fn [coll]
+      (mapcat #(repeat 2 %)
+              coll)) [:a :a :b :b])
+   '(:a :a :a :a :b :b :b :b))
+(= ((fn [coll]
+      (mapcat #(repeat 2 %)
+              coll)) [[1 2] [3 4]])
+   '([1 2] [1 2] [3 4] [3 4]))
 
-;Write a function which duplicates each element of a sequence.
-;(= (__ [1 2 3]) '(1 1 2 2 3 3))
-;(= (__ [:a :a :b :b]) '(:a :a :a :a :b :b :b :b))
-;(= (__ [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
-;(= (__ [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
+;; 30 pg 177
+
 
 ;; 51
 (let [[a b] ["cat" "dog" "bird" "fish"]]
