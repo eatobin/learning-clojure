@@ -170,7 +170,7 @@
 ;; 30 pg 177
 
 
-;; 51
+;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
   [a b])
 ;; -> ["cat" "dog"]
