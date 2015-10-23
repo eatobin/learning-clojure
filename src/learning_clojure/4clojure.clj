@@ -269,6 +269,12 @@
           (repeat n x))
         coll)) [[1 2] [3 4]] 2)
    '([1 2] [1 2] [3 4] [3 4]))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [44 33] 2)
+   [44 44 33 33])
 
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
