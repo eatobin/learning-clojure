@@ -276,6 +276,49 @@
         coll)) [44 33] 2)
    [44 44 33 33])
 
+;; 26
+(def fib
+  (map first
+       (iterate
+         (fn [[a b]]
+           [b (+ a b)])
+         [0 1])))
+(take 10 fib)
+
+(fn [n]
+  (take n
+        (map first
+             (iterate
+               (fn [[a b]]
+                 [b (+ a b)])
+               [1 1]))))
+(= ((fn [n]
+      (take n
+            (map first
+                 (iterate
+                   (fn [[a b]]
+                     [b (+ a b)])
+                   [1 1])))) 3)
+   '(1 1 2))
+(= ((fn [n]
+      (take n
+            (map first
+                 (iterate
+                   (fn [[a b]]
+                     [b (+ a b)])
+                   [1 1])))) 6)
+   '(1 1 2 3 5 8))
+(= ((fn [n]
+      (take n
+            (map first
+                 (iterate
+                   (fn [[a b]]
+                     [b (+ a b)])
+                   [1 1])))) 8)
+   '(1 1 2 3 5 8 13 21))
+
+;; to 29 pg 179
+
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
   [a b])
