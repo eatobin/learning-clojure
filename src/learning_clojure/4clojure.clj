@@ -199,6 +199,13 @@
                  (mod (inc %1) n))
       %2)
     coll))
+(fn [coll n]
+  (keep-indexed
+    (fn [index value]
+      (when (not= 0
+                  (mod (inc index) n))
+        value))
+    coll))
 (= ((fn [coll n]
       (keep-indexed
         #(when (not= 0
@@ -210,9 +217,10 @@
    [1 2 4 5 7 8])
 (= ((fn [coll n]
       (keep-indexed
-        #(when (not= 0
-                     (mod (inc %1) n))
-          %2)
+        (fn [index value]
+          (when (not= 0
+                      (mod (inc index) n))
+            value))
         coll))
      [:a :b :c :d :e :f]
      2)
