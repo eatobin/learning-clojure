@@ -181,6 +181,54 @@
      [[1 2] [1 2] [3 4] [1 2]])
    '([1 2] [3 4] [1 2]))
 
+;; 31
+(fn [coll]
+  (seq (partition-by identity coll)))
+(= ((fn [coll]
+      (seq (partition-by identity coll))) [1 1 2 1 1 1 3 3])
+   '((1 1) (2) (1 1 1) (3 3)))
+(= (#(seq (partition-by identity %)) [:a :a :b :b :c])
+   '((:a :a) (:b :b) (:c)))
+(= (#(seq (partition-by identity %)) [[1 2] [1 2] [3 4]])
+   '(([1 2] [1 2]) ([3 4])))
+
+;; 41
+(fn [coll n]
+  (keep-indexed
+    #(when (not= 0
+                 (mod (inc %1) n))
+      %2)
+    coll))
+(= ((fn [coll n]
+      (keep-indexed
+        #(when (not= 0
+                     (mod (inc %1) n))
+          %2)
+        coll))
+     [1 2 3 4 5 6 7 8]
+     3)
+   [1 2 4 5 7 8])
+(= ((fn [coll n]
+      (keep-indexed
+        #(when (not= 0
+                     (mod (inc %1) n))
+          %2)
+        coll))
+     [:a :b :c :d :e :f]
+     2)
+   [:a :c :e])
+(= ((fn [coll n]
+      (keep-indexed
+        #(when (not= 0
+                     (mod (inc %1) n))
+          %2)
+        coll))
+     [1 2 3 4 5 6]
+     4)
+   [1 2 3 5 6])
+
+;; to 45 pg 178
+
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
   [a b])
