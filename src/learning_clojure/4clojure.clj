@@ -235,7 +235,40 @@
      4)
    [1 2 3 5 6])
 
-;; to 45 pg 178
+;; 45
+(= '(1 4 7 10 13)
+   (take 5 (iterate #(+ 3 %) 1)))
+
+;; 33
+(fn [coll n]
+  (mapcat
+    (fn [x]
+      (repeat n x))
+    coll))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [1 2 3] 2)
+   '(1 1 2 2 3 3))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [:a :b] 4)
+   '(:a :a :a :a :b :b :b :b))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [4 5 6] 1)
+   '(4 5 6))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [[1 2] [3 4]] 2)
+   '([1 2] [1 2] [3 4] [3 4]))
 
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
