@@ -167,8 +167,19 @@
               coll)) [[1 2] [3 4]])
    '([1 2] [1 2] [3 4] [3 4]))
 
-;; 30 pg 177
-
+;; 30
+#(map first (partition-by identity %))
+(= (apply str (#(map first (partition-by identity %))
+                "Leeeeeerrroyyy"))
+   "Leroy")
+(= ((fn [coll]
+      (map first (partition-by identity coll)))
+     [1 1 2 3 3 2 2 3])
+   '(1 2 3 2 3))
+(= ((fn [coll]
+      (map first (partition-by identity coll)))
+     [[1 2] [1 2] [3 4] [1 2]])
+   '([1 2] [3 4] [1 2]))
 
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
