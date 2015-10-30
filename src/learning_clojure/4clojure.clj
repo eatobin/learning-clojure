@@ -335,7 +335,17 @@
              (re-seq #"[A-Z]"
                      s))) "$#A(*&987Zf") "AZ")
 
-;; to 48 pg 180
+;; 42
+(fn [n]
+  (reduce * (range 1 (inc n))))
+(= ((fn [n]
+      (reduce * (range 1 (inc n)))) 1) 1)
+(= ((fn [n]
+      (reduce * (range 1 (inc n)))) 3) 6)
+(= ((fn [n]
+      (reduce * (range 1 (inc n)))) 5) 120)
+(= ((fn [n]
+      (reduce * (range 1 (inc n)))) 8) 40320)
 
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
