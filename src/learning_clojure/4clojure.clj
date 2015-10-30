@@ -317,7 +317,25 @@
                    [1 1])))) 8)
    '(1 1 2 3 5 8 13 21))
 
-;; to 29 pg 179
+;; 29
+(fn [s]
+  (apply str
+         (re-seq #"[A-Z]"
+                 s)))
+(= ((fn [s]
+      (apply str
+             (re-seq #"[A-Z]"
+                     s))) "HeLlO, WoRlD!") "HLOWRD")
+(empty? ((fn [s]
+           (apply str
+                  (re-seq #"[A-Z]"
+                          s))) "nothing"))
+(= ((fn [s]
+      (apply str
+             (re-seq #"[A-Z]"
+                     s))) "$#A(*&987Zf") "AZ")
+
+;; to 48 pg 180
 
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
