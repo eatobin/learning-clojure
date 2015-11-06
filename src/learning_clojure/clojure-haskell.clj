@@ -4,15 +4,13 @@
   (mod n 10))
 (defn drop-last-digit [n]
   (quot n 10))
-;(loop [x 10]
-;  (when (> x 1)
-;    (println x)
-;    (recur (- x 2))))
-;(defn to-rev-digits [n]
-;  (loop [n]
-;    (if (> n 0)
-;      (cons (last-digit n)
-;             (recur (drop-last-digit n))))))
+(defn to-rev-digits [n]
+  (loop [x n
+         a []]
+    (if (<= x 0)
+      a
+      (recur (drop-last-digit x)
+             (conj a (last-digit x))))))
 ;toRevDigits n
 ;  | (<=) n 0  = []
 ;  | otherwise = lastDigit n : toRevDigits (dropLastDigit n)
