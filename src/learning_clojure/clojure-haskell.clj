@@ -2,8 +2,16 @@
 
 (defn last-digit [n]
   (mod n 10))
+
+;lastDigit :: Integer -> Integer
+;lastDigit n = (mod) n 10
+
 (defn drop-last-digit [n]
   (quot n 10))
+
+;dropLastDigit :: Integer -> Integer
+;dropLastDigit n = (div) n 10
+
 (defn to-rev-digits [n]
   (loop [x n
          a []]
@@ -11,6 +19,8 @@
       a
       (recur (drop-last-digit x)
              (conj a (last-digit x))))))
+
+;toRevDigits :: Integer -> [Integer]
 ;toRevDigits n
-;  | (<=) n 0  = []
-;  | otherwise = lastDigit n : toRevDigits (dropLastDigit n)
+;| (<=) n 0  = []
+;| otherwise = (:) (lastDigit n) (toRevDigits (dropLastDigit n))
