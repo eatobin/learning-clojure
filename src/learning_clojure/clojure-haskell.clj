@@ -21,13 +21,12 @@
              (conj a (last-digit x))))))
              
 (defn double-every-other [coll]
-  (loop [c coll
-        [x y & zs] c
-         a []]
-    (if (empty? c)
+  (loop [[x y & zs :as w] coll
+          a []]
+    (if (empty? w)
       a
-      (recur (drop-last-digit x)
-             (conj a (last-digit x))))))
+      (recur (zs)
+             (conj a x (* 2 y))))))
 
 ;toRevDigits :: Integer -> [Integer]
 ;toRevDigits n
