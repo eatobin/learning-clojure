@@ -32,3 +32,7 @@
 ;toRevDigits n
 ;| (<=) n 0  = []
 ;| otherwise = (:) (lastDigit n) (toRevDigits (dropLastDigit n))
+
+(let [[x y & zs :as w]
+  [1 2 3 4 5 6]]
+    [x y zs w])
