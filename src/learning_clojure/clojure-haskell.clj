@@ -25,8 +25,10 @@
           a []]
     (if (empty? w)
       a
-      (recur (zs)
-             (conj a x (* 2 y))))))
+      (if (= (count w) 1)
+        (conj a x)
+       (recur (into [] zs)
+             (conj a x (* 2 y)))))))
 
 ;toRevDigits :: Integer -> [Integer]
 ;toRevDigits n
@@ -36,3 +38,9 @@
 (let [[x y & zs :as w]
   [1 2 3 4 5 6]]
     [x y zs w])
+
+(let [[x y & zs :as w]
+  [1 2 3 4 5 6]]
+  (if [x []]
+    [x]))
+    
