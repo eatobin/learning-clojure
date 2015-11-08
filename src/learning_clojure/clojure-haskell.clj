@@ -26,9 +26,9 @@
     (if (empty? w)
       a
       (if (= (count w) 1)
-        (conj a x)
-       (recur (into [] zs)
-             (conj a x (* 2 y)))))))
+         (conj a x)
+         (recur (into [] zs)
+                (conj a x (* 2 y)))))))
 
 ;toRevDigits :: Integer -> [Integer]
 ;toRevDigits n
