@@ -19,28 +19,36 @@
       a
       (recur (drop-last-digit x)
              (conj a (last-digit x))))))
-             
-(defn double-every-other [coll]
-  (loop [[x y & zs :as w] coll
-          a []]
-    (if (empty? w)
-      a
-      (if (= (count w) 1)
-         (conj a x)
-         (recur (into [] zs)
-                (conj a x (* 2 y)))))))
 
 ;toRevDigits :: Integer -> [Integer]
 ;toRevDigits n
 ;| (<=) n 0  = []
 ;| otherwise = (:) (lastDigit n) (toRevDigits (dropLastDigit n))
 
-(let [[x y & zs :as w]
-  [1 2 3 4 5 6]]
-    [x y zs w])
+(defn double-every-other [coll]
+  (loop [[x y & zs :as w] coll
+         a []]
+    (if (empty? w)
+      a
+      (if (= (count w) 1)
+        (conj a x)
+        (recur (into [] zs)
+               (conj a x (* 2 y)))))))
 
-(let [[x y & zs :as w]
-  [1 2 3 4 5 6]]
-  (if [x []]
-    [x]))
-    
+;doubleEveryOther :: [Integer] -> [Integer]
+;doubleEveryOther []       = []
+;doubleEveryOther (x:[])   = [x]
+;doubleEveryOther (x:y:zs) = x : (y * 2) : doubleEveryOther zs
+
+(defn sum-digits [coll]
+  (loop [[x & xs :as w] coll
+         a 0]
+    (if (empty? w)
+      a
+      (recur (into [] xs)
+             (+ (+ a (drop-last-digit x)) (last-digit x))))))
+
+;sumDigits :: [Integer] -> Integer
+;sumDigits [] = 0
+;sumDigits (x:[]) = (dropLastDigit x) + (lastDigit x)
+;sumDigits (x:xs) = (dropLastDigit x) + (lastDigit x) + sumDigits xs
