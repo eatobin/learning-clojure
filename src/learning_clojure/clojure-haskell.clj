@@ -52,6 +52,11 @@
 ;sumDigits [] = 0
 ;sumDigits (x:xs) = (dropLastDigit x) + (lastDigit x) + sumDigits xs
 
+(defn luhn [n]
+  (= (mod (sum-digits (double-every-other (to-rev-digits n)))
+          10)
+     0))
+
 ;luhn :: Integer -> Bool
 ;luhn n = (mod (sumDigits (doubleEveryOther (toRevDigits n))) 10) == 0
 ;-- 4662110665499438 True
