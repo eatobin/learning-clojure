@@ -50,5 +50,4 @@
 
 ;sumDigits :: [Integer] -> Integer
 ;sumDigits [] = 0
-;sumDigits (x:[]) = (dropLastDigit x) + (lastDigit x)
 ;sumDigits (x:xs) = (dropLastDigit x) + (lastDigit x) + sumDigits xs
