@@ -51,3 +51,9 @@
 ;sumDigits :: [Integer] -> Integer
 ;sumDigits [] = 0
 ;sumDigits (x:xs) = (dropLastDigit x) + (lastDigit x) + sumDigits xs
+
+;luhn :: Integer -> Bool
+;luhn n = (mod (sumDigits (doubleEveryOther (toRevDigits n))) 10) == 0
+;-- 4662110665499438 True
+;-- 645937 True
+;-- 1859 True
