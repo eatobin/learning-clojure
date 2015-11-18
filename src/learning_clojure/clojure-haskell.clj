@@ -63,6 +63,9 @@
 ;-- 645937 True
 ;-- 1859 True
 
+(defn hanoi [n p1 p2 p3]
+  )
+
 ;type Peg = String
 ;type Move = (Peg, Peg)
 
