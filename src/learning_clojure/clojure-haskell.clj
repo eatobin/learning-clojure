@@ -103,5 +103,5 @@
 ;type Move = (Peg, Peg)
 
 ;hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
-;hanoi 1 p1 _ p3 = [(p1, p3)]
-;hanoi n p1 p2 p3 = (hanoi (n - 1) p1 p3 p2) ++ (hanoi 1 p1 p2 p3) ++ (hanoi (n - 1) p2 p1 p3)
+;hanoi 0 _ _ _ = []
+;hanoi n a b c = hanoi (n-1) a c b ++ [(a,c)] ++ hanoi (n-1) b a c
