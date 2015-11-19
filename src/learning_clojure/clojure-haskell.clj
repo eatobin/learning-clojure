@@ -71,6 +71,24 @@
       (println (format "Move fromX %s to %s" p1 p3))
       (recur (dec n) p2 p1 p3))))
 
+(defn power
+  ([x y] (power x y 1))
+  ([x y current]
+  (if (= y 0)
+    current
+    (if (> y 0)
+      (power x (- y 1) (* x current))
+      (power x (+ y 1) (/ current x))))))
+
+(defn power
+  ([x y] (power x y 1))
+  ([x y current]
+  (if (= y 0)
+    current
+    (if (> y 0)
+      (recur x (- y 1) (* x current))
+      (recur x (+ y 1) (/ current x))))))
+
 ;(defn hanoi [n p1 p2 p3]
 ;  (loop [ln n lp1 p1 lp2 p2 lp3 p3
 ;         a []]
