@@ -71,10 +71,15 @@
       (println (format "Move fromX %s to %s" a c))
       (recur (dec n) b a c))))
 
+;; not tail-recursive - will dump for large n
 (defn hanoi2 [n a b c]
   (if (= n 1)
     (list (list a c))
-    (concat (hanoi2 (dec n) a c b) (hanoi2 1 a b c) (hanoi2 (dec n) b a c))))
+    (into []
+          (concat
+            (hanoi2 (dec n) a c b)
+            (hanoi2 1 a b c)
+            (hanoi2 (dec n) b a c)))))
 
 ;type Peg = String
 ;type Move = (Peg, Peg)
