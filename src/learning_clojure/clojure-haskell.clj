@@ -63,41 +63,18 @@
 ;-- 645937 True
 ;-- 1859 True
 
-(defn hanoi [n p1 p2 p3]
+(defn hanoi [n a b c]
   (if (= n 1)
-    (println (format "Move from %s to %s" p1 p3))
+    (println (format "Move from %s to %s" a c))
     (do
-      (hanoi (dec n) p1 p3 p2)
-      (println (format "Move fromX %s to %s" p1 p3))
-      (recur (dec n) p2 p1 p3))))
+      (hanoi (dec n) a c b)
+      (println (format "Move fromX %s to %s" a c))
+      (recur (dec n) b a c))))
 
-(defn power
-  ([x y] (power x y 1))
-  ([x y current]
-  (if (= y 0)
-    current
-    (if (> y 0)
-      (power x (- y 1) (* x current))
-      (power x (+ y 1) (/ current x))))))
-
-(defn power
-  ([x y] (power x y 1))
-  ([x y current]
-  (if (= y 0)
-    current
-    (if (> y 0)
-      (recur x (- y 1) (* x current))
-      (recur x (+ y 1) (/ current x))))))
-
-;(defn hanoi [n p1 p2 p3]
-;  (loop [ln n lp1 p1 lp2 p2 lp3 p3
-;         a []]
-;    (if (= ln 0)
-;      a
-;      (hanoi (dec n) p1 p3 p2
-;             (recur 1 p1 p2 p3
-;                    (when (= n 1)
-;                      (conj a (list p1 p3))))))))
+(defn hanoi2 [n a b c]
+  (if (= n 1)
+    (list (list a c))
+    (concat (hanoi2 (dec n) a c b) (hanoi2 1 a b c) (hanoi2 (dec n) b a c))))
 
 ;type Peg = String
 ;type Move = (Peg, Peg)
