@@ -1,5 +1,11 @@
 (ns learning-clojure.4clojure)
 
+;; 1
+(= true true)
+
+;; 2
+(= (- 10 (* 2 3)) 4)
+
 ;; 6
 (= [:a :b :c]
    (list :a :b :c)
