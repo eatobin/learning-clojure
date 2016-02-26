@@ -8,7 +8,7 @@
     (is (= 1 1))))
 
 (deftest yaml-out-test
-  (is (= "- {age: 33, name: John Smith, weight: 100}\n- {age: 27, name: Mary Smith, weight: 150}\n"
+  (is (= "- {name: John Smith, weight: 100, age: 33}\n- {weight: 150, name: Mary Smith, age: 27}\n"
          (yaml/generate-string
            [{:name "John Smith", :weight 100, :age 33}
             {:weight 150, :name "Mary Smith", :age 27}]))))
