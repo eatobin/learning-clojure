@@ -147,20 +147,20 @@
           '(1 2 3 4 5)))
 (true? ((fn [coll]
           (= (seq coll)
-             (reverse (seq coll))))
-         "racecar"))
+             (reverse (seq coll)))
+          "racecar")))
 (true? ((fn [coll]
           (= (seq coll)
-             (reverse (seq coll))))
-         [:foo :bar :foo]))
+             (reverse (seq coll)))
+          [:foo :bar :foo])))
 (true? ((fn [coll]
           (= (seq coll)
-             (reverse (seq coll))))
-         '(1 1 3 3 1 1)))
+             (reverse (seq coll)))
+          '(1 1 3 3 1 1))))
 (false? ((fn [coll]
            (= (seq coll)
-              (reverse (seq coll))))
-          '(:a :b :c)))
+              (reverse (seq coll)))
+           '(:a :b :c))))
 
 ;; 32
 (fn [coll]
@@ -185,12 +185,12 @@
                 "Leeeeeerrroyyy"))
    "Leroy")
 (= ((fn [coll]
-      (map first (partition-by identity coll)))
-     [1 1 2 3 3 2 2 3])
+      (map first (partition-by identity coll))
+      [1 1 2 3 3 2 2 3]))
    '(1 2 3 2 3))
 (= ((fn [coll]
-      (map first (partition-by identity coll)))
-     [[1 2] [1 2] [3 4] [1 2]])
+      (map first (partition-by identity coll))
+      [[1 2] [1 2] [3 4] [1 2]]))
    '([1 2] [3 4] [1 2]))
 
 ;; 31
@@ -223,9 +223,9 @@
         #(when (not= 0
                      (mod (inc %1) n))
           %2)
-        coll))
+        coll)
      [1 2 3 4 5 6 7 8]
-     3)
+      3))
    [1 2 4 5 7 8])
 (= ((fn [coll n]
       (keep-indexed
@@ -233,18 +233,18 @@
           (when (not= 0
                       (mod (inc index) n))
             value))
-        coll))
+        coll)
      [:a :b :c :d :e :f]
-     2)
+      2))
    [:a :c :e])
 (= ((fn [coll n]
       (keep-indexed
         #(when (not= 0
                      (mod (inc %1) n))
           %2)
-        coll))
+        coll)
      [1 2 3 4 5 6]
-     4)
+      4))
    [1 2 3 5 6])
 
 ;; 45
