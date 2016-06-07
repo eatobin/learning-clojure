@@ -1,0 +1,3 @@
+- {title: Book One, author: Joe Blow, person: Person One}
+- {title: Book Two, author: Joe Two, person: null}
+- {title: The Bible, author: G-d, person: Person One}
