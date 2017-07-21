@@ -209,7 +209,7 @@
   (keep-indexed
     #(when (not= 0
                  (mod (inc %1) n))
-      %2)
+       %2)
     coll))
 (fn [coll n]
   (keep-indexed
@@ -222,7 +222,7 @@
       (keep-indexed
         #(when (not= 0
                      (mod (inc %1) n))
-          %2)
+           %2)
         coll))
      [1 2 3 4 5 6 7 8]
      3)
@@ -241,7 +241,7 @@
       (keep-indexed
         #(when (not= 0
                      (mod (inc %1) n))
-          %2)
+           %2)
         coll))
      [1 2 3 4 5 6]
      4)
