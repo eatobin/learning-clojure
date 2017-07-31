@@ -164,3 +164,34 @@ af/fav-food
 
 (common-fav-foods [:jam :brownies :toast]
                   [:lettuce :carrots :jam])
+
+(defrecord Person [fname lname address])
+;=> learning_clojure.ch_1.Person
+(defrecord Address [street city state zip])
+;=> learning_clojure.ch_1.Address
+(def stu (Person. "Stu" "Halloway"
+                  (Address. "200 N Mangum"
+                            "Durham"
+                            "NC"
+                            27701)))
+;=> #'learning-clojure.ch-1/stu
+(:lname stu)
+;=> "Halloway"
+(-> stu :address :city)
+;=> "Durham"
+(assoc stu :fname "Stuart")
+;=>
+;#learning_clojure.ch_1.Person{:fname "Stuart",
+;                              :lname "Halloway",
+;                              :address #learning_clojure.ch_1.Address{:street "200 N Mangum",
+;                                                                      :city "Durham",
+;                                                                      :state "NC",
+;                                                                      :zip 27701}}
+(update-in stu [:address :zip] inc)
+;=>
+;#learning_clojure.ch_1.Person{:fname "Stu",
+;                              :lname "Halloway",
+;                              :address #learning_clojure.ch_1.Address{:street "200 N Mangum",
+;                                                                      :city "Durham",
+;                                                                      :state "NC",
+;                                                                      :zip 27702}}
