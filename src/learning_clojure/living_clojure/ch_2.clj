@@ -1,4 +1,4 @@
-(ns learning-clojure.ch-2)
+(ns learning_clojure.living_clojure.ch_2)
 
 (class true)
 (true? true)

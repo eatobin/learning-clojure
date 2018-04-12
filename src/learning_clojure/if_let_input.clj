@@ -1,4 +1,4 @@
-(ns learning-clojure.if-let-input)
+(ns learning_clojure.if_let_input)
 
 (defn my-plan [weather]
   (if (= :good weather)

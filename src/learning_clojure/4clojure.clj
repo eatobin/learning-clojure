@@ -1,4 +1,4 @@
-(ns learning-clojure.4clojure)
+(ns learning_clojure.4clojure)
 
 ;; 1
 (= true

@@ -1,6 +1,6 @@
-(ns learning-clojure.eric-test
+(ns learning_clojure.eric-test
   (:require [clojure.test :refer :all]
-            [learning-clojure.eric :refer :all]
+            [learning_clojure.eric :refer :all]
             [clj-yaml.core :as yaml]))
 
 (deftest a-test

@@ -1,4 +1,4 @@
-(ns learning-clojure.ch-8)
+(ns learning_clojure.living_clojure.ch_8)
 
 (defn hi-queen [phrase]
   (str phrase ", so please your Majesty."))

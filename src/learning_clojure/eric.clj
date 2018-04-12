@@ -1,4 +1,4 @@
-(ns learning-clojure.eric)
+(ns learning_clojure.eric)
 
 (def t0 (System/currentTimeMillis))
 (defn t1 [] (System/currentTimeMillis))

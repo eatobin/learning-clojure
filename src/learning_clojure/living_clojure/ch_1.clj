@@ -1,4 +1,4 @@
-(ns learning-clojure.ch-1)
+(ns learning_clojure.living_clojure.ch_1)
 
 42
 12.43
@@ -174,7 +174,7 @@ af/fav-food
                             "Durham"
                             "NC"
                             27701)))
-;=> #'learning-clojure.ch-1/stu
+;=> #'learning_clojure.ch-1/stu
 (:lname stu)
 ;=> "Halloway"
 (-> stu :address :city)

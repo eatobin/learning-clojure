@@ -1,4 +1,4 @@
-(ns learning-clojure.seven-langs)
+(ns learning_clojure.seven_langs)
 
 (def people ["Lea", "Han Solo"])
 (count "Lea")

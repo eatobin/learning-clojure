@@ -1,4 +1,4 @@
-(ns learning-clojure.vectors)
+(ns learning_clojure.vectors)
 
 (def names
   [

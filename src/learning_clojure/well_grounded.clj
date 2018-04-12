@@ -1,4 +1,4 @@
-(ns learning-clojure.well-grounded)
+(ns learning_clojure.well_grounded)
 
 (defn const-fun1 [_] 1)
 (defn ident-fun [x] x)

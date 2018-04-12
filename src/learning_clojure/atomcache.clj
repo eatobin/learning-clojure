@@ -1,4 +1,4 @@
-(ns learning-clojure.atomcache)
+(ns learning_clojure.atomcache)
 
 ; START:create
 (defn create

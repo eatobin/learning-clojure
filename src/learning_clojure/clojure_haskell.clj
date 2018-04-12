@@ -1,4 +1,4 @@
-(ns learning-clojure.clojure-haskell)
+(ns learning_clojure.clojure_haskell)
 
 (defn last-digit [n]
   (mod n 10))
