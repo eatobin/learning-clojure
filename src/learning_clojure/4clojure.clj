@@ -380,3 +380,16 @@
 (= [1 2 [3 4 5] [1 2 3 4 5]]
    (let [[a b & c :as d] [1 2 3 4 5]]
      [a b c d]))
+
+;; 134
+(defn nil-key [k coll]
+  (if
+    (and
+      (not (nil? (find coll k)))
+      (nil? (k coll)))
+    true
+    false))
+
+(true? (nil-key :a {:a nil :b 2}))
+(false? (nil-key :b {:a nil :b 2}))
+(false? (nil-key :c {:a nil :b 2}))
