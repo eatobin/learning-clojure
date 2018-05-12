@@ -3,7 +3,6 @@
 ;; 1
 (= true
    true)
-
 (= false
    false)
 
