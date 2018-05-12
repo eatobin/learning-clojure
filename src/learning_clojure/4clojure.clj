@@ -4,6 +4,9 @@
 (= true
    true)
 
+(= false
+   false)
+
 ;; 2
 (= (- 10 (* 2 3))
    4)
