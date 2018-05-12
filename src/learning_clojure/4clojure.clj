@@ -61,7 +61,10 @@
 ;; 57
 (conj '(1 2 3) 4)
 ;; => (4 1 2 3)
-(= '(5 4 3 2 1) ((fn foo [x] (when (> x 0) (conj (foo (dec x)) x))) 5))
+(= '(5 4 3 2 1)
+   ((fn foo [x]
+      (when (> x 0)
+        (conj (foo (dec x)) x))) 5))
 
 ;; 68
 ;; This results in a VECTOR - not a list! conj is at END for vector! (#57)
