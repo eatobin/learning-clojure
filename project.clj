@@ -4,5 +4,5 @@
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [circleci/clj-yaml "0.5.6"]
-                 [orchestra "2017.11.12-1"]])
+                 [circleci/clj-yaml "0.5.6"]]
+  :profiles {:dev {:dependencies [[org.clojure/test.check "0.9.0"]]}})
