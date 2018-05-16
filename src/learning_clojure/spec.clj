@@ -1,9 +1,10 @@
-;https://clojure.org/guides/spec
-
 (ns learning-clojure.spec
   (:require [clojure.spec.alpha :as s]
             [clojure.spec.test.alpha :as stest]
             [clojure.spec.gen.alpha :as gen]))
+
+;; https://clojure.org/guides/spec
+
 
 (defn ranged-rand
   "Returns random int in range start <= rand < end"
