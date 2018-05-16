@@ -1,4 +1,4 @@
-(ns com.ociweb.swing
+(ns learning-clojure.swing
   (:import
     (java.awt BorderLayout)
     (java.awt.event ActionListener)
