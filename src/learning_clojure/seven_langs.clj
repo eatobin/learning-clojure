@@ -34,7 +34,7 @@
 
 ; Broken unless
 (defn unless [test body] (if (not test) body))
-(unless true (println "Danger, danger Will Robinson"))
+;; (unless true (println "Danger, danger Will Robinson"))
 
 (macroexpand ''something-we-do-not-want-interpreted)
 
@@ -42,8 +42,8 @@
   (list 'if (list 'not test) body))
 (macroexpand '(unlessX condition body))
 
-(unless true (println "No more danger, Will."))
+;; (unless true (println "No more danger, Will."))
 ;; nil
-(unless false (println "Now, THIS is The FORCE."))
+;; (unless false (println "Now, THIS is The FORCE."))
 ;; Now, THIS is The FORCE.
 ;; nil
