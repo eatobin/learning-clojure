@@ -2,22 +2,22 @@
 
 (def names
   [
-   {:id 0, :last "Tobin", :first "Eric", :middle "A."}
-   {:id 1, :last "Tobin", :first "Brenda", :middle "D."}
+   {:id 0, :last "Tobin0", :first "Eric", :middle "A."}
+   {:id 1, :last "Tobin1", :first "Brenda", :middle "D."}
    ])
 
-names
-(conj names {:id 2, :last "Tobin", :first "Saul", :middle nil})
-names
+;; names
+(conj names {:id 2, :last "Tobin2", :first "Saul", :middle nil})
+;; names
 
-(def names29 (conj names {:id 2, :last "Tobin", :first "Saul", :middle nil}))
-names
-names29
+(def names29 (conj names {:id 2, :last "Tobin2", :first "Saul", :middle nil}))
+;; names
+;; names29
 (last names29)
 
-names29
-(def names2 (conj names2 {:id 3, :last "Tobin", :first "Chula", :middle "Doggie"}))
-names29
+;; names29
+(def names2 (conj names29 {:id 3, :last "Tobin3", :first "Chula", :middle "Doggie"}))
+;; names29
 (last names29)
 
 (:middle (nth names 1))
