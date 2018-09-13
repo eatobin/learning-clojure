@@ -22,12 +22,12 @@
 (def ac (create))
 (put ac :first "Eric")
 ; {:first "Eric"}
-(println (str "Item: " (getski ac :first)))
+;; (println (str "Item: " (getski ac :first)))
 ; Item: Eric
 ; nil
 (put ac :first "Scott")
 ; {:first "Scott"}
-(println (str "Item: " (getski ac :first)))
+;; (println (str "Item: " (getski ac :first)))
 ; Item: Scott
 ;nil
 (put ac :last "Scott")
