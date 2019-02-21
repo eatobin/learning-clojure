@@ -132,38 +132,38 @@ developer
 (#(str "Off we go" "!" " - " %) "again")
 (#(str "Off we go" "!" " - " %1 %2) "again" "?")
 
-(ns alice.favfoods)
-*ns*
-(def fav-food "strawberry jam")
-fav-food
-alice.favfoods/fav-food
-(ns rabbit.favfoods)
-(def fav-food "lettuce soup")
-fav-food
-*ns*
-alice.favfoods/fav-food
-
-(ns wonderland)
-(require '[alice.favfoods :as af])
-af/fav-food
-*ns*
-
-(ns wonderland2
-  (:require [alice.favfoods :as af]))
-*ns*
-af/fav-food
-
-(ns wonderland
-  (:require [clojure.set :as s]))
-
-(defn common-fav-foods [foods1 foods2]
-  (let [food-set1 (set foods1)
-        food-set2 (set foods2)
-        common-foods (s/intersection food-set1 food-set2)]
-    (str "Common Foods: " common-foods)))
-
-(common-fav-foods [:jam :brownies :toast]
-                  [:lettuce :carrots :jam])
+;(ns alice.favfoods)
+;*ns*
+;(def fav-food "strawberry jam")
+;fav-food
+;alice.favfoods/fav-food
+;(ns rabbit.favfoods)
+;(def fav-food "lettuce soup")
+;fav-food
+;*ns*
+;alice.favfoods/fav-food
+;
+;(ns wonderland)
+;(require '[alice.favfoods :as af])
+;af/fav-food
+;*ns*
+;
+;(ns wonderland2
+;  (:require [alice.favfoods :as af]))
+;*ns*
+;af/fav-food
+;
+;(ns wonderland
+;  (:require [clojure.set :as s]))
+;
+;(defn common-fav-foods [foods1 foods2]
+;  (let [food-set1 (set foods1)
+;        food-set2 (set foods2)
+;        common-foods (s/intersection food-set1 food-set2)]
+;    (str "Common Foods: " common-foods)))
+;
+;(common-fav-foods [:jam :brownies :toast]
+;                  [:lettuce :carrots :jam])
 
 (defrecord Person [fname lname address])
 ;=> learning_clojure.ch_1.Person
