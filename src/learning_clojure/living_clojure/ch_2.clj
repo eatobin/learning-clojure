@@ -45,7 +45,7 @@
 (every? drinkable? [:drinkme :drinkme])
 (every? drinkable? [:drinkme :poison])
 (fn [x] (= x :drinkme))
-(every? (fn [x] (= x :drinkme) :toast) [:drinkme :drinkme])
+(every? (fn [x] (= x :drinkme)) [:drinkme :drinkme])
 (every? #(= % :drinkme) [:drinkme :drinkme])
 (not-any? #(= % :drinkme) [:drinkme :poison])
 (not-any? #(= % :drinkme) [:poison :poison])
@@ -71,14 +71,21 @@
   "Don't try it")
 ;; -> "Try it"
 
-(if-let [result "I'll go to a park."]
+(if-let [result "This will return if result NOT false or nil"]
   result
-  "I'll go to a cafe.")                                     ;; "I'll go to a park."
+  "This will return if result IS false or nil")
 
-(if-let [result nil]
+(if-let [result (= 1 0)]
   result
-  "I'll go to a cafe.")
-;; "I'll go to a cafe."
+  "This will return if result IS false or nil")
+
+(if-let [result (= 1 1)]
+  result
+  "This will return if result IS false or nil")
+
+(if-let [result (max 88 99)]
+  result
+  "This will return if result IS false or nil")
 
 (if (= 1 1)
   100
