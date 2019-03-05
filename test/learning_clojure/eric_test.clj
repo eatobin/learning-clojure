@@ -1,7 +1,8 @@
 (ns learning_clojure.eric-test
   (:require [clojure.test :refer :all]
             [learning_clojure.eric :refer :all]
-            [clj-yaml.core :as yaml]))
+            [clj-yaml.core :as yaml]
+            [clojure.edn :as edn]))
 
 (deftest a-test
   (testing "FIXME, I fail."
@@ -21,3 +22,29 @@
   weight: 175
   age: 28
 ")))))
+
+(def sample-map {:foo "bar" :bar "foo"})
+
+;; Here you can see that the 'prn-str' is the writer...
+(defn convert-sample-map-to-edn
+  "Converting a Map to EDN"
+  []
+  ;; yep, converting a map to EDN is that simple"
+  (prn-str sample-map))
+
+(println "Let's convert a map to EDN: " (convert-sample-map-to-edn))
+;=> Let's convert a map to EDN:  {:foo "bar", :bar "foo"}
+
+;; ...and the reader is 'read-string'
+(println "Now let's covert the map back: " (edn/read-string (convert-sample-map-to-edn)))
+;=> Now let's covert the map back:  {:foo bar, :bar foo}
+
+(deftest edn-out-test
+  (is (= "[{:name \"John Smith\", :weight 100, :age 33} {:weight 150, :name \"Mary Smith\", :age 27}]"
+         (pr-str [{:name "John Smith", :weight 100, :age 33}
+                  {:weight 150, :name "Mary Smith", :age 27}]))))
+
+(deftest edn-in-test
+  (is (= [{:name "John Smith", :weight 100, :age 33}
+          {:weight 150, :name "Mary Smith", :age 27}]
+         (edn/read-string "[{:name \"John Smith\", :weight 100, :age 33} {:weight 150, :name \"Mary Smith\", :age 27}]"))))
