@@ -70,7 +70,9 @@
                      :name      "Jimmy from sales"})
 ; => "Jimmy from sales will stay up all night fantasy footballing"
 
-(defmulti types (fn [x y] [(class x) (class y)]))
+(defmulti types
+  (fn [x y]
+    [(class x) (class y)]))
 (defmethod types [String String]
   [_ _]
   "Two strings!")
