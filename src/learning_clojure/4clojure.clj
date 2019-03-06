@@ -1,5 +1,6 @@
 (ns learning_clojure.4clojure)
 
+;;; Elementary
 ;; 1
 (= true
    true)
@@ -10,11 +11,47 @@
 (= (- 10 (* 2 3))
    4)
 
+;; 3
+(= "HELLO WORLD" (.toUpperCase "hello world"))
+
+;; 4
+(= (list :a :b :c) '(:a :b :c))
+
+;; 5
+(= '(1 2 3 4) (conj '(2 3 4) 1))
+(= '(1 2 3 4) (conj '(3 4) 2 1))
+
 ;; 6
 (= [:a :b :c]
    (list :a :b :c)
    (vec '(:a :b :c))
    (vector :a :b :c))
+
+;; 7
+(= [1 2 3 4] (conj [1 2 3] 4))
+(= [1 2 3 4] (conj [1 2] 3 4))
+
+;; 8
+(= #{:a :b :c :d} (set '(:a :a :b :c :c :c :c :d :d)))
+(= #{:a :b :c :d} (clojure.set/union #{:a :b :c} #{:b :c :d}))
+
+;; 9
+(= #{1 2 3 4} (conj #{1 4 3} 2))
+
+;; 10
+(= 20 ((hash-map :a 10, :b 20, :c 30) :b))
+(= 20 (:b {:a 10, :b 20, :c 30}))
+
+;; 11
+(= {:a 1, :b 2, :c 3} (conj {:a 1} [:b 2] [:c 3]))
+
+;; 12
+(= 3 (first '(3 2 1)))
+(= 3 (second [2 3 4]))
+(= 3 (last (list 1 2 3)))
+
+;; 13
+(= (seq [20 30 40]) (rest [10 20 30 40]))
 
 ;; 14
 (= 8
@@ -38,9 +75,13 @@
 (= (add-name "Jenn") "Hello, Jenn!")
 (= (add-name "Rhea") "Hello, Rhea!")
 (= (#(str "Hello, " % "!") "Dave") "Hello, Dave!")
+(= ((fn [n] (str "Hello, " n "!")) "Dave") "Hello, Dave!")
 
 ;; 17
-(= '(6 7 8) (map #(+ % 5) '(1 2 3)))
+(= (seq '(6 7 8)) (map #(+ % 5) '(1 2 3)))
+
+;; 18
+(= (seq '(6 7)) (filter #(> % 5) '(3 4 5 6 7)))
 
 ;; 35
 (= 7 (let [x 5] (+ 2 x)))
@@ -48,11 +89,15 @@
 (= 7 (let [x 21] (let [y 3] (/ x y))))
 
 ;; 36
-(= 10 (let [x 7 y 3] (+ x y)))
-(= 4 (let [y 3 z 1] (+ y z)))
-(= 1 (let [z 1] z))
-
-;; End day 2
+(= 10 (let [_ 1
+            y 3
+            x 7] (+ x y)))
+(= 4 (let [z 1
+           y 3
+           _ 7] (+ y z)))
+(= 1 (let [z 1
+           _ 3
+           _ 7] z))
 
 ;; 37
 (re-seq #"jam" "I like jam in my jam ")
@@ -64,7 +109,62 @@
 (= '(5 4 3 2 1)
    ((fn foo [x]
       (when (> x 0)
-        (conj (foo (dec x)) x))) 5))
+        (conj (foo (dec x)) x)))
+     5))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;; Easy
+;; 19
+(= ((fn [seq]
+      (first (reverse seq))) [1 2 3 4 5]) 5)
+(= ((fn [seq]
+      (first (reverse seq))) '(5 4 3)) 3)
+(= ((fn [seq]
+      (first (reverse seq))) ["b" "c" "d"]) "d")
+
+;; 20
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) (list 1 2 3 4 5)) 4)
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) ["a" "b" "c"]) "b")
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) [[1 2] [3 4]]) [1 2])
+(fn [coll]
+  (last (take 2 (reverse coll))))
+
+;; 35
+(= 7 (let [x 5] (+ 2 x)))
+(= 7 (let [x 3, y 10] (- y x)))
+(= 7 (let [x 21] (let [y 3] (/ x y))))
+
+
+
+;; End day 2
+
+
+
+
 
 ;; 68
 ;; This results in a VECTOR - not a list! conj is at END for vector! (#57)
@@ -100,16 +200,6 @@
                                    z))
 (= '(1 5 9 13 17 21 25 29 33 37) (for [[x y] (partition 2 (range 20))]
                                    (+ x y)))
-
-;; 20
-(= ((fn [coll]
-      (last (take 2 (reverse coll)))) (list 1 2 3 4 5)) 4)
-(= ((fn [coll]
-      (last (take 2 (reverse coll)))) ["a" "b" "c"]) "b")
-(= ((fn [coll]
-      (last (take 2 (reverse coll)))) [[1 2] [3 4]]) [1 2])
-(fn [coll]
-  (last (take 2 (reverse coll))))
 
 ;; 24
 (fn [coll]
