@@ -83,3 +83,10 @@
 
 (add33 6)
 ;=> 39
+
+(defn make-adder-eric [x]
+  (fn [y] (+ x y)))
+
+(def add9 (make-adder-eric 9))
+
+(add9 9)
