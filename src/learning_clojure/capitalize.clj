@@ -8,7 +8,7 @@
          accum '()]
 
     ;test for return or recur
-    (if (clojure.string/accum? word)
+    (if (clojure.string/blank? word)
 
       ;return results
       (apply str (reverse accum))
