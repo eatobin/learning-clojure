@@ -5,14 +5,14 @@
   ;loop binds initial values once,
   ;then binds values from each recursion call
   (loop [word word
-         blank '()]
+         accum '()]
 
     ;test for return or recur
-    (if (clojure.string/blank? word)
+    (if (clojure.string/accum? word)
 
       ;return results
-      (apply str (reverse blank))
+      (apply str (reverse accum))
 
       ;recur calls loop with new values
       (recur (apply str (rest word))
-             (conj blank (Character/toUpperCase (first word)))))))
+             (conj accum (Character/toUpperCase (first word)))))))
