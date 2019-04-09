@@ -76,4 +76,8 @@
 (defmethod types [String String]
   [_ _]
   "Two strings!")
+(defmethod types [Double Double]
+  [_ _]
+  "Two doubles")
 (types "String 1" "String 2")
+(types 44.4 55.5)
