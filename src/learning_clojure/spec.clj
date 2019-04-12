@@ -35,7 +35,6 @@
   "Takes just an int and returns the set of its digit characters."
   [just-an-int]
   (into #{} (str just-an-int)))
-
 (s/fdef digits
         :args (s/cat :just-an-int int?)
         :ret (s/coll-of char? :kind set? :min-count 1))
@@ -60,11 +59,11 @@
                   :kwargs (s/keys* :req-un [(or ::who
                                                 (and ::which ::what))]))
            ["said so" (LocalDateTime/now) :who "I"])
-(s/explain (s/cat :why string?
-                  :when #(instance? LocalDateTime %)
-                  :kwargs (s/keys* :req-un [(or ::who
-                                                (and ::which ::what))]))
-           ["because" (LocalDateTime/now) :which 1])
+;(s/explain (s/cat :why string?
+;                  :when #(instance? LocalDateTime %)
+;                  :kwargs (s/keys* :req-un [(or ::who
+;                                                (and ::which ::what))]))
+;           ["because" (LocalDateTime/now) :which 1])
 
 (big-fun "because" (LocalDateTime/now) :which 1 :what 4)    ;; valid
 (big-fun "said so" (LocalDateTime/now) :who "I")            ;; also valid
@@ -132,6 +131,32 @@
                   :rest (s/? (s/cat :blurp? int?
                                     :glurf? boolean?)))
            ["thePath" 42 true])
+
+(s/def ::pick-fn
+  (s/with-gen
+    (s/fspec :args (s/cat :a any? :b any?)
+             :ret any?
+             :fn #(or (= (:ret %) (:a (:args %)))
+                      (= (:ret %) (:b (:args %)))))
+    #(gen/return (fn [a b] (rand-nth [a b])))))
+(defn battle
+  "Returns the victor."
+  [contestant-1 contestant-2]
+  (if (even? (System/nanoTime)) contestant-1 contestant-2))
+(s/def battle ::pick-fn)
+;(stest/check `battle)
+
+(s/check-asserts true)
+
+(defn stringer-bell [s]
+  (s/assert (s/nilable string?) s)
+  (println s "\007"))
+
+(stringer-bell "dog")
+(stringer-bell nil)
+;(stringer-bell 66)
+
+;End of Taylor Wood
 
 (ranged-rand 8 50)
 ;(ranged-rand 8 5)
