@@ -1,0 +1,4 @@
+[eric@linux-x2vq learning-clojure](master)$ clj -Sdeps '{:deps {org.clojure/clojure {:mvn/version "1.10.0"}
+>                     org.clojure/test.check {:mvn/version "0.9.0"}
+>                     org.clojure/spec-alpha2 {:git/url "https://github.com/clojure/spec-alpha2.git"
+>                                              :sha "0a96d224df8ff5ba0a59a46a8387173585799476"}}}'

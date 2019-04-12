@@ -6,7 +6,8 @@
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]
             [orchestra.spec.test :as ostest]
-            [net.danielcompton.defn-spec-alpha :as ds]))
+            [net.danielcompton.defn-spec-alpha :as ds])
+  (:import (java.time LocalDateTime)))
 
 ;; https://clojure.org/guides/spec
 
@@ -28,6 +29,8 @@
         :fn (s/and #(>= (:ret %) (-> % :args :start))
                    #(< (:ret %) (-> % :args :end))))
 
+;Taylor Wood: https://blog.taylorwood.io/2017/10/15/fspec.htm
+
 (defn digits
   "Takes just an int and returns the set of its digit characters."
   [just-an-int]
@@ -37,9 +40,89 @@
         :args (s/cat :just-an-int int?)
         :ret (s/coll-of char? :kind set? :min-count 1))
 
-(ostest/instrument)
+(defn big-fun
+  [why when & {:keys [who which what]}]
+  (format "%s %s %s %s %s" why when who which what))
 
+(s/fdef big-fun
+        :args (s/cat :why string?
+                     :when #(instance? LocalDateTime %)
+                     :kwargs (s/keys* :req-un [(or ::who
+                                                   (and ::which ::what))])))
 
+(s/conform (s/cat :why string?
+                  :when #(instance? LocalDateTime %)
+                  :kwargs (s/keys* :req-un [(or ::who
+                                                (and ::which ::what))]))
+           ["because" (LocalDateTime/now) :which 1 :what 4])
+(s/conform (s/cat :why string?
+                  :when #(instance? LocalDateTime %)
+                  :kwargs (s/keys* :req-un [(or ::who
+                                                (and ::which ::what))]))
+           ["said so" (LocalDateTime/now) :who "I"])
+(s/explain (s/cat :why string?
+                  :when #(instance? LocalDateTime %)
+                  :kwargs (s/keys* :req-un [(or ::who
+                                                (and ::which ::what))]))
+           ["because" (LocalDateTime/now) :which 1])
+
+(big-fun "because" (LocalDateTime/now) :which 1 :what 4)    ;; valid
+(big-fun "said so" (LocalDateTime/now) :who "I")            ;; also valid
+(big-fun "because" (LocalDateTime/now) :which 1)            ;; invalid
+
+(defn such-arity
+  ([] "nullary")
+  ([_] "unary")
+  ([_ _ & _] "one two many"))
+(s/fdef such-arity
+        :args (s/alt :nullary (s/cat)
+                     :unary (s/cat :one any?)
+                     :variadic (s/cat :one any?
+                                      :two any?
+                                      :many (s/* any?))))
+
+(s/conform (s/alt :nullary (s/cat)
+                  :unary (s/cat :one any?)
+                  :variadic (s/cat :one any?
+                                   :two any?
+                                   :many (s/* any?)))
+           [])
+(s/conform (s/alt :nullary (s/cat)
+                  :unary (s/cat :one any?)
+                  :variadic (s/cat :one any?
+                                   :two any?
+                                   :many (s/* any?)))
+           [33])
+(s/conform (s/alt :nullary (s/cat)
+                  :unary (s/cat :one any?)
+                  :variadic (s/cat :one any?
+                                   :two any?
+                                   :many (s/* any?)))
+           [33 66])
+(s/conform (s/alt :nullary (s/cat)
+                  :unary (s/cat :one any?)
+                  :variadic (s/cat :one any?
+                                   :two any?
+                                   :many (s/* any?)))
+           [33 66 99])
+
+(such-arity)
+(such-arity 33)
+(such-arity 33 66 88)
+
+(defn slarp [path & [blurp? glurf?]]
+  (str path blurp? glurf?))
+(s/fdef slarp
+        :args (s/cat :path string?
+                     :rest (s/? (s/cat :blurp? int?
+                                       :glurf? boolean?))))
+
+(slarp "thePath")
+(slarp "thePath" 42 true)
+(s/conform (s/cat :path string?
+                  :rest (s/? (s/cat :blurp? int?
+                                    :glurf? boolean?)))
+           ["thePath" 42 true])
 
 (ranged-rand 8 50)
 ;(ranged-rand 8 5)
@@ -92,3 +175,5 @@
 (gen/sample vec-and-elem 8)
 
 (sgen/generate (s/gen int?))
+
+(ostest/instrument)
