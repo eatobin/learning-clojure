@@ -117,6 +117,15 @@
                      :rest (s/? (s/cat :blurp? int?
                                        :glurf? boolean?))))
 
+(s/conform (s/cat :path string?
+                  :rest (s/? (s/cat :blurp? int?
+                                    :glurf? boolean?)))
+           ["test"])
+(s/conform (s/cat :path string?
+                  :rest (s/? (s/cat :blurp? int?
+                                    :glurf? boolean?)))
+           ["thePath" 42 true])
+
 (slarp "thePath")
 (slarp "thePath" 42 true)
 (s/conform (s/cat :path string?
