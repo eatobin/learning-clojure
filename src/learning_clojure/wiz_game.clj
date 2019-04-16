@@ -16,4 +16,7 @@
             'attic       '(living-room downstairs ladder)})
 
 (defn describe-path [edge]
-  (list 'there 'is 'a (first (rest (rest edge))) 'going (first (rest edge)) 'from 'here))
+  (list 'there 'is 'a (first (rest (rest edge))) 'going (first (rest edge)) 'from 'here.))
+
+(defn describe-paths [location edges]
+  (mapcat describe-path (get edges location)))
