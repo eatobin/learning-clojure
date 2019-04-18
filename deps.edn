@@ -2,7 +2,6 @@
  :paths ["resources" "src"]
 
  :deps  {
-         org.clojure/clojure               {:mvn/version "1.10.0"}
          circleci/clj-yaml                 {:mvn/version "0.6.0"}
          orchestra                         {:mvn/version "2019.02.06-1"}
          net.danielcompton/defn-spec-alpha {:mvn/version "0.1.0"}
@@ -18,10 +17,6 @@
                 :main-opts  ["-m" "cognitect.test-runner"
                              "-d" "test"]}}
  }
-
-;For CIDER:
-;clj -A:test:cider-clj
-;clj -A:test:cider-clj -Spath
 
 ;Run tests:
 ;clj -A:test:runner
