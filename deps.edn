@@ -21,3 +21,6 @@
 ;Run tests:
 ;clj -A:test:runner
 ;clj -A:test:runner -Spath
+
+;Make new:
+;https://github.com/seancorfield/clj-new
