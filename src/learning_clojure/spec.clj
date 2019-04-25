@@ -210,4 +210,7 @@
 
 (sgen/generate (s/gen int?))
 
+(+ (- 10 6)
+   (+ (+ 44 4) (* 4 4)))
+
 (ostest/instrument)
