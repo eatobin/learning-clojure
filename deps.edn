@@ -25,5 +25,5 @@
 ;Make new:
 ;https://github.com/seancorfield/clj-new
 
-;Run klipse-repl:
-;clojure -A:klipse-repl:test
+;k-repl:
+;clojure -A:k-repl
