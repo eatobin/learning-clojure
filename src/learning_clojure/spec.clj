@@ -216,5 +216,3 @@
 (println "well... this works!")
 
 (ostest/instrument)
-
-;; this is text
