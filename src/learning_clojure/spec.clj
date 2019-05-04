@@ -23,11 +23,11 @@
   (+ start (long (rand (- end start)))))
 
 (s/fdef ranged-rand
-        :args (s/and (s/cat :start int? :end int?)
-                     #(< (:start %) (:end %)))
-        :ret int?
-        :fn (s/and #(>= (:ret %) (-> % :args :start))
-                   #(< (:ret %) (-> % :args :end))))
+  :args (s/and (s/cat :start int? :end int?)
+               #(< (:start %) (:end %)))
+  :ret int?
+  :fn (s/and #(>= (:ret %) (-> % :args :start))
+             #(< (:ret %) (-> % :args :end))))
 
 ;Taylor Wood: https://blog.taylorwood.io/2017/10/15/fspec.htm
 
@@ -36,18 +36,18 @@
   [just-an-int]
   (into #{} (str just-an-int)))
 (s/fdef digits
-        :args (s/cat :just-an-int int?)
-        :ret (s/coll-of char? :kind set? :min-count 1))
+  :args (s/cat :just-an-int int?)
+  :ret (s/coll-of char? :kind set? :min-count 1))
 
 (defn big-fun
   [why when & {:keys [who which what]}]
   (format "%s %s %s %s %s" why when who which what))
 
 (s/fdef big-fun
-        :args (s/cat :why string?
-                     :when #(instance? LocalDateTime %)
-                     :kwargs (s/keys* :req-un [(or ::who
-                                                   (and ::which ::what))])))
+  :args (s/cat :why string?
+               :when #(instance? LocalDateTime %)
+               :kwargs (s/keys* :req-un [(or ::who
+                                             (and ::which ::what))])))
 
 (s/conform (s/cat :why string?
                   :when #(instance? LocalDateTime %)
@@ -74,11 +74,11 @@
   ([_] "unary")
   ([_ _ & _] "one two many"))
 (s/fdef such-arity
-        :args (s/alt :nullary (s/cat)
-                     :unary (s/cat :one any?)
-                     :variadic (s/cat :one any?
-                                      :two any?
-                                      :many (s/* any?))))
+  :args (s/alt :nullary (s/cat)
+               :unary (s/cat :one any?)
+               :variadic (s/cat :one any?
+                                :two any?
+                                :many (s/* any?))))
 
 (s/conform (s/alt :nullary (s/cat)
                   :unary (s/cat :one any?)
@@ -112,9 +112,9 @@
 (defn slarp [path & [blurp? glurf?]]
   (str path blurp? glurf?))
 (s/fdef slarp
-        :args (s/cat :path string?
-                     :rest (s/? (s/cat :blurp? int?
-                                       :glurf? boolean?))))
+  :args (s/cat :path string?
+               :rest (s/? (s/cat :blurp? int?
+                                 :glurf? boolean?))))
 
 (s/conform (s/cat :path string?
                   :rest (s/? (s/cat :blurp? int?
