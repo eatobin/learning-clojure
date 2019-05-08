@@ -17,6 +17,8 @@
   (+ x 0.88))
 (adder 44)
 
+(defn cc [c] (first c))
+
 (defn ranged-rand
   "Returns random int in range start <= rand < end"
   [start end]
