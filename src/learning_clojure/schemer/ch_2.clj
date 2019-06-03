@@ -9,3 +9,11 @@
            (ch1/atom? (first l)))
       (lat? (rest l))
       true false)))
+
+(def member?
+  (fn [a lat]
+    (cond
+      (ch1/null? lat) false
+      true (or
+             (= (first lat) a)
+             (member? a (rest lat))))))
