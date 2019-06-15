@@ -1,4 +1,4 @@
-(ns learning-clojure.schemer.ch-1)
+(ns learning-clojure.schemer.ch1)
 
 (def atom?
   (fn [a]

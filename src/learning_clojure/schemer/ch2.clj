@@ -1,5 +1,5 @@
-(ns learning-clojure.schemer.ch-2
-  (:require [learning-clojure.schemer.ch-1 :refer :all]))
+(ns learning-clojure.schemer.ch2
+  (:require [learning-clojure.schemer.ch1 :refer :all]))
 
 (def lat?
   (fn [l]
