@@ -11,3 +11,10 @@
              true (cons (first lat)
                         (rember
                          a (rest lat)))))))
+
+(def firsts
+  (fn [l]
+    (cond
+      (null? l) '()
+      true (cons (first (first l))
+                 (firsts (rest l))))))
