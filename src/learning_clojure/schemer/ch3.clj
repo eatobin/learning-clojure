@@ -18,3 +18,11 @@
       (null? l) '()
       true (cons (first (first l))
                  (firsts (rest l))))))
+
+(def insertR
+  (fn [new old lat]
+    (cond
+      (null? lat) '()
+      true (cond
+             (= (first lat) old) (cons (first lat) (cons new (rest lat)))
+             true (cons (first lat) (insertR new old (rest lat)))))))
