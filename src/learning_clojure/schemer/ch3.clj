@@ -42,3 +42,11 @@
       true (cond
              (= (first lat) old) (cons new (rest lat))
              true (cons (first lat) (subst new old (rest lat)))))))
+
+(def subst2
+  (fn [new o1 o2 lat]
+    (cond
+      (null? lat) '()
+      true (cond
+             (or (= (first lat) o1) (= (first lat) o2)) (cons new (rest lat))
+             true (cons (first lat) (subst2 new o1 o2 (rest lat)))))))
