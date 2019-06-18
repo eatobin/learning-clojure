@@ -34,3 +34,11 @@
       true (cond
              (= (first lat) old) (cons new lat)
              true (cons (first lat) (insertL new old (rest lat)))))))
+
+(def subst
+  (fn [new old lat]
+    (cond
+      (null? lat) '()
+      true (cond
+             (= (first lat) old) (cons new (rest lat))
+             true (cons (first lat) (subst new old (rest lat)))))))
