@@ -50,3 +50,10 @@
       true (cond
              (or (= (first lat) o1) (= (first lat) o2)) (cons new (rest lat))
              true (cons (first lat) (subst2 new o1 o2 (rest lat)))))))
+
+(def multirember
+  (fn [a lat]
+    (cond
+      (null? lat) '()
+      (= (first lat) a) (multirember a (rest lat))
+      true (cons (first lat) (multirember a (rest lat))))))
