@@ -57,3 +57,17 @@
       (null? lat) '()
       (= (first lat) old) (cons (first lat) (cons new (multiinsertR new old (rest lat))))
       true (cons (first lat) (multiinsertR new old (rest lat))))))
+
+(def multiinsertL
+  (fn [new old lat]
+    (cond
+      (null? lat) '()
+      (= (first lat) old) (cons new (cons old (multiinsertL new old (rest lat))))
+      true (cons (first lat) (multiinsertL new old (rest lat))))))
+
+(def multisubst
+  (fn [new old lat]
+    (cond
+      (null? lat) '()
+      (= (first lat) old) (cons new (multisubst new old (rest lat)))
+      true (cons (first lat) (multisubst new old (rest lat))))))
