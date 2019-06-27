@@ -6,8 +6,7 @@
     (cond
       (null? l) true
       (and (seq? l)
-           (atom? (first l)))
-      (lat? (rest l))
+           (atom? (first l))) (lat? (rest l))
       true false)))
 
 (def member?
