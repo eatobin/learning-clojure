@@ -1,5 +1,21 @@
 (ns learning_clojure.eric)
 
+(defn my-nth [coll n]
+  (loop [coll coll
+         n n
+         acc 0]
+    (if (= n acc)
+      (first coll)
+      (recur (rest coll) n (inc acc)))))
+
+(fn [coll n]
+  (loop [coll coll
+         n n
+         acc 0]
+    (if (= n acc)
+      (first coll)
+      (recur (rest coll) n (inc acc)))))
+
 (def t0 (System/currentTimeMillis))
 (defn t1 [] (System/currentTimeMillis))
 (t1)
@@ -146,31 +162,31 @@ x
 (require '[clj-yaml.core :as yaml])
 
 (yaml/generate-string
-  [{:name "John Smith", :weight 100, :age 33}
-   {:weight 150, :name "Mary Smith", :age 27}])
+ [{:name "John Smith", :weight 100, :age 33}
+  {:weight 150, :name "Mary Smith", :age 27}])
 ; => "- {age: 33, name: John Smith, weight: 100}\n- {age: 27, name: Mary Smith, weight: 150}\n"
 
 (into [] (yaml/parse-string "- {age: 33, name: John Smith, weight: 100}\n- {age: 27, name: Mary Smith, weight: 150}\n"))
 ;; => [{:age 33, :name "John Smith", :weight 100} {:age 27, :name "Mary Smith", :weight 150}]
 
 (spit "flubber.yaml" (yaml/generate-string
-                       [{:name "Scott Smith", :age 33}
-                        {:name "Brenda Smith", :age 27}]))
+                      [{:name "Scott Smith", :age 33}
+                       {:name "Brenda Smith", :age 27}]))
 
 (into [] (yaml/parse-string
-           (slurp "flubber.yaml")))
+          (slurp "flubber.yaml")))
 ;; => [{:age 33 :name "Scott Smith"} {:age 27 :name "Brenda Smith"}]
 
 (spit "flubber.yaml" (yaml/generate-string
-                       [{:title "Book One" :author "Joe Blow" :person "Person One"}
-                        {:title "Book Two" :author "Joe Two" :person nil}
-                        {:title "The Bible" :author "G-d" :person "Person One"}]))
+                      [{:title "Book One" :author "Joe Blow" :person "Person One"}
+                       {:title "Book Two" :author "Joe Two" :person nil}
+                       {:title "The Bible" :author "G-d" :person "Person One"}]))
 
 (def booksX
   (atom (into []
               (yaml/parse-string
-                (slurp "flubber.yaml")))))
+               (slurp "flubber.yaml")))))
 
 (spit "flubber.yaml"
       (yaml/generate-string
-        (deref booksX)))
+       (deref booksX)))
