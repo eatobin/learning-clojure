@@ -488,3 +488,20 @@
 (true? (nil-key :a {:a nil :b 2}))
 (false? (nil-key :b {:a nil :b 2}))
 (false? (nil-key :c {:a nil :b 2}))
+
+;; 21
+(defn my-nth [coll n]
+  (loop [coll coll
+         n n
+         acc 0]
+    (if (= n acc)
+      (first coll)
+      (recur (rest coll) n (inc acc)))))
+
+(fn [coll n]
+  (loop [coll coll
+         n n
+         acc 0]
+    (if (= n acc)
+      (first coll)
+      (recur (rest coll) n (inc acc)))))

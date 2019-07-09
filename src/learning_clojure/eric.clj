@@ -1,21 +1,5 @@
 (ns learning_clojure.eric)
 
-(defn my-nth [coll n]
-  (loop [coll coll
-         n n
-         acc 0]
-    (if (= n acc)
-      (first coll)
-      (recur (rest coll) n (inc acc)))))
-
-(fn [coll n]
-  (loop [coll coll
-         n n
-         acc 0]
-    (if (= n acc)
-      (first coll)
-      (recur (rest coll) n (inc acc)))))
-
 (def t0 (System/currentTimeMillis))
 (defn t1 [] (System/currentTimeMillis))
 (t1)
