@@ -26,3 +26,9 @@
     (cond
       (zero_? m) n
       true (sub1 (o- n (sub1 m))))))
+
+(def addtup
+  (fn [tup]
+    (cond
+      (null? tup) 0
+      true (o+ (first tup) (addtup (rest tup))))))
