@@ -38,3 +38,10 @@
     (cond
       (zero_? m) 0
       true (o+ n (x n (sub1 m))))))
+
+(def tup+
+  (fn [tup1 tup2]
+    (cond
+      (and (null? tup1) (null? tup2)) '()
+      true (cons (o+ (first tup1) (first tup2))
+                 (tup+ (rest tup1) (rest tup2))))))
