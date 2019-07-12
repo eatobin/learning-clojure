@@ -32,3 +32,9 @@
     (cond
       (null? tup) 0
       true (o+ (first tup) (addtup (rest tup))))))
+
+(def x
+  (fn [n m]
+    (cond
+      (zero_? m) 0
+      true (o+ n (x n (sub1 m))))))
