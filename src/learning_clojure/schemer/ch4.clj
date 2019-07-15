@@ -42,6 +42,7 @@
 (def tup+
   (fn [tup1 tup2]
     (cond
-      (and (null? tup1) (null? tup2)) '()
+      (null? tup1) tup2
+      (null? tup2) tup1
       true (cons (o+ (first tup1) (first tup2))
                  (tup+ (rest tup1) (rest tup2))))))
