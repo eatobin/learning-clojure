@@ -112,59 +112,10 @@
         (conj (foo (dec x)) x)))
      5))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;;; Easy
-;; 19
-(= ((fn [seq]
-      (first (reverse seq))) [1 2 3 4 5]) 5)
-(= ((fn [seq]
-      (first (reverse seq))) '(5 4 3)) 3)
-(= ((fn [seq]
-      (first (reverse seq))) ["b" "c" "d"]) "d")
-
-;; 20
-(= ((fn [coll]
-      (last (take 2 (reverse coll)))) (list 1 2 3 4 5)) 4)
-(= ((fn [coll]
-      (last (take 2 (reverse coll)))) ["a" "b" "c"]) "b")
-(= ((fn [coll]
-      (last (take 2 (reverse coll)))) [[1 2] [3 4]]) [1 2])
-(fn [coll]
-  (last (take 2 (reverse coll))))
-
-;; 35
-(= 7 (let [x 5] (+ 2 x)))
-(= 7 (let [x 3, y 10] (- y x)))
-(= 7 (let [x 21] (let [y 3] (/ x y))))
-
-
-
-;; End day 2
-
-
-
-
+;; 64
+["(= 15 (reduce __ [1 2 3 4 5]))"
+                    "(=  0 (reduce __ []))"
+                    "(=  6 (reduce __ 1 [2 3]))"]
 
 ;; 68
 ;; This results in a VECTOR - not a list! conj is at END for vector! (#57)
@@ -190,6 +141,19 @@
    (->> [2 5 4 1 3 6] (drop 2) (take 3) (map inc) (reduce +))
    11)
 
+;; 134
+(defn nil-key [k coll]
+  (if
+    (and
+      (not (nil? (find coll k)))
+      (nil? (k coll)))
+    true
+    false))
+
+(true? (nil-key :a {:a nil :b 2}))
+(false? (nil-key :b {:a nil :b 2}))
+(false? (nil-key :c {:a nil :b 2}))
+
 ;; 145
 (= '(1 5 9 13 17 21 25 29 33 37) (for [x (range 40)
                                        :when (= 1 (rem x 4))]
@@ -200,6 +164,46 @@
                                    z))
 (= '(1 5 9 13 17 21 25 29 33 37) (for [[x y] (partition 2 (range 20))]
                                    (+ x y)))
+
+
+;;; Easy
+;; 19
+(= ((fn [seq]
+      (first (reverse seq))) [1 2 3 4 5]) 5)
+(= ((fn [seq]
+      (first (reverse seq))) '(5 4 3)) 3)
+(= ((fn [seq]
+      (first (reverse seq))) ["b" "c" "d"]) "d")
+
+;; 20
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) (list 1 2 3 4 5)) 4)
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) ["a" "b" "c"]) "b")
+(= ((fn [coll]
+      (last (take 2 (reverse coll)))) [[1 2] [3 4]]) [1 2])
+(fn [coll]
+  (last (take 2 (reverse coll))))
+
+;; 21
+(defn my-nth [coll n]
+  (loop [coll coll
+         n n
+         acc 0]
+    (if (= n acc)
+      (first coll)
+      (recur (rest coll) n (inc acc)))))
+
+(fn [coll n]
+  (loop [coll coll
+         n n
+         acc 0]
+    (if (= n acc)
+      (first coll)
+      (recur (rest coll) n (inc acc)))))
+
+;;22
+;;23
 
 ;; 24
 (fn [coll]
@@ -231,6 +235,47 @@
       (filter odd? coll)) [1 1 1 3])
    '(1 1 1 3))
 
+;; 26
+(def fib
+  (map first
+       (iterate
+         (fn [[a b]]
+           [b (+ a b)])
+         [0 1])))
+(take 10 fib)
+
+(fn [n]
+  (take n
+        (map first
+             (iterate
+               (fn [[a b]]
+                 [b (+ a b)])
+               [1 1]))))
+(= ((fn [n]
+      (take n
+            (map first
+                 (iterate
+                   (fn [[a b]]
+                     [b (+ a b)])
+                   [1 1])))) 3)
+   '(1 1 2))
+(= ((fn [n]
+      (take n
+            (map first
+                 (iterate
+                   (fn [[a b]]
+                     [b (+ a b)])
+                   [1 1])))) 6)
+   '(1 1 2 3 5 8))
+(= ((fn [n]
+      (take n
+            (map first
+                 (iterate
+                   (fn [[a b]]
+                     [b (+ a b)])
+                   [1 1])))) 8)
+   '(1 1 2 3 5 8 13 21))
+
 ;; 27
 (fn [coll]
   (= (seq coll)
@@ -257,22 +302,25 @@
               (reverse (seq coll))))
           '(:a :b :c)))
 
-;; 32
-(fn [coll]
-  (mapcat #(repeat 2 %)
-          coll))
-(= ((fn [coll]
-      (mapcat #(repeat 2 %)
-              coll)) [1 2 3])
-   '(1 1 2 2 3 3))
-(= ((fn [coll]
-      (mapcat #(repeat 2 %)
-              coll)) [:a :a :b :b])
-   '(:a :a :a :a :b :b :b :b))
-(= ((fn [coll]
-      (mapcat #(repeat 2 %)
-              coll)) [[1 2] [3 4]])
-   '([1 2] [1 2] [3 4] [3 4]))
+;;28
+
+;; 29
+(fn [s]
+  (apply str
+         (re-seq #"[A-Z]"
+                 s)))
+(= ((fn [s]
+      (apply str
+             (re-seq #"[A-Z]"
+                     s))) "HeLlO, WoRlD!") "HLOWRD")
+(empty? ((fn [s]
+           (apply str
+                  (re-seq #"[A-Z]"
+                          s))) "nothing"))
+(= ((fn [s]
+      (apply str
+             (re-seq #"[A-Z]"
+                     s))) "$#A(*&987Zf") "AZ")
 
 ;; 30
 #(map first (partition-by identity %))
@@ -298,6 +346,65 @@
    '((:a :a) (:b :b) (:c)))
 (= (#(seq (partition-by identity %)) [[1 2] [1 2] [3 4]])
    '(([1 2] [1 2]) ([3 4])))
+
+;; 32
+(fn [coll]
+  (mapcat #(repeat 2 %)
+          coll))
+(= ((fn [coll]
+      (mapcat #(repeat 2 %)
+              coll)) [1 2 3])
+   '(1 1 2 2 3 3))
+(= ((fn [coll]
+      (mapcat #(repeat 2 %)
+              coll)) [:a :a :b :b])
+   '(:a :a :a :a :b :b :b :b))
+(= ((fn [coll]
+      (mapcat #(repeat 2 %)
+              coll)) [[1 2] [3 4]])
+   '([1 2] [1 2] [3 4] [3 4]))
+
+;; 33
+(fn [coll n]
+  (mapcat
+    (fn [x]
+      (repeat n x))
+    coll))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [1 2 3] 2)
+   '(1 1 2 2 3 3))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [:a :b] 4)
+   '(:a :a :a :a :b :b :b :b))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [4 5 6] 1)
+   '(4 5 6))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [[1 2] [3 4]] 2)
+   '([1 2] [1 2] [3 4] [3 4]))
+(= ((fn [coll n]
+      (mapcat
+        (fn [x]
+          (repeat n x))
+        coll)) [44 33] 2)
+   [44 44 33 33])
+
+;;34
+;;38
+;;39
+;;40
 
 ;; 41
 (fn [coll n]
@@ -342,110 +449,6 @@
      4)
    [1 2 3 5 6])
 
-;; 45
-(= '(1 4 7 10 13)
-   (take 5 (iterate #(+ 3 %) 1)))
-
-;; 33
-(fn [coll n]
-  (mapcat
-    (fn [x]
-      (repeat n x))
-    coll))
-(= ((fn [coll n]
-      (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [1 2 3] 2)
-   '(1 1 2 2 3 3))
-(= ((fn [coll n]
-      (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [:a :b] 4)
-   '(:a :a :a :a :b :b :b :b))
-(= ((fn [coll n]
-      (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [4 5 6] 1)
-   '(4 5 6))
-(= ((fn [coll n]
-      (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [[1 2] [3 4]] 2)
-   '([1 2] [1 2] [3 4] [3 4]))
-(= ((fn [coll n]
-      (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [44 33] 2)
-   [44 44 33 33])
-
-;; 26
-(def fib
-  (map first
-       (iterate
-         (fn [[a b]]
-           [b (+ a b)])
-         [0 1])))
-(take 10 fib)
-
-(fn [n]
-  (take n
-        (map first
-             (iterate
-               (fn [[a b]]
-                 [b (+ a b)])
-               [1 1]))))
-(= ((fn [n]
-      (take n
-            (map first
-                 (iterate
-                   (fn [[a b]]
-                     [b (+ a b)])
-                   [1 1])))) 3)
-   '(1 1 2))
-(= ((fn [n]
-      (take n
-            (map first
-                 (iterate
-                   (fn [[a b]]
-                     [b (+ a b)])
-                   [1 1])))) 6)
-   '(1 1 2 3 5 8))
-(= ((fn [n]
-      (take n
-            (map first
-                 (iterate
-                   (fn [[a b]]
-                     [b (+ a b)])
-                   [1 1])))) 8)
-   '(1 1 2 3 5 8 13 21))
-
-;; 29
-(fn [s]
-  (apply str
-         (re-seq #"[A-Z]"
-                 s)))
-(= ((fn [s]
-      (apply str
-             (re-seq #"[A-Z]"
-                     s))) "HeLlO, WoRlD!") "HLOWRD")
-(empty? ((fn [s]
-           (apply str
-                  (re-seq #"[A-Z]"
-                          s))) "nothing"))
-(= ((fn [s]
-      (apply str
-             (re-seq #"[A-Z]"
-                     s))) "$#A(*&987Zf") "AZ")
-
-;; 48
-(= 6 (some #{2 7 6} [5 6 7 8]))
-(= 6 (some #(when (even? %) %) [5 6 7 8]))
-
 ;; 42
 (fn [n]
   (reduce * (range 1 (inc n))))
@@ -458,7 +461,17 @@
 (= ((fn [n]
       (reduce * (range 1 (inc n)))) 8) 40320)
 
-;; to 52 pg 180
+;; 45
+(= '(1 4 7 10 13)
+   (take 5 (iterate #(+ 3 %) 1)))
+
+;;47
+
+;; 48
+(= 6 (some #{2 7 6} [5 6 7 8]))
+(= 6 (some #(when (even? %) %) [5 6 7 8]))
+
+;;49
 
 ;; 51 - last finished - pg 181
 (let [[a b] ["cat" "dog" "bird" "fish"]]
@@ -476,32 +489,10 @@
    (let [[a b & c :as d] [1 2 3 4 5]]
      [a b c d]))
 
-;; 134
-(defn nil-key [k coll]
-  (if
-    (and
-      (not (nil? (find coll k)))
-      (nil? (k coll)))
-    true
-    false))
-
-(true? (nil-key :a {:a nil :b 2}))
-(false? (nil-key :b {:a nil :b 2}))
-(false? (nil-key :c {:a nil :b 2}))
-
-;; 21
-(defn my-nth [coll n]
-  (loop [coll coll
-         n n
-         acc 0]
-    (if (= n acc)
-      (first coll)
-      (recur (rest coll) n (inc acc)))))
-
-(fn [coll n]
-  (loop [coll coll
-         n n
-         acc 0]
-    (if (= n acc)
-      (first coll)
-      (recur (rest coll) n (inc acc)))))
+;;52
+;;61
+;;62
+;;66
+;;81
+;;83
+;;86
