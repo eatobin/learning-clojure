@@ -498,6 +498,27 @@
    [44 44 33 33])
 
 ;;34
+(= ((fn [x y]
+      (loop [x x
+             y y
+             rng '()]
+        (if (= x y)
+          (reverse rng)
+          (recur (inc x) y (cons x rng))))) 1 4) '(1 2 3))
+(= ((fn [x y]
+      (loop [x x
+             y y
+             rng '()]
+        (if (= x y)
+          (reverse rng)
+          (recur (inc x) y (cons x rng))))) -2 2) '(-2 -1 0 1))
+(= ((fn [x y]
+      (loop [x x
+             y y
+             rng '()]
+        (if (= x y)
+          (reverse rng)
+          (recur (inc x) y (cons x rng))))) 5 8) '(5 6 7))
 ;;38
 ;;39
 ;;40
