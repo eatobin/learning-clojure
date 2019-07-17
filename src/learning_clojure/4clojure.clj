@@ -300,8 +300,6 @@
    [[5 6] [3 4] [1 2]])
 
 ;; 24
-
-
 (fn [coll]
   (reduce + coll))
 (= ((fn [coll]
@@ -399,7 +397,29 @@
          '(:a :b :c)))
 
 ;;28
-
+;(fn [coll]
+;  (loop [coll coll
+;         flat '()]
+;    (if (empty? coll)
+;      flat
+;      (if (sequential? (first coll))
+;        (recur (rest coll) (cons (first (first coll)) flat))
+;        (recur (rest coll) (cons (first coll) flat))))))
+;(fn [coll]
+;  (loop [coll coll
+;         flat '()]
+;    (cond
+;      (empty? coll) flat
+;      (sequential? (first coll)) (recur (first coll) flat)
+;      true (recur (rest coll) (cons (first coll) flat))))
+(fn [coll]
+  (loop [coll coll
+         fst (first coll)
+         flat '()]
+    (cond
+      (and (empty? coll) (empty? fst)) flat
+      (sequential? fst) (recur (coll (first fst) flat)
+                               true (recur (rest coll) (cons (first coll) flat))))
 ;; 29
 (fn [s]
   (apply str
