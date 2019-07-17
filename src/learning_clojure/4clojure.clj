@@ -520,7 +520,48 @@
           (reverse rng)
           (recur (inc x) y (cons x rng))))) 5 8) '(5 6 7))
 ;;38
+(= ((fn [& m] (reduce #(if (> %1 %2) %1 %2) m)) 1 8 3 4) 8)
+(= ((fn [& m] (reduce #(if (> %1 %2) %1 %2) m)) 30 20) 30)
+(= ((fn [& m] (reduce #(if (> %1 %2) %1 %2) m)) 45 67 11) 67)
+
 ;;39
+(= ((fn [col1 col2]
+      (loop [col1 col1
+             col2 col2
+             combo (empty col1)]
+        (if (or (empty? col1) (empty? col2))
+          (reverse combo)
+          (recur (rest col1)
+                 (rest col2)
+                 (cons (first col2)
+                       (cons (first col1) combo))))))
+    [1 2 3] [:a :b :c])
+   '(1 :a 2 :b 3 :c))
+(= ((fn [col1 col2]
+      (loop [col1 col1
+             col2 col2
+             combo (empty col1)]
+        (if (or (empty? col1) (empty? col2))
+          (reverse combo)
+          (recur (rest col1)
+                 (rest col2)
+                 (cons (first col2)
+                       (cons (first col1) combo))))))
+    [1 2] [3 4 5 6])
+   '(1 3 2 4))
+(= ((fn [col1 col2]
+      (loop [col1 col1
+             col2 col2
+             combo (empty col1)]
+        (if (or (empty? col1) (empty? col2))
+          (reverse combo)
+          (recur (rest col1)
+                 (rest col2)
+                 (cons (first col2)
+                       (cons (first col1) combo))))))
+    [30 20] [25 15])
+   [30 25 20 15])
+
 ;;40
 
 ;; 41
