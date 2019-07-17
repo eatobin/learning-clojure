@@ -110,12 +110,12 @@
    ((fn foo [x]
       (when (> x 0)
         (conj (foo (dec x)) x)))
-     5))
+    5))
 
 ;; 64
 ["(= 15 (reduce __ [1 2 3 4 5]))"
-                    "(=  0 (reduce __ []))"
-                    "(=  6 (reduce __ 1 [2 3]))"]
+ "(=  0 (reduce __ []))"
+ "(=  6 (reduce __ 1 [2 3]))"]
 
 ;; 68
 ;; This results in a VECTOR - not a list! conj is at END for vector! (#57)
@@ -165,7 +165,6 @@
 (= '(1 5 9 13 17 21 25 29 33 37) (for [[x y] (partition 2 (range 20))]
                                    (+ x y)))
 
-
 ;;; Easy
 ;; 19
 (= ((fn [seq]
@@ -203,9 +202,50 @@
       (recur (rest coll) n (inc acc)))))
 
 ;;22
+(= ((fn [coll]
+      (loop [coll coll
+             acc 0]
+        (if (empty? coll)
+          acc
+          (recur (rest coll) (inc acc)))))
+    '(1 2 3 3 1))
+   5)
+(= ((fn [coll]
+      (loop [coll coll
+             acc 0]
+        (if (empty? coll)
+          acc
+          (recur (rest coll) (inc acc))))) '(1 2 3 3 1)) 5)
+(= ((fn [coll]
+      (loop [coll coll
+             acc 0]
+        (if (empty? coll)
+          acc
+          (recur (rest coll) (inc acc))))) "Hello World") 11)
+(= ((fn [coll]
+      (loop [coll coll
+             acc 0]
+        (if (empty? coll)
+          acc
+          (recur (rest coll) (inc acc))))) [[1 2] [3 4] [5 6]]) 3)
+(= ((fn [coll]
+      (loop [coll coll
+             acc 0]
+        (if (empty? coll)
+          acc
+          (recur (rest coll) (inc acc))))) '(13)) 1)
+(= ((fn [coll]
+      (loop [coll coll
+             acc 0]
+        (if (empty? coll)
+          acc
+          (recur (rest coll) (inc acc))))) '(:a :b :c)) 3)
+
 ;;23
 
 ;; 24
+
+
 (fn [coll]
   (reduce + coll))
 (= ((fn [coll]
@@ -288,19 +328,19 @@
 (true? ((fn [coll]
           (= (seq coll)
              (reverse (seq coll))))
-         "racecar"))
+        "racecar"))
 (true? ((fn [coll]
           (= (seq coll)
              (reverse (seq coll))))
-         [:foo :bar :foo]))
+        [:foo :bar :foo]))
 (true? ((fn [coll]
           (= (seq coll)
              (reverse (seq coll))))
-         '(1 1 3 3 1 1)))
+        '(1 1 3 3 1 1)))
 (false? ((fn [coll]
            (= (seq coll)
               (reverse (seq coll))))
-          '(:a :b :c)))
+         '(:a :b :c)))
 
 ;;28
 
@@ -329,11 +369,11 @@
    "Leroy")
 (= ((fn [coll]
       (map first (partition-by identity coll)))
-     [1 1 2 3 3 2 2 3])
+    [1 1 2 3 3 2 2 3])
    '(1 2 3 2 3))
 (= ((fn [coll]
       (map first (partition-by identity coll)))
-     [[1 2] [1 2] [3 4] [1 2]])
+    [[1 2] [1 2] [3 4] [1 2]])
    '([1 2] [3 4] [1 2]))
 
 ;; 31
@@ -426,8 +466,8 @@
                      (mod (inc %1) n))
            %2)
         coll))
-     [1 2 3 4 5 6 7 8]
-     3)
+    [1 2 3 4 5 6 7 8]
+    3)
    [1 2 4 5 7 8])
 (= ((fn [coll n]
       (keep-indexed
@@ -436,8 +476,8 @@
                       (mod (inc index) n))
             value))
         coll))
-     [:a :b :c :d :e :f]
-     2)
+    [:a :b :c :d :e :f]
+    2)
    [:a :c :e])
 (= ((fn [coll n]
       (keep-indexed
@@ -445,8 +485,8 @@
                      (mod (inc %1) n))
            %2)
         coll))
-     [1 2 3 4 5 6]
-     4)
+    [1 2 3 4 5 6]
+    4)
    [1 2 3 5 6])
 
 ;; 42
