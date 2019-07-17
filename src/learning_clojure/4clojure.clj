@@ -185,13 +185,35 @@
   (last (take 2 (reverse coll))))
 
 ;; 21
-(defn my-nth [coll n]
-  (loop [coll coll
-         n n
-         acc 0]
-    (if (= n acc)
-      (first coll)
-      (recur (rest coll) n (inc acc)))))
+(= ((fn [coll n]
+      (loop [coll coll
+             n n
+             acc 0]
+        (if (= n acc)
+          (first coll)
+          (recur (rest coll) n (inc acc))))) '(4 5 6 7) 2) 6)
+(= ((fn [coll n]
+      (loop [coll coll
+             n n
+             acc 0]
+        (if (= n acc)
+          (first coll)
+          (recur (rest coll) n (inc acc))))) [:a :b :c] 0) :a)
+(= ((fn [coll n]
+      (loop [coll coll
+             n n
+             acc 0]
+        (if (= n acc)
+          (first coll)
+          (recur (rest coll) n (inc acc))))) [1 2 3 4] 1) 2)
+(= ((fn [coll n]
+      (loop [coll coll
+             n n
+             acc 0]
+        (if (= n acc)
+          (first coll)
+          (recur (rest coll) n (inc acc))))) '([1 2] [3 4] [5 6]) 2) [5 6])
+
 
 (fn [coll n]
   (loop [coll coll
