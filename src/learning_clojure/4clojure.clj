@@ -113,9 +113,9 @@
     5))
 
 ;; 64
-["(= 15 (reduce __ [1 2 3 4 5]))"
- "(=  0 (reduce __ []))"
- "(=  6 (reduce __ 1 [2 3]))"]
+(= 15 (reduce + [1 2 3 4 5]))
+(= 0 (reduce + []))
+(= 6 (reduce + 1 [2 3]))
 
 ;; 68
 ;; This results in a VECTOR - not a list! conj is at END for vector! (#57)
