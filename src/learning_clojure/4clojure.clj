@@ -264,6 +264,30 @@
           (recur (rest coll) (inc acc))))) '(:a :b :c)) 3)
 
 ;;23
+(= ((fn [coll]
+      (loop [coll coll
+             reversed (empty coll)]
+        (if (empty? coll)
+          reversed
+          (recur (rest coll) (cons (first coll) reversed)))))
+    [1 2 3 4 5])
+   [5 4 3 2 1])
+(= ((fn [coll]
+      (loop [coll coll
+             reversed (empty coll)]
+        (if (empty? coll)
+          reversed
+          (recur (rest coll) (cons (first coll) reversed)))))
+    (sorted-set 5 7 2 7))
+   '(7 5 2))
+(= ((fn [coll]
+      (loop [coll coll
+             reversed (empty coll)]
+        (if (empty? coll)
+          reversed
+          (recur (rest coll) (cons (first coll) reversed)))))
+    [[1 2] [3 4] [5 6]])
+   [[5 6] [3 4] [1 2]])
 
 ;; 24
 
