@@ -142,17 +142,27 @@
    11)
 
 ;; 134
-(defn nil-key [k coll]
-  (if
-    (and
-      (not (nil? (find coll k)))
-      (nil? (k coll)))
-    true
-    false))
-
-(true? (nil-key :a {:a nil :b 2}))
-(false? (nil-key :b {:a nil :b 2}))
-(false? (nil-key :c {:a nil :b 2}))
+(true? ((fn [k coll]
+          (if
+            (and
+              (not (nil? (find coll k)))
+              (nil? (k coll)))
+            true
+            false)) :a {:a nil :b 2}))
+(false? ((fn [k coll]
+           (if
+             (and
+               (not (nil? (find coll k)))
+               (nil? (k coll)))
+             true
+             false)) :b {:a nil :b 2}))
+(false? ((fn [k coll]
+           (if
+             (and
+               (not (nil? (find coll k)))
+               (nil? (k coll)))
+             true
+             false)) :c {:a nil :b 2}))
 
 ;; 145
 (= '(1 5 9 13 17 21 25 29 33 37) (for [x (range 40)
@@ -559,7 +569,7 @@
 
 ;;49
 
-;; 51 - last finished - pg 181
+;; 51
 (let [[a b] ["cat" "dog" "bird" "fish"]]
   [a b])
 ;; -> ["cat" "dog"]
