@@ -414,12 +414,19 @@
 ;      true (recur (rest coll) (cons (first coll) flat))))
 (fn [coll]
   (loop [coll coll
-         fst (first coll)
+         flat '()]
+    (if (empty? coll)
+      flat
+      (recur (rest coll)
+             (cons (first coll)
+                   flat)))))
+(fn [coll]
+  (loop [coll coll
+         current (first coll)
          flat '()]
     (cond
-      (and (empty? coll) (empty? fst)) flat
-      (sequential? fst) (recur (coll (first fst) flat)
-                               true (recur (rest coll) (cons (first coll) flat))))
+      (empty? coll) flat
+     (not (seq? current) (recur (rest coll) (first (rest coll)) (cons (first coll) flat))))
 ;; 29
 (fn [s]
   (apply str
