@@ -33,11 +33,11 @@
       (null? tup) 0
       true (o+ (first tup) (addtup (rest tup))))))
 
-(def x
+(def ox
   (fn [n m]
     (cond
       (zero_? m) 0
-      true (o+ n (x n (sub1 m))))))
+      true (o+ n (ox n (sub1 m))))))
 
 (def tup+
   (fn [tup1 tup2]
@@ -46,3 +46,10 @@
       (null? tup2) tup1
       true (cons (o+ (first tup1) (first tup2))
                  (tup+ (rest tup1) (rest tup2))))))
+
+(def o>
+  (fn [n m]
+    (cond
+      (zero_? m) true
+      (zero_? n) false
+      true (o> (sub1 n) (sub1 m)))))
