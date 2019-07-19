@@ -405,6 +405,7 @@
     (empty? l) nil
     (not (seq? (first l))) (cons (first l) (flat (rest l)))
     true (concat (flater (first l)) (flater (rest l)))))
+
 (= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
      '((1 2) 3 [4 [5 6]]))
    '(1 2 3 4 5 6))
