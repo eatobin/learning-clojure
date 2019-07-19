@@ -397,36 +397,24 @@
          '(:a :b :c)))
 
 ;;28
-;(fn [coll]
-;  (loop [coll coll
-;         flat '()]
-;    (if (empty? coll)
-;      flat
-;      (if (sequential? (first coll))
-;        (recur (rest coll) (cons (first (first coll)) flat))
-;        (recur (rest coll) (cons (first coll) flat))))))
-;(fn [coll]
-;  (loop [coll coll
-;         flat '()]
-;    (cond
-;      (empty? coll) flat
-;      (sequential? (first coll)) (recur (first coll) flat)
-;      true (recur (rest coll) (cons (first coll) flat))))
-(fn [coll]
-  (loop [coll coll
-         flat '()]
-    (if (empty? coll)
-      flat
-      (recur (rest coll)
-             (cons (first coll)
-                   flat)))))
-(fn [coll]
-  (loop [coll coll
-         current (first coll)
-         flat '()]
-    (cond
-      (empty? coll) flat
-     (not (seq? current) (recur (rest coll) (first (rest coll)) (cons (first coll) flat))))
+(defn flat [x]
+  (filter (complement sequential?)
+          (rest (tree-seq sequential? seq x))))
+(defn flater [l]
+  (cond
+    (empty? l) nil
+    (not (seq? (first l))) (cons (first l) (flat (rest l)))
+    true (concat (flater (first l)) (flater (rest l)))))
+(= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
+     '((1 2) 3 [4 [5 6]]))
+   '(1 2 3 4 5 6))
+(= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
+     ["a" ["b"] "c"])
+   '("a" "b" "c"))
+(= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
+     '((((:a)))))
+   '(:a))
+
 ;; 29
 (fn [s]
   (apply str
