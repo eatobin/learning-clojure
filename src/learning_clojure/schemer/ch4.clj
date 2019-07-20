@@ -53,3 +53,9 @@
       (zero_? m) true
       (zero_? n) false
       true (o> (sub1 n) (sub1 m)))))
+
+(defn flater [l]
+  (cond
+    (null? l) nil
+    (atom? (first l)) (cons (first l) (flater (rest l)))
+    true (concat (flater (first l)) (flater (rest l)))))

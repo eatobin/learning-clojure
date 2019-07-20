@@ -144,23 +144,23 @@
 ;; 134
 (true? ((fn [k coll]
           (if
-            (and
-              (not (nil? (find coll k)))
-              (nil? (k coll)))
+           (and
+            (not (nil? (find coll k)))
+            (nil? (k coll)))
             true
             false)) :a {:a nil :b 2}))
 (false? ((fn [k coll]
            (if
-             (and
-               (not (nil? (find coll k)))
-               (nil? (k coll)))
+            (and
+             (not (nil? (find coll k)))
+             (nil? (k coll)))
              true
              false)) :b {:a nil :b 2}))
 (false? ((fn [k coll]
            (if
-             (and
-               (not (nil? (find coll k)))
-               (nil? (k coll)))
+            (and
+             (not (nil? (find coll k)))
+             (nil? (k coll)))
              true
              false)) :c {:a nil :b 2}))
 
@@ -223,7 +223,6 @@
         (if (= n acc)
           (first coll)
           (recur (rest coll) n (inc acc))))) '([1 2] [3 4] [5 6]) 2) [5 6])
-
 
 (fn [coll n]
   (loop [coll coll
@@ -333,41 +332,41 @@
 (def fib
   (map first
        (iterate
-         (fn [[a b]]
-           [b (+ a b)])
-         [0 1])))
+        (fn [[a b]]
+          [b (+ a b)])
+        [0 1])))
 (take 10 fib)
 
 (fn [n]
   (take n
         (map first
              (iterate
-               (fn [[a b]]
-                 [b (+ a b)])
-               [1 1]))))
+              (fn [[a b]]
+                [b (+ a b)])
+              [1 1]))))
 (= ((fn [n]
       (take n
             (map first
                  (iterate
-                   (fn [[a b]]
-                     [b (+ a b)])
-                   [1 1])))) 3)
+                  (fn [[a b]]
+                    [b (+ a b)])
+                  [1 1])))) 3)
    '(1 1 2))
 (= ((fn [n]
       (take n
             (map first
                  (iterate
-                   (fn [[a b]]
-                     [b (+ a b)])
-                   [1 1])))) 6)
+                  (fn [[a b]]
+                    [b (+ a b)])
+                  [1 1])))) 6)
    '(1 1 2 3 5 8))
 (= ((fn [n]
       (take n
             (map first
                  (iterate
-                   (fn [[a b]]
-                     [b (+ a b)])
-                   [1 1])))) 8)
+                  (fn [[a b]]
+                    [b (+ a b)])
+                  [1 1])))) 8)
    '(1 1 2 3 5 8 13 21))
 
 ;; 27
@@ -378,7 +377,7 @@
     (reverse (seq %)))
 (false? (#(= (seq %)
              (reverse (seq %)))
-          '(1 2 3 4 5)))
+         '(1 2 3 4 5)))
 (true? ((fn [coll]
           (= (seq coll)
              (reverse (seq coll))))
@@ -403,17 +402,17 @@
 (defn flater [l]
   (cond
     (empty? l) nil
-    (not (seq? (first l))) (cons (first l) (flat (rest l)))
+    (not (seq? (first l))) (cons (first l) (flater (rest l)))
     true (concat (flater (first l)) (flater (rest l)))))
 
 (= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
-     '((1 2) 3 [4 [5 6]]))
+    '((1 2) 3 [4 [5 6]]))
    '(1 2 3 4 5 6))
 (= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
-     ["a" ["b"] "c"])
+    ["a" ["b"] "c"])
    '("a" "b" "c"))
 (= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
-     '((((:a)))))
+    '((((:a)))))
    '(:a))
 
 ;; 29
@@ -437,7 +436,7 @@
 ;; 30
 #(map first (partition-by identity %))
 (= (apply str (#(map first (partition-by identity %))
-                "Leeeeeerrroyyy"))
+               "Leeeeeerrroyyy"))
    "Leroy")
 (= ((fn [coll]
       (map first (partition-by identity coll)))
@@ -479,38 +478,38 @@
 ;; 33
 (fn [coll n]
   (mapcat
-    (fn [x]
-      (repeat n x))
-    coll))
+   (fn [x]
+     (repeat n x))
+   coll))
 (= ((fn [coll n]
       (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [1 2 3] 2)
+       (fn [x]
+         (repeat n x))
+       coll)) [1 2 3] 2)
    '(1 1 2 2 3 3))
 (= ((fn [coll n]
       (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [:a :b] 4)
+       (fn [x]
+         (repeat n x))
+       coll)) [:a :b] 4)
    '(:a :a :a :a :b :b :b :b))
 (= ((fn [coll n]
       (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [4 5 6] 1)
+       (fn [x]
+         (repeat n x))
+       coll)) [4 5 6] 1)
    '(4 5 6))
 (= ((fn [coll n]
       (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [[1 2] [3 4]] 2)
+       (fn [x]
+         (repeat n x))
+       coll)) [[1 2] [3 4]] 2)
    '([1 2] [1 2] [3 4] [3 4]))
 (= ((fn [coll n]
       (mapcat
-        (fn [x]
-          (repeat n x))
-        coll)) [44 33] 2)
+       (fn [x]
+         (repeat n x))
+       coll)) [44 33] 2)
    [44 44 33 33])
 
 ;;34
@@ -583,42 +582,42 @@
 ;; 41
 (fn [coll n]
   (keep-indexed
-    #(when (not= 0
-                 (mod (inc %1) n))
-       %2)
-    coll))
+   #(when (not= 0
+                (mod (inc %1) n))
+      %2)
+   coll))
 (fn [coll n]
   (keep-indexed
-    (fn [index value]
-      (when (not= 0
-                  (mod (inc index) n))
-        value))
-    coll))
+   (fn [index value]
+     (when (not= 0
+                 (mod (inc index) n))
+       value))
+   coll))
 (= ((fn [coll n]
       (keep-indexed
-        #(when (not= 0
-                     (mod (inc %1) n))
-           %2)
-        coll))
+       #(when (not= 0
+                    (mod (inc %1) n))
+          %2)
+       coll))
     [1 2 3 4 5 6 7 8]
     3)
    [1 2 4 5 7 8])
 (= ((fn [coll n]
       (keep-indexed
-        (fn [index value]
-          (when (not= 0
-                      (mod (inc index) n))
-            value))
-        coll))
+       (fn [index value]
+         (when (not= 0
+                     (mod (inc index) n))
+           value))
+       coll))
     [:a :b :c :d :e :f]
     2)
    [:a :c :e])
 (= ((fn [coll n]
       (keep-indexed
-        #(when (not= 0
-                     (mod (inc %1) n))
-           %2)
-        coll))
+       #(when (not= 0
+                    (mod (inc %1) n))
+          %2)
+       coll))
     [1 2 3 4 5 6]
     4)
    [1 2 3 5 6])
