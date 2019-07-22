@@ -67,3 +67,15 @@
       (zero_? m) false
       (zero_? n) true
       true (o< (sub1 n) (sub1 m)))))
+
+(defn o=1 [n m]
+  (cond
+    (zero_? m) (zero_? n)
+    (zero_? n) false
+    true (o=1 (sub1 n) (sub1 m))))
+
+(defn o=2 [n m]
+  (cond
+    (o> n m) false
+    (o< n m) false
+    true true))
