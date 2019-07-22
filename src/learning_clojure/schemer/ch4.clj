@@ -3,6 +3,13 @@
             [learning-clojure.schemer.ch2 :refer :all]
             [learning-clojure.schemer.ch3 :refer :all]))
 
+;; 4 clojure
+(defn flater [l]
+  (cond
+    (null? l) nil
+    (atom? (first l)) (cons (first l) (flater (rest l)))
+    true (concat (flater (first l)) (flater (rest l)))))
+
 (def zero_?
   (fn [n]
     (= 0 n)))
@@ -50,12 +57,13 @@
 (def o>
   (fn [n m]
     (cond
-      (zero_? m) true
       (zero_? n) false
+      (zero_? m) true
       true (o> (sub1 n) (sub1 m)))))
 
-(defn flater [l]
-  (cond
-    (null? l) nil
-    (atom? (first l)) (cons (first l) (flater (rest l)))
-    true (concat (flater (first l)) (flater (rest l)))))
+(def o<
+  (fn [n m]
+    (cond
+      (zero_? m) false
+      (zero_? n) true
+      true (o< (sub1 n) (sub1 m)))))
