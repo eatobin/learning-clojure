@@ -84,3 +84,9 @@
   (cond
     (zero_? m) 1
     true (ox n (my-exp n (sub1 m)))))
+
+(def my-div
+  (fn [n m]
+    (cond
+      (< n m) 0
+      true (add1 (my-div (o- n m) m)))))
