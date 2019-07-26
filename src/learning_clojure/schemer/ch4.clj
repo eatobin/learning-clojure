@@ -80,7 +80,7 @@
     (o< n m) false
     true true))
 
-(defn my-exp [n m]
+xxx(defn my-exp [n m]
   (cond
     (zero_? m) 1
     true (ox n (my-exp n (sub1 m)))))
