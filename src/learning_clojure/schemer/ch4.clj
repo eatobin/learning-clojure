@@ -96,3 +96,9 @@
     (cond
       (null? lat) 0
       true (add1 (my-length (rest lat))))))
+
+(def pick
+  (fn [n lat]
+    (cond
+      (zero_? (sub1 n)) (first lat)
+      true (pick (sub1 n) (rest lat)))))
