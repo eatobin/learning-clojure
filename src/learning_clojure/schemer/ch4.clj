@@ -90,3 +90,9 @@
     (cond
       (< n m) 0
       true (add1 (my-div (o- n m) m)))))
+
+(def my-length
+  (fn [lat]
+    (cond
+      (null? lat) 0
+      true (add1 (my-length (rest lat))))))
