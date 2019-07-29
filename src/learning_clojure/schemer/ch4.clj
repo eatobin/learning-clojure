@@ -106,6 +106,5 @@
 (def rempick
   (fn [n lat]
     (cond
-      (null? lat) '()
-      (zero_? (sub1 n)) (rempick (sub1 n) (rest lat))
+      (zero_? (sub1 n)) (rest lat)
       true (cons (first lat) (rempick (sub1 n) (rest lat))))))
