@@ -578,7 +578,15 @@
    [30 25 20 15])
 
 ;;40
-
+(fn [v coll]
+  (loop [v v
+         coll coll
+         coll2 (empty coll)
+         ctr 0]
+    (cond
+      (empty? coll) coll2
+      (even? ctr) (recur v (rest coll) (cons (first coll) coll2) (inc ctr))
+      true (recur v (rest coll) (cons (first coll) (cons v coll2)) (inc ctr)))))
 ;; 41
 (fn [coll n]
   (keep-indexed
