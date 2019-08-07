@@ -396,9 +396,11 @@
          '(:a :b :c)))
 
 ;;28
-(defn flat [x]
+(defn flat [xs]
   (filter (complement sequential?)
-          (rest (tree-seq sequential? seq x))))
+          (rest (tree-seq sequential? seq xs))))
+(flat '(1 (2 3) 4))
+
 (defn flater [l]
   (cond
     (empty? l) nil
