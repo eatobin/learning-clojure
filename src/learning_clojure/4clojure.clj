@@ -669,6 +669,10 @@
    (take 5 (iterate #(+ 3 %) 1)))
 
 ;;47
+(contains? #{4 5 6} 4)
+(contains? [1 1 1 1 1] 4)
+(contains? {4 :a 2 :b} 4)
+(not (contains? [1 2 4] 4))
 
 ;; 48
 (= 6 (some #{2 7 6} [5 6 7 8]))
