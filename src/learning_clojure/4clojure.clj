@@ -578,15 +578,31 @@
    [30 25 20 15])
 
 ;;40
-(fn [v coll]
-  (loop [v v
-         coll coll
-         coll2 (empty coll)
-         ctr 0]
-    (cond
-      (empty? coll) coll2
-      (even? ctr) (recur v (rest coll) (cons (first coll) coll2) (inc ctr))
-      true (recur v (rest coll) (cons (first coll) (cons v coll2)) (inc ctr)))))
+(= ((fn [v coll]
+      (loop [v v
+             coll coll
+             coll2 (empty coll)]
+        (cond
+          (empty? coll) (butlast (reverse coll2))
+          true (recur v (rest coll) (cons v (cons (first coll) coll2))))))
+    0 [1 2 3]) [1 0 2 0 3])
+(= (apply str ((fn [v coll]
+                 (loop [v v
+                        coll coll
+                        coll2 (empty coll)]
+                   (cond
+                     (empty? coll) (butlast (reverse coll2))
+                     true (recur v (rest coll) (cons v (cons (first coll) coll2))))))
+               ", " ["one" "two" "three"])) "one, two, three")
+(= ((fn [v coll]
+      (loop [v v
+             coll coll
+             coll2 (empty coll)]
+        (cond
+          (empty? coll) (butlast (reverse coll2))
+          true (recur v (rest coll) (cons v (cons (first coll) coll2))))))
+    :z [:a :b :c :d]) [:a :z :b :z :c :z :d])
+
 ;; 41
 (fn [coll n]
   (keep-indexed
