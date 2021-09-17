@@ -1,0 +1,23 @@
+{
+  :paths ["resources" "src" "test"]
+
+  :deps {
+    org.clojure/clojure {:mvn/version "1.10.3"}
+    org.clojure/test.check {:mvn/version "1.1.0"}
+    circleci/clj-yaml {:mvn/version "0.6.0"}
+    orchestra/orchestra {:mvn/version "2021.01.01-1"}
+    net.danielcompton/defn-spec-alpha {:mvn/version "0.1.0"}
+  }
+
+  :aliases {
+    :runner {
+      :extra-deps {
+        com.cognitect/test-runner {
+          :git/url "https://github.com/cognitect-labs/test-runner"
+          :sha "dd6da11611eeb87f08780a30ac8ea6012d4c05ce"
+        }
+      }
+      :main-opts ["-m" "cognitect.test-runner" "-d" "test"]
+    }
+  }
+}
