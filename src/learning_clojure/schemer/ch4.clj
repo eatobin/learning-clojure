@@ -102,3 +102,16 @@
     (cond
       (zero_? (sub1 n)) (first lat)
       true (pick (sub1 n) (rest lat)))))
+
+(def rempick
+  (fn [n lat]
+    (cond
+      (zero_? (sub1 n)) (rest lat)
+      true (cons (first lat) (rempick (sub1 n) (rest lat))))))
+
+(def no-nums
+  (fn [lat]
+    (cond
+      (null? lat) '()
+      (number? (first lat)) (no-nums (rest lat))
+      true (cons (first lat) (no-nums (rest lat))))))
