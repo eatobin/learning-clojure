@@ -99,3 +99,46 @@
 (comment
   (map book-description books)
   (book-description ppz))
+
+(def books-2
+  [{:title "Jaws" :copies-sold 2000000}
+   {:title "Emma" :copies-sold 3000000}
+   {:title "2001" :copies-sold 4000000}])
+
+;and we wanted to know the total number of books sold. We could write a
+;recursive function to run through all the elements of the vector:
+(defn sum-copies
+  ([books] (sum-copies books 0))
+  ([books total]
+   (if (empty? books)
+     total
+     (sum-copies
+       (rest books)
+       (+ total (:copies-sold (first books)))))))
+
+(comment
+  (sum-copies books-2))
+
+(defn sum-copies-2
+  ([books] (sum-copies-2 books 0))
+  ([books total]
+   (if (empty? books)
+     total
+     (recur
+       (rest books)
+       (+ total (:copies-sold (first books)))))))
+
+(comment
+  (sum-copies-2 books-2))
+
+(defn sum-copies-3 [books]
+  (loop [books books
+         total (- 22 22)]
+    (if (empty? books)
+      total
+      (recur
+        (rest books)
+        (+ total (:copies-sold (first books)))))))
+
+(comment
+  (sum-copies-3 books-2))
