@@ -18,6 +18,28 @@
     (contains? book :title) :standard-map
     (contains? book :book) :alternative-map))
 
+(defn dispatch-cone-const [cone]
+  (cond
+    (= 3 (count cone)) 3
+    (= (nth cone 1) "Chocolate") "Got chocolate!"
+    (= (nth cone 2) "Chocolate") :chocolate-top))
+
+(defmulti cone-check dispatch-cone-const)
+
+(defmethod cone-check 3 [cone]
+  cone)
+
+(defmethod cone-check "Got chocolate!" [cone]
+  (nth cone 1))
+
+(defmethod cone-check :chocolate-top [_]
+  :yummy)
+
+(comment
+  (cone-check [:one "Straw" 2])
+  (cone-check [:4 "Chocolate" 5 6 7])
+  (cone-check [:me :you "Chocolate" 1 5 :dogs]))
+
 (defmulti normalize-book dispatch-book-format)
 
 (defmethod normalize-book :vector-book [book]
