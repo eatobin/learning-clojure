@@ -33,3 +33,25 @@
   (normalize-book {:title "War and Peace" :author "Tolstoy"})
   (normalize-book {:book "Emma" :by "Austen"})
   (normalize-book ["1984" "Orwell"]))
+
+(defn dispatch-published [book]
+  (cond
+    (< (:published book) 1928) :public-domain
+    (< (:published book) 1978) :old-copyright
+    :else :new-copyright))
+
+(defmulti compute-royalties dispatch-published)
+
+(defmethod compute-royalties :public-domain [_] 0)
+
+(defmethod compute-royalties :old-copyright [book]
+  ;; Compute royalties based on old copyright law.
+  (* 0.1 (:price book)))
+
+(defmethod compute-royalties :new-copyright [book]
+  (* 0.2 (:price book)))
+
+(comment
+  (format "$%.2f" (double (compute-royalties {:price 10.00 :published 1901})))
+  (format "$%.2f" (double (compute-royalties {:published 1950 :price 20.00})))
+  (format "$%.2f" (double (compute-royalties {:price 30.00 :published 2001}))))
