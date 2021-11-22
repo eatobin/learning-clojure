@@ -12,9 +12,13 @@
 
 ;; https://clojure.org/guides/spec
 
+(declare my-inc a adder x v)
+
 (defn-spec my-inc integer?
            [a integer?] ; Each argument is followed by its spec.
            (+ a 1))
+
+(my-inc 44)
 
 (ds/defn adder :- double?
          "This is a test comment"
