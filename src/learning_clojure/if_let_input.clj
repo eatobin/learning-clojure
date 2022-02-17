@@ -9,8 +9,8 @@
 (my-plan :bad)
 
 (if true
-    "I'll go to a park."
-    "I'll go to a cafe.")
+  "I'll go to a park."
+  "I'll go to a cafe.")
 
 (let [result true]
   (if result
@@ -18,8 +18,8 @@
     "I'll go to a cafe."))
 
 (if-let [result "I'll go to a park."]
-    result
-    "I'll go to a cafe.")
+  result
+  "I'll go to a cafe.")
 
 (if-let [result nil]
   result
@@ -40,7 +40,12 @@
 ;; "I'll go to a cafe."
 
 (if-let [result "works!"]
-    result)
+  result
+  "Nope")
+
+(if-let [result nil]
+  result
+  "Nope")
 
 (when-let [result (if (= 1 1)
                     100)]
