@@ -25,25 +25,6 @@
 
 (m/validate short-string "kikka")
 
-;;Maps
-
-;(def non-empty-string
-;  (m/from-ast {:type       :string
-;               :properties {:min 1}}))
-;
-;(m/schema? non-empty-string)
-;; => true
-;
-;(m/validate non-empty-string "")
-;; => false
-;
-;(m/validate non-empty-string "kikka")
-;; => true
-;
-;(m/ast non-empty-string)
-;; => {:type :string,
-;;     :properties {:min 1}}
-
 (comment (def pow
            (m/-instrument
              {:schema [:=> [:cat :int] [:int {:max 6}]]}
