@@ -7,10 +7,10 @@
   {:malli/schema [:=> [:cat :int] :int]}
   [x] (inc x))
 
+(m/=> kukka [:=> [:cat :int] :int])
 (defn kukka
   "schema via separate declaration"
   [x] (inc x))
-(m/=> kukka [:=> [:cat :int] :int])
 
 (dev/start!)
 
