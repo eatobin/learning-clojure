@@ -51,8 +51,8 @@
   (defn plus1 [x] (inc x))
   (m/=> plus1 [:=> [:cat :int] small-int])
 
-  (m/=> plus1 [:=> [:cat :int] small-int])
-  (defn plus1 [x] (inc x))
+  (m/=> plus1a [:=> [:cat :int] small-int])
+  (defn plus1a [x] (inc x))
 
   (m/function-schemas)
 
