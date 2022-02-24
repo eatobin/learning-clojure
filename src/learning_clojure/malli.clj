@@ -66,7 +66,26 @@
   (m/=> my-small-add [:=> [:cat :int :int] small-int])
   (mi/instrument!)
   (my-add 22 2)
-  (my-add 22.0 2.0)
+  ;(my-add 22.0 2.0)
   (my-small-add 1 2)
   (my-small-add 11 22))
 
+(m/=> my-add-2 [:=> [:cat :int :int] :int])
+(defn my-add-2 [x y]
+  (+ x y))
+
+
+(def small-int-2 [:int {:max 6}])
+
+(m/=> small-dual [:=> [:cat :int :int [:=> [:cat :int :int] :int]] small-int-2])
+(defn small-dual [x y f]
+  (f x y))
+
+(small-dual 1 2 my-add-2)
+(small-dual 11 22 my-add-2)
+(small-dual 11.0 22.0 my-add-2)
+
+(defn print-em [x y]
+  (str x ", " y))
+
+(small-dual 1 2 print-em)
