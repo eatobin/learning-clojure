@@ -2,5 +2,6 @@
  :deps {
         circleci/clj-yaml                 {:mvn/version "0.6.0"}
         net.danielcompton/defn-spec-alpha {:mvn/version "0.1.0"}
+        metosin/malli {:mvn/version "0.8.3"}
         }
  }
