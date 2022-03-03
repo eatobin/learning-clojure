@@ -13,6 +13,16 @@
 (m/validate non-empty-string "")
 ; => false
 
+(m/validate [:and :int [:> 6]] 7)
+; => true
+
+(m/validate [:catn [:s string?] [:n int?]] ["foo" 9])
+;=> true
+
+(m/explain [:catn [:s string?] [:n int?]] ["foo" 9.9])
+;=>
+;{:schema [:catn [:s string?] [:n int?]], :value ["foo" 9.9], :errors ({:path [:n], :in [1], :schema int?, :value 9.9})}
+
 (m/validate non-empty-string "kikka")
 ; => true
 
@@ -70,16 +80,15 @@
   (my-small-add 1 2)
   (my-small-add 11 22))
 
-(m/=> my-add-2 [:=> [:cat :int :int] :int])
 (defn my-add-2 [x y]
   (+ x y))
-
+(m/=> my-add-2 [:=> [:cat :int :int] :int])
 
 (def small-int-2 [:int {:max 6}])
 
-(m/=> small-dual [:=> [:cat :int :int [:=> [:cat :int :int] :int]] small-int-2])
 (defn small-dual [x y f]
   (f x y))
+(m/=> small-dual [:=> [:cat :int :int [:=> [:cat :int :int] :int]] small-int-2])
 
 (small-dual 1 2 my-add-2)
 (small-dual 11 22 my-add-2)
