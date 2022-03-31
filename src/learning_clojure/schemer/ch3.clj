@@ -2,6 +2,8 @@
   (:require [learning-clojure.schemer.ch1 :refer :all]
             [learning-clojure.schemer.ch2 :refer :all]))
 
+;; all declares are for clj-kondo
+(declare rember)
 (def rember
   (fn [a lat]
     (cond
@@ -9,6 +11,7 @@
       (= (first lat) a) (rest lat)
       true (cons (first lat) (rember a (rest lat))))))
 
+(declare firsts)
 (def firsts
   (fn [l]
     (cond
