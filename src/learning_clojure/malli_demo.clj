@@ -14,6 +14,7 @@
 
 (dev/start!)
 
+#_:clj-kondo/ignore
 (comment
   (kikka 1 2)
   (kukka 1 2)

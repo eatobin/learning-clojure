@@ -61,6 +61,7 @@
   (defn plus1 [x] (inc x))
   (m/=> plus1 [:=> [:cat :int] small-int])
 
+  (declare plus1a)
   (m/=> plus1a [:=> [:cat :int] small-int])
   (defn plus1a [x] (inc x))
 
