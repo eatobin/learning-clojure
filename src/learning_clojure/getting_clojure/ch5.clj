@@ -142,3 +142,9 @@
 
 (comment
   (sum-copies-3 books-2))
+
+(comment
+  (get {:1 :one, :2 :two} :2)
+  (get {:1 :one, :2 :two} :22 :nope)
+  (:11 {:1 :one, :2 :two})
+  ({:1 :one, :2 :two} :11))
