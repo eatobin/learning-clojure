@@ -19,4 +19,5 @@
   (kikka 1 2)
   (kukka 1 2)
   (kikka "1")
-  (kukka "1"))
+  (kukka "1")
+  (kikka 1.0))
