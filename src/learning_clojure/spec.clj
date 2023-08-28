@@ -1,13 +1,13 @@
 (ns learning-clojure.spec
   (:require [clojure.spec.alpha :as s]
-            [clojure.spec.test.alpha :as stest]
-            [clojure.spec.gen.alpha :as sgen]
-            [clojure.test.check :as tc]
-            [clojure.test.check.generators :as gen]
-            [clojure.test.check.properties :as prop]
-            [orchestra.spec.test :as ostest]
-            [net.danielcompton.defn-spec-alpha :as ds]
-            [orchestra.core :refer [defn-spec]])
+    [clojure.spec.test.alpha :as stest]
+    [clojure.spec.gen.alpha :as sgen]
+    [clojure.test.check :as tc]
+    [clojure.test.check.generators :as gen]
+    [clojure.test.check.properties :as prop]
+    [orchestra.spec.test :as ostest]
+    [net.danielcompton.defn-spec-alpha :as ds]
+    [orchestra.core :as oc])
   (:import (java.time LocalDateTime)))
 
 ;; https://clojure.org/guides/spec
@@ -15,16 +15,16 @@
 ;for clj-kondo
 (declare my-inc a adder x v)
 
-(defn-spec my-inc integer?
-           [a integer?]                                     ; Each argument is followed by its spec.
-           (+ a 1))
+(oc/defn-spec my-inc integer?
+  [a integer?]                                     ; Each argument is followed by its spec.
+  (+ a 1))
 
 (my-inc 44)
 
 (ds/defn adder :- double?
-         "This is a test comment"
-         [x :- int?]
-         (+ x 0.88))
+  "This is a test comment"
+  [x :- int?]
+  (+ x 0.88))
 (adder 44)
 
 (defn ranged-rand
@@ -33,11 +33,11 @@
   (+ start (long (rand (- end start)))))
 
 (s/fdef ranged-rand
-        :args (s/and (s/cat :start int? :end int?)
-                     #(< (:start %) (:end %)))
-        :ret int?
-        :fn (s/and #(>= (:ret %) (-> % :args :start))
-                   #(< (:ret %) (-> % :args :end))))
+  :args (s/and (s/cat :start int? :end int?)
+          #(< (:start %) (:end %)))
+  :ret int?
+  :fn (s/and #(>= (:ret %) (-> % :args :start))
+        #(< (:ret %) (-> % :args :end))))
 
 ;Taylor Wood: https://blog.taylorwood.io/2017/10/15/fspec.htm
 
@@ -46,29 +46,29 @@
   [just-an-int]
   (into #{} (str just-an-int)))
 (s/fdef digits
-        :args (s/cat :just-an-int int?)
-        :ret (s/coll-of char? :kind set? :min-count 1))
+  :args (s/cat :just-an-int int?)
+  :ret (s/coll-of char? :kind set? :min-count 1))
 
 (defn big-fun
   [why when & {:keys [who which what]}]
   (format "%s %s %s %s %s" why when who which what))
 
 (s/fdef big-fun
-        :args (s/cat :why string?
-                     :when #(instance? LocalDateTime %)
-                     :kwargs (s/keys* :req-un [(or ::who
-                                                   (and ::which ::what))])))
+  :args (s/cat :why string?
+          :when #(instance? LocalDateTime %)
+          :kwargs (s/keys* :req-un [(or ::who
+                                      (and ::which ::what))])))
 
 (s/conform (s/cat :why string?
-                  :when #(instance? LocalDateTime %)
-                  :kwargs (s/keys* :req-un [(or ::who
-                                                (and ::which ::what))]))
-           ["because" (LocalDateTime/now) :which 1 :what 4])
+             :when #(instance? LocalDateTime %)
+             :kwargs (s/keys* :req-un [(or ::who
+                                         (and ::which ::what))]))
+  ["because" (LocalDateTime/now) :which 1 :what 4])
 (s/conform (s/cat :why string?
-                  :when #(instance? LocalDateTime %)
-                  :kwargs (s/keys* :req-un [(or ::who
-                                                (and ::which ::what))]))
-           ["said so" (LocalDateTime/now) :who "I"])
+             :when #(instance? LocalDateTime %)
+             :kwargs (s/keys* :req-un [(or ::who
+                                         (and ::which ::what))]))
+  ["said so" (LocalDateTime/now) :who "I"])
 ;(s/explain (s/cat :why string?
 ;                  :when #(instance? LocalDateTime %)
 ;                  :kwargs (s/keys* :req-un [(or ::who
@@ -84,36 +84,36 @@
   ([_] "unary")
   ([_ _ & _] "one two many"))
 (s/fdef such-arity
-        :args (s/alt :nullary (s/cat)
-                     :unary (s/cat :one any?)
-                     :variadic (s/cat :one any?
-                                      :two any?
-                                      :many (s/* any?))))
+  :args (s/alt :nullary (s/cat)
+          :unary (s/cat :one any?)
+          :variadic (s/cat :one any?
+                      :two any?
+                      :many (s/* any?))))
 
 (s/conform (s/alt :nullary (s/cat)
-                  :unary (s/cat :one any?)
-                  :variadic (s/cat :one any?
-                                   :two any?
-                                   :many (s/* any?)))
-           [])
+             :unary (s/cat :one any?)
+             :variadic (s/cat :one any?
+                         :two any?
+                         :many (s/* any?)))
+  [])
 (s/conform (s/alt :nullary (s/cat)
-                  :unary (s/cat :one any?)
-                  :variadic (s/cat :one any?
-                                   :two any?
-                                   :many (s/* any?)))
-           [33])
+             :unary (s/cat :one any?)
+             :variadic (s/cat :one any?
+                         :two any?
+                         :many (s/* any?)))
+  [33])
 (s/conform (s/alt :nullary (s/cat)
-                  :unary (s/cat :one any?)
-                  :variadic (s/cat :one any?
-                                   :two any?
-                                   :many (s/* any?)))
-           [33 66])
+             :unary (s/cat :one any?)
+             :variadic (s/cat :one any?
+                         :two any?
+                         :many (s/* any?)))
+  [33 66])
 (s/conform (s/alt :nullary (s/cat)
-                  :unary (s/cat :one any?)
-                  :variadic (s/cat :one any?
-                                   :two any?
-                                   :many (s/* any?)))
-           [33 66 99])
+             :unary (s/cat :one any?)
+             :variadic (s/cat :one any?
+                         :two any?
+                         :many (s/* any?)))
+  [33 66 99])
 
 (such-arity)
 (such-arity 33)
@@ -122,32 +122,32 @@
 (defn slarp [path & [blurp? glurf?]]
   (str path blurp? glurf?))
 (s/fdef slarp
-        :args (s/cat :path string?
-                     :rest (s/? (s/cat :blurp? int?
-                                       :glurf? boolean?))))
+  :args (s/cat :path string?
+          :rest (s/? (s/cat :blurp? int?
+                       :glurf? boolean?))))
 
 (s/conform (s/cat :path string?
-                  :rest (s/? (s/cat :blurp? int?
-                                    :glurf? boolean?)))
-           ["test"])
+             :rest (s/? (s/cat :blurp? int?
+                          :glurf? boolean?)))
+  ["test"])
 (s/conform (s/cat :path string?
-                  :rest (s/? (s/cat :blurp? int?
-                                    :glurf? boolean?)))
-           ["thePath" 42 true])
+             :rest (s/? (s/cat :blurp? int?
+                          :glurf? boolean?)))
+  ["thePath" 42 true])
 
 (slarp "thePath")
 (slarp "thePath" 42 true)
 (s/conform (s/cat :path string?
-                  :rest (s/? (s/cat :blurp? int?
-                                    :glurf? boolean?)))
-           ["thePath" 42 true])
+             :rest (s/? (s/cat :blurp? int?
+                          :glurf? boolean?)))
+  ["thePath" 42 true])
 
 (s/def ::pick-fn
   (s/with-gen
     (s/fspec :args (s/cat :a any? :b any?)
-             :ret any?
-             :fn #(or (= (:ret %) (:a (:args %)))
-                      (= (:ret %) (:b (:args %)))))
+      :ret any?
+      :fn #(or (= (:ret %) (:a (:args %)))
+             (= (:ret %) (:b (:args %)))))
     #(gen/return (fn [a b] (rand-nth [a b])))))
 (defn battle
   "Returns the victor."
@@ -189,16 +189,16 @@
   own function"
   [coll]
   (every? (fn [[a b]] (<= a b))
-          (partition 2 1 coll)))
+    (partition 2 1 coll)))
 (def property
   (prop/for-all [v (gen/vector gen/small-integer)]
-                (let [s (sort v)]
-                  (and (= (count v) (count s))
-                       (ascending? s)))))
+    (let [s (sort v)]
+      (and (= (count v) (count s))
+        (ascending? s)))))
 (tc/quick-check 100 property)
 (def bad-property
   (prop/for-all [v (gen/vector gen/small-integer)]
-                (ascending? v)))
+    (ascending? v)))
 (tc/quick-check 100 bad-property)
 
 (gen/sample gen/small-integer)
@@ -214,13 +214,13 @@
 (def keyword-vector (gen/such-that not-empty (gen/vector gen/keyword)))
 (def vec-and-elem
   (gen/bind keyword-vector
-            (fn [v] (gen/tuple (gen/elements v) (gen/return v)))))
+    (fn [v] (gen/tuple (gen/elements v) (gen/return v)))))
 
 (gen/sample vec-and-elem 8)
 
 (sgen/generate (s/gen int?))
 
 (+ (- 10 6)
-   (+ (+ 44 4) (* 4 4)))
+  (+ (+ 44 4) (* 4 4)))
 
 (ostest/instrument)
