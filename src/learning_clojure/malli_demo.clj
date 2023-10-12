@@ -32,6 +32,7 @@
 ; =prints=> ..instrumented #'user/plus1
 ; =prints=> started instrumentation
 
+#_:clj-kondo/ignore
 (plus1 "6")
 ; =throws=> :malli.core/invalid-input {:input [:cat :int], :args ["6"], :schema [:=> [:cat :int] [:int {:max 6}]]}
 
@@ -47,3 +48,26 @@
 (dev/stop!)
 ; =prints=> ..unstrumented #'user/plus1
 ; =prints=> stopped instrumentation
+
+
+(comment
+  (ns learning-clojure.malli-demo)
+
+  (defn plus1
+    "Adds one to the number"
+    {:malli/schema [:=> [:cat :int] :int]}
+    [x] (inc x))
+
+  ;; instrument, clj-kondo + pretty errors
+  #_:clj-kondo/ignore
+  (require '[malli.dev :as dev])
+  (require '[malli.dev.pretty :as pretty])
+  (dev/start! {:report (pretty/reporter)})
+
+  #_:clj-kondo/ignore
+  (plus1 "1234")
+
+  (plus1 77)
+
+  (comment
+    (dev/stop!)))
