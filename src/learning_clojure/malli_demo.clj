@@ -73,3 +73,7 @@
     (dev/stop!)))
 
 ; clj -Sdeps '{:deps {metosin/malli {:mvn/version "0.13.0"}}}'
+
+[1 2 3 #_4 5]
+
+;; https://clojure.org/guides/weird_characters#:~:text=%23_%20%2D%20Discard,-See%20%23%20for%20additional&text=%23_%20tells%20the%20reader%20to%20ignore%20the%20next%20form%20completely.&text=also%20works.,discard%20character%20works%20in%20edn.&text=The%20docs%20suggest%20that%20%22The,which%20yields%20nil%20).%22.
