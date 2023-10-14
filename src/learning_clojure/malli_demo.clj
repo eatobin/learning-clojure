@@ -71,3 +71,5 @@
 
   (comment
     (dev/stop!)))
+
+; clj -Sdeps '{:deps {metosin/malli {:mvn/version "0.13.0"}}}'
