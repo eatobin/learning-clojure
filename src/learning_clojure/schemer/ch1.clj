@@ -7,8 +7,8 @@
 (def null?
   (fn [a]
     (or
-      (nil? a)
-      (= () a))))
+     (nil? a)
+     (= () a))))
 
 (atom? 42)
 (atom? '(42))

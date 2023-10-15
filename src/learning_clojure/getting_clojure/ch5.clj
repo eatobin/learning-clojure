@@ -113,8 +113,8 @@
    (if (empty? books)
      total
      (sum-copies
-       (rest books)
-       (+ total (:copies-sold (first books)))))))
+      (rest books)
+      (+ total (:copies-sold (first books)))))))
 
 (comment
   (sum-copies books-2))
@@ -125,8 +125,8 @@
    (if (empty? books)
      total
      (recur
-       (rest books)
-       (+ total (:copies-sold (first books)))))))
+      (rest books)
+      (+ total (:copies-sold (first books)))))))
 
 (comment
   (sum-copies-2 books-2))
@@ -137,8 +137,8 @@
     (if (empty? books)
       total
       (recur
-        (rest books)
-        (+ total (:copies-sold (first books)))))))
+       (rest books)
+       (+ total (:copies-sold (first books)))))))
 
 (comment
   (sum-copies-3 books-2))

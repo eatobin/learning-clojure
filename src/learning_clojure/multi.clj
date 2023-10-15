@@ -1,8 +1,8 @@
 (ns learning_clojure.multi)
 
 (defmulti encounter
-          (fn [x y]
-            [(:Species x) (:Species y)]))
+  (fn [x y]
+    [(:Species x) (:Species y)]))
 (defmethod encounter [:Bunny :Lion]
   [_ _]
   :run-away)
@@ -38,16 +38,16 @@
 
 
 (defmulti full-moon-behavior
-          (fn [were-creature]
-            (:were-type were-creature)))
+  (fn [were-creature]
+    (:were-type were-creature)))
 (defmethod full-moon-behavior :wolf
   [were-creature]
   (str
-    (:name were-creature) " will howl and murder"))
+   (:name were-creature) " will howl and murder"))
 (defmethod full-moon-behavior :simmons
   [were-creature]
   (str
-    (:name were-creature) " will encourage people and sweat to the oldies"))
+   (:name were-creature) " will encourage people and sweat to the oldies"))
 (defmethod full-moon-behavior nil
   [were-creature]
   (str (:name were-creature) " will stay at home and eat ice cream"))
@@ -71,8 +71,8 @@
 ; => "Jimmy from sales will stay up all night fantasy footballing"
 
 (defmulti types
-          (fn [x y]
-            [(class x) (class y)]))
+  (fn [x y]
+    [(class x) (class y)]))
 (defmethod types [String String]
   [_ _]
   "Two strings!")

@@ -85,8 +85,8 @@
 (require '[clj-yaml.core :as yaml])
 
 (yaml/generate-string
-  [{:name "John Smith", :weight 100, :age 33}
-   {:weight 150, :name "Mary Smith", :age 27}])
+ [{:name "John Smith", :weight 100, :age 33}
+  {:weight 150, :name "Mary Smith", :age 27}])
 ;; => "- {age: 33, name: John Smith, weight: 100}\n- {age: 27, name: Mary Smith, weight: 150}\n"
 
 (into [] (yaml/parse-string "
@@ -98,22 +98,22 @@
 ;; => [{:weight 120, :name "Brenda Smith", :age 27} {:name "Scott Smith", :weight 175, :age 28}]
 
 (spit "flubber.yaml" (yaml/generate-string
-                       [{:name "Scott Smith", :age 33}
-                        {:name "Brenda Smith", :age 27}]))
+                      [{:name "Scott Smith", :age 33}
+                       {:name "Brenda Smith", :age 27}]))
 
 (into [] (yaml/parse-string
-           (slurp "flubber.yaml")))
+          (slurp "flubber.yaml")))
 ;; => [{:age 33 :name "Scott Smith"} {:age 27 :name "Brenda Smith"}]
 
 (spit "flubber2.yaml" (yaml/generate-string
-                        [{:title "Book One" :author "Joe Blow" :person "Person One"}
-                         {:title "Book Two" :author "Joe Two" :person nil}
-                         {:title "The Bible" :author "G-d" :person "Person One"}]))
+                       [{:title "Book One" :author "Joe Blow" :person "Person One"}
+                        {:title "Book Two" :author "Joe Two" :person nil}
+                        {:title "The Bible" :author "G-d" :person "Person One"}]))
 
 (def data
   (atom
-    (yaml/parse-string
-      (slurp "flubber2.yaml"))))
+   (yaml/parse-string
+    (slurp "flubber2.yaml"))))
 ;; => #'total-beginner.begin/data
 (deref data)
 ;; => {:books ({:person "Person One", :title "Book One", :author "Joe Blow"} {:person nil, :title "Book Two", :author "Joe Two"} {:person "Person One", :title "The Bible", :author "G-d"}), :people ({:name "Person One", :max-books 2} {:name "Person Two", :max-books 6})}
@@ -124,13 +124,13 @@
 
 (def books
   (atom
-    (into [] (:books (yaml/parse-string
-                       (slurp "flubber2.yaml"))))))
+   (into [] (:books (yaml/parse-string
+                     (slurp "flubber2.yaml"))))))
 
 (def people
   (atom
-    (into [] (:people (yaml/parse-string
-                        (slurp "flubber2.yaml"))))))
+   (into [] (:people (yaml/parse-string
+                      (slurp "flubber2.yaml"))))))
 ;; => #'total-beginner.begin/books
 ;; => #'total-beginner.begin/people
 (deref books)

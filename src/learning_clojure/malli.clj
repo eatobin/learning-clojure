@@ -37,8 +37,8 @@
 
 (comment (def pow
            (m/-instrument
-             {:schema [:=> [:cat :int] [:int {:max 6}]]}
-             (fn [x] (* x x))))
+            {:schema [:=> [:cat :int] [:int {:max 6}]]}
+            (fn [x] (* x x))))
 
          (pow 2)
          ; => 4

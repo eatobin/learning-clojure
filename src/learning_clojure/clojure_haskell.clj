@@ -77,9 +77,9 @@
     (list (list a c))
     (into []
           (concat
-            (hanoi2 (dec n) a c b)
-            (hanoi2 1 a b c)
-            (hanoi2 (dec n) b a c)))))
+           (hanoi2 (dec n) a c b)
+           (hanoi2 1 a b c)
+           (hanoi2 (dec n) b a c)))))
 
 ;type Peg = String
 ;type Move = (Peg, Peg)

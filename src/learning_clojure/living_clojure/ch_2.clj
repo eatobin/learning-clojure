@@ -322,9 +322,9 @@
   (if (empty? in)
     out
     (alice-is
-      (rest in)
-      (conj out
-            (str "Alice is " (first in))))))
+     (rest in)
+     (conj out
+           (str "Alice is " (first in))))))
 (alice-is adjs [])
 ;; -> ["Alice is normal" "Alice is too small" "Alice is too big" "Alice is swimming"]
 

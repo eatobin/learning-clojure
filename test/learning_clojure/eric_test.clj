@@ -1,9 +1,9 @@
 ; [eric@linux-x2vq learning-clojure](master)$ clojure -X:test/rich
 
 (ns learning_clojure.eric-test
-  (:require [clojure.test :refer [deftest is testing]]
-    [clj-yaml.core :as yaml]
-    [clojure.edn :as edn]))
+  (:require [clj-yaml.core :as yaml]
+            [clojure.edn :as edn]
+            [clojure.test :refer [deftest is testing]]))
 
 ;; YAML:
 
@@ -13,13 +13,13 @@
 
 (deftest yaml-out-test
   (is (= "- {name: John Smith, weight: 100, age: 33}\n- {weight: 150, name: Mary Smith, age: 27}\n"
-        (yaml/generate-string
+         (yaml/generate-string
           [{:name "John Smith", :weight 100, :age 33}
            {:weight 150, :name "Mary Smith", :age 27}]))))
 
 (deftest yaml-in-test
   (is (= [{:weight 120, :name "Brenda Smith", :age 27} {:name "Scott Smith", :weight 175, :age 28}]
-        (into [] (yaml/parse-string "
+         (into [] (yaml/parse-string "
 - {weight: 120, name: Brenda Smith, age: 27}
 - name: Scott Smith
   weight: 175
@@ -46,10 +46,10 @@
 
 (deftest edn-out-test
   (is (= "[{:name \"John Smith\", :weight 100, :age 33} {:weight 150, :name \"Mary Smith\", :age 27}]"
-        (pr-str [{:name "John Smith", :weight 100, :age 33}
-                 {:weight 150, :name "Mary Smith", :age 27}]))))
+         (pr-str [{:name "John Smith", :weight 100, :age 33}
+                  {:weight 150, :name "Mary Smith", :age 27}]))))
 
 (deftest edn-in-test
   (is (= [{:name "John Smith", :weight 100, :age 33}
           {:weight 150, :name "Mary Smith", :age 27}]
-        (edn/read-string "[{:name \"John Smith\", :weight 100, :age 33} {:weight 150, :name \"Mary Smith\", :age 27}]"))))
+         (edn/read-string "[{:name \"John Smith\", :weight 100, :age 33} {:weight 150, :name \"Mary Smith\", :age 27}]"))))
