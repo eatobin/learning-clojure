@@ -1,4 +1,5 @@
-(ns learning_clojure.living_clojure.ch_1)
+(ns learning_clojure.living_clojure.ch_1
+  (:require [clojure.set :as set]))
 
 42
 12.43
@@ -57,9 +58,9 @@ nil
        {:jam1 "orange" :jam3 "red"}
        {:jam4 "blue"})
 #{:red :blue :white :pink}
-(clojure.set/union #{:r :b :w} #{:w :p :y})
-(clojure.set/difference #{:r :b :w} #{:w :p :y})
-(clojure.set/intersection #{:r :b :w} #{:w :p :y})
+(set/union #{:r :b :w} #{:w :p :y})
+(set/difference #{:r :b :w} #{:w :p :y})
+(set/intersection #{:r :b :w} #{:w :p :y})
 (set [:rabbit :rabbit :watch :door])
 (set {:a 1, :b 2, :c 3})
 (get (set {:a 1, :b 2, :c 3}) :c)

@@ -33,11 +33,13 @@
 (sizeX [1 2 3])
 
 ; Broken unless
+#_:clj-kondo/ignore
 (defn unless [test body] (if (not test) body))
 ;; (unless true (println "Danger, danger Will Robinson"))
 
 (macroexpand ''something-we-do-not-want-interpreted)
 
+#_:clj-kondo/ignore
 (defmacro unlessX [test body]
   (list 'if (list 'not test) body))
 (macroexpand '(unlessX condition body))

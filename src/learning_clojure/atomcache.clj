@@ -7,6 +7,7 @@
 ; END:create
 
 ; START:get
+#_:clj-kondo/ignore
 (defn getski
   [cache key]
   (@cache key))

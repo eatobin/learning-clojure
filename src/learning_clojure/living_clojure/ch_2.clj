@@ -121,10 +121,12 @@
 (when-let [x false] x)
 ;; nil
 
+#_:clj-kondo/ignore
 (when-let [result (if (= 1 1)
                     100)]
   result)
 ;; 100
+#_:clj-kondo/ignore
 (when-let [result (if (not= 1 1)
                     100)]
   result)

@@ -13,6 +13,7 @@
 ;; https://clojure.org/guides/spec
 
 ;for clj-kondo
+#_:clj-kondo/ignore
 (declare my-inc a adder x v)
 
 (oc/defn-spec my-inc integer?
@@ -179,6 +180,7 @@
 (gen/generate (s/gen int?))
 (gen/sample (s/gen string?))
 
+#_:clj-kondo/ignore
 (s/def ::suit #{:club :diamond :heart :spade})
 (gen/sample (s/gen #{:club :diamond :heart :spade}))
 
