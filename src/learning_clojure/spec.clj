@@ -225,4 +225,6 @@
 (+ (- 10 6)
    (+ (+ 44 4) (* 4 4)))
 
+(println "Let's see where this prints!")
+
 (ostest/instrument)

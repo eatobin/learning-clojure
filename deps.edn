@@ -2,5 +2,5 @@
 
 {:deps {clj-commons/clj-yaml {:mvn/version "1.0.27"}
         net.danielcompton/defn-spec-alpha {:mvn/version "0.1.0"}
-        metosin/malli {:mvn/version "0.13.0"}
+        metosin/malli {:mvn/version "0.16.1"}
         orchestra/orchestra {:mvn/version "2021.01.01-1"}}}
