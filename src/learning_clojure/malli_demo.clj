@@ -1,6 +1,6 @@
 (ns learning-clojure.malli-demo
   (:require [malli.core :as m]
-    [malli.dev :as dev]))
+            [malli.dev :as dev]))
 
 (defn kikka
   "schema via var metadata"
@@ -68,7 +68,7 @@
   (plus1 "1234")
 
   (plus1 77)
-  
+
   (defn my-add-2 [x y]
     (+ x y))
   (m/=> my-add-2 [:=> [:cat :int :int] :int])
@@ -87,7 +87,7 @@
     (str x ", " y))
 
   (small-dual 1 2 print-em)
-  
+
   (comment
     (dev/stop!)))
 

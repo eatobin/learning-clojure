@@ -86,10 +86,20 @@
 (m/=> my-add-2 [:=> [:cat :int :int] :int])
 
 (def small-int-2 [:int {:max 6}])
+(def my-addition [:=> [:cat :int :int] :int])
 
 (defn small-dual [x y f]
   (f x y))
 (m/=> small-dual [:=> [:cat :int :int [:=> [:cat :int :int] :int]] small-int-2])
+
+(defn just-dual [x y f]
+  (f x y))
+;; (m/=> just-dual [:=> [:cat :int :int [:=> [:cat :int :int] :int]] :int])
+(m/=> just-dual [:=> [:cat :int :int my-addition] :int])
+
+(just-dual 1 2 my-add-2)
+(just-dual 11 22 my-add-2)
+(just-dual 11.0 22.0 my-add-2)
 
 (small-dual 1 2 my-add-2)
 (small-dual 11 22 my-add-2)
