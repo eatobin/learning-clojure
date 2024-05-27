@@ -99,10 +99,12 @@
 
 (just-dual 1 2 my-add-2)
 (just-dual 11 22 my-add-2)
+#_:clj-kondo/ignore
 (just-dual 11.0 22.0 my-add-2)
 
 (small-dual 1 2 my-add-2)
 (small-dual 11 22 my-add-2)
+#_:clj-kondo/ignore
 (small-dual 11.0 22.0 my-add-2)
 
 (defn print-em [x y]
