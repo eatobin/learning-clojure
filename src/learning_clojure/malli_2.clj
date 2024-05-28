@@ -1,5 +1,4 @@
-(ns learning-clojure.malli-2
-  (:require [malli.core :as m]))
+(ns learning-clojure.malli-2)
 
 (defn plus1
   "Adds one to the number"
@@ -7,8 +6,8 @@
   [x]
   (inc x))
 
-(m/=> my-add [:=> [:cat :int :int] :int])
 (defn my-add
+  {:malli/schema [:=> [:cat :int :int] :int]}
   [x y]
   (+ x y))
 

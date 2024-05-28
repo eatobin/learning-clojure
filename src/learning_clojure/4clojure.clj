@@ -1,4 +1,6 @@
-(ns learning_clojure.4clojure)
+(ns learning-clojure.4clojure
+  (:require
+   [clojure.set :as set]))
 
 ;;; Elementary
 ;; 1
@@ -33,7 +35,7 @@
 
 ;; 8
 (= #{:a :b :c :d} (set '(:a :a :b :c :c :c :c :d :d)))
-(= #{:a :b :c :d} (clojure.set/union #{:a :b :c} #{:b :c :d}))
+(= #{:a :b :c :d} (set/union #{:a :b :c} #{:b :c :d}))
 
 ;; 9
 (= #{1 2 3 4} (conj #{1 4 3} 2))
@@ -405,7 +407,8 @@
   (cond
     (empty? l) nil
     (not (seq? (first l))) (cons (first l) (flater (rest l)))
-    true (concat (flater (first l)) (flater (rest l)))))
+    :else (concat (flater (first l)) (flater (rest l)))))
+(flater '(1 (2 3) 4))
 
 (= (#(filter (complement sequential?) (rest (tree-seq sequential? seq %)))
     '((1 2) 3 [4 [5 6]]))
@@ -586,7 +589,7 @@
              coll2 (empty coll)]
         (cond
           (empty? coll) (butlast (reverse coll2))
-          true (recur v (rest coll) (cons v (cons (first coll) coll2))))))
+          :else (recur v (rest coll) (cons v (cons (first coll) coll2))))))
     0 [1 2 3])
    [1 0 2 0 3])
 (= (apply str
@@ -596,7 +599,7 @@
                     coll2 (empty coll)]
                (cond
                  (empty? coll) (butlast (reverse coll2))
-                 true (recur v (rest coll) (cons v (cons (first coll) coll2))))))
+                 :else (recur v (rest coll) (cons v (cons (first coll) coll2))))))
            ", " ["one" "two" "three"]))
    "one, two, three")
 (= ((fn [v coll]
@@ -605,7 +608,7 @@
              coll2 (empty coll)]
         (cond
           (empty? coll) (butlast (reverse coll2))
-          true (recur v (rest coll) (cons v (cons (first coll) coll2))))))
+          :else (recur v (rest coll) (cons v (cons (first coll) coll2))))))
     :z [:a :b :c :d])
    [:a :z :b :z :c :z :d])
 
