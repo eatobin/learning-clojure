@@ -1,6 +1,6 @@
 ; [eric@linux-x2vq learning-clojure](master)$ clojure -X:test/rich
 
-(ns learning_clojure.eric-test
+(ns learning-clojure.eric-test
   (:require [clj-yaml.core :as yaml]
             [clojure.edn :as edn]
             [clojure.test :refer [deftest is testing]]))
